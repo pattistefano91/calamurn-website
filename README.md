@@ -101,7 +101,9 @@ Il flusso spec-kit resta disponibile: `/speckit-specify`, `/speckit-plan`, `/spe
 
 ## Cosa manca prima di poter dire che il sito è pubblicato
 
-Esegui `npm run dati:mancanti` per la lista completa. In sintesi:
+Le domande sono raccolte in **[DA-CONFERMARE.md](DA-CONFERMARE.md)**, un modulo da compilare
+riga per riga. `npm run dati:mancanti` elenca invece cosa manca guardando il codice. In
+sintesi:
 
 - **il numero WhatsApp e l'indirizzo e-mail veri** — oggi sono segnaposto, e finché lo sono
   il pulsante di prenotazione non porta da nessuna parte;
