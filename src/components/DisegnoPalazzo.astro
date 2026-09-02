@@ -296,6 +296,11 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
 </section>
 
 <script>
+  // Segna la pagina come «con JavaScript»: gli stati iniziali nascosti delle
+  // animazioni valgono solo sotto questa classe, così senza JavaScript il
+  // disegno resta visibile invece di sparire (spec 005, SC-005).
+  document.documentElement.classList.add("js");
+
   const $ = (id: string) => document.getElementById(id);
 
   const paneP = $("paneP");

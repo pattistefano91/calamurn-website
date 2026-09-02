@@ -32,7 +32,7 @@ const capienze = Object.fromEntries(
 );
 ---
 
-<div class="bar" id="prenota">
+<div class="bar" id="prenota" data-capienze={JSON.stringify(capienze)}>
   <div class="f">
     <label for="arrivo">Arrivo</label>
     <input type="date" id="arrivo" name="arrivo" min={oggi} />
@@ -104,7 +104,7 @@ const capienze = Object.fromEntries(
   const errore = $<HTMLParagraphElement>("barerr");
 
   const CAPIENZE: Record<string, number> = JSON.parse(
-    document.getElementById("capienze")?.textContent ?? "{}",
+    document.getElementById("prenota")?.dataset.capienze ?? "{}",
   );
 
   if (arrivo && partenza && ospiti && camera && errore) {
@@ -167,5 +167,3 @@ const capienze = Object.fromEntries(
     });
   }
 </script>
-
-<script type="application/json" id="capienze" set:html={JSON.stringify(capienze)} is:inline></script>

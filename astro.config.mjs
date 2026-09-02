@@ -12,6 +12,31 @@ export default defineConfig({
   output: "static",
   trailingSlash: "ignore",
   integrations: [sitemap()],
+
+  security: {
+    // La politica di sicurezza dei contenuti la scrive Astro, perché è l'unico
+    // a conoscere l'impronta degli script che genera in pagina: una regola
+    // fissa scritta a mano in vercel.json li bloccherebbe tutti
+    // (spec 011, FR-009).
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src https://fonts.gstatic.com",
+        "connect-src 'self'",
+        "frame-ancestors 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+      ],
+      styleDirective: {
+        resources: ["'self'", "https://fonts.googleapis.com"],
+      },
+      scriptDirective: {
+        resources: ["'self'"],
+      },
+    },
+  },
+
   build: {
     inlineStylesheets: "auto",
   },

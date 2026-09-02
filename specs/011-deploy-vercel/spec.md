@@ -106,6 +106,12 @@ sulla forma canonica in HTTPS.
 - **FR-009**: La politica di sicurezza dei contenuti DEVE consentire solo le origini
   effettivamente usate — il sito stesso e il dominio dei caratteri tipografici — e vietare gli
   script incorporati non dichiarati.
+
+  La politica va **generata in fase di costruzione**, con l'impronta di ogni script
+  incorporato, non scritta a mano fra le intestazioni: gli script che il generatore mette in
+  pagina cambiano a ogni modifica, e una regola fissa li bloccherebbe tutti. Restano fuori
+  dagli hash i blocchi di dati strutturati `application/ld+json`, che il browser non esegue
+  e che quindi nessuna politica deve autorizzare.
 - **FR-010**: La costruzione DEVE fallire se il risultato supera un limite di peso dichiarato,
   perché una regressione sulle immagini non passi inosservata.
 - **FR-011**: Il progetto NON DEVE avere variabili d'ambiente contenenti segreti: il sito è
