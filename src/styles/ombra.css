@@ -669,9 +669,19 @@ section {
   fill: var(--lead-2);
   letter-spacing: 0.06em;
 }
-.draw {
+/* Il tracciamento parte da un disegno nascosto: lo stato iniziale vale solo
+   quando c'è JavaScript per farlo comparire. Senza, il disegno è già completo
+   invece di restare invisibile (spec 005, SC-005). */
+.js .draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
+}
+.js .fade,
+.js .washon {
+  opacity: 0;
+}
+.washon {
+  opacity: 0.55;
 }
 .go-anim .draw {
   animation: trace 0.6s ease-out forwards;
@@ -681,10 +691,6 @@ section {
 }
 .go-anim .washon {
   animation: washin 0.7s ease-out forwards;
-}
-.fade,
-.washon {
-  opacity: 0;
 }
 @keyframes trace {
   to {
