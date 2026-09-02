@@ -1,0 +1,23 @@
+# --- foto originali -------------------------------------------------------
+# material/ pesa ~236 MB (PNG e HEIC a piena risoluzione) e resta in locale.
+# Le sorgenti versionate sono in src/assets/photos/, generate da
+# scripts/ingest-photos.py a partire da scripts/photos.manifest.json.
+material/
+
+# --- build ----------------------------------------------------------------
+dist/
+.astro/
+node_modules/
+.vercel/
+.output/
+
+# --- ambiente -------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- sistema --------------------------------------------------------------
+.DS_Store
+*.log
+npm-debug.log*
+.cache/

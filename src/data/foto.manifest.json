@@ -1,0 +1,410 @@
+{
+  "nota": "Selezione e ordine ricavati dal prototipo material/calamurn-sito-ombra.html; il file sorgente e' l'originale ad alta risoluzione abbinato per average-hash.",
+  "foto": [
+    {
+      "id": "palazzo-01",
+      "gruppo": "palazzo",
+      "ruolo": "hero-giorno",
+      "sorgente": "palazzo/image00042.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il portone del palazzo su via Dione, di giorno"
+    },
+    {
+      "id": "palazzo-02",
+      "gruppo": "palazzo",
+      "ruolo": "hero-sera",
+      "sorgente": "palazzo/image00009.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Lo stesso portone al calare della sera, con la lanterna accesa"
+    },
+    {
+      "id": "palazzo-03",
+      "gruppo": "palazzo",
+      "ruolo": "facciata-bifore",
+      "sorgente": "palazzo/image00041.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Le bifore e le balaustre traforate della facciata, viste dal basso"
+    },
+    {
+      "id": "suite-01",
+      "gruppo": "suite",
+      "ruolo": "principale",
+      "sorgente": "suite/image00025.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "L'attico, con il letto a baldacchino sotto la pietra"
+    },
+    {
+      "id": "suite-02",
+      "gruppo": "suite",
+      "ruolo": "principale",
+      "sorgente": "suite/image00023.jpeg",
+      "w": 1050,
+      "h": 1400,
+      "didascalia": "Il letto, contro il muro in pietra retroilluminato"
+    },
+    {
+      "id": "suite-03",
+      "gruppo": "suite",
+      "ruolo": "principale",
+      "sorgente": "suite/image00024.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "L'angolo colazione, con il tavolo in terrazzo"
+    },
+    {
+      "id": "suite-04",
+      "gruppo": "suite",
+      "ruolo": "principale",
+      "sorgente": "suite/image00039.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "La scaletta interna che sale al terrazzo"
+    },
+    {
+      "id": "suite-05",
+      "gruppo": "suite",
+      "ruolo": "principale",
+      "sorgente": "suite/image00028.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "Il bagno, con il lucernario sul tetto"
+    },
+    {
+      "id": "suite-06",
+      "gruppo": "suite",
+      "ruolo": "principale",
+      "sorgente": "suite/image00014.png",
+      "w": 1448,
+      "h": 1086,
+      "didascalia": "Il terrazzo, sotto la pergola di canne"
+    },
+    {
+      "id": "suite-07",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00016.png",
+      "w": 1085,
+      "h": 1450,
+      "didascalia": "Il mare, oltre i tetti di Ortigia"
+    },
+    {
+      "id": "suite-08",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00009.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "Le sdraio all'ombra dell'ombrellone"
+    },
+    {
+      "id": "suite-09",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00007.png",
+      "w": 1448,
+      "h": 1086,
+      "didascalia": "La tavola davanti alle finestre"
+    },
+    {
+      "id": "suite-10",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00018.jpeg",
+      "w": 1040,
+      "h": 1387,
+      "didascalia": "Il tramonto dal terrazzo"
+    },
+    {
+      "id": "suite-11",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00020.png",
+      "w": 1448,
+      "h": 1086,
+      "didascalia": "La sera, con le luci accese"
+    },
+    {
+      "id": "suite-12",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00033.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "La cabina armadio"
+    },
+    {
+      "id": "suite-13",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00030.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "La doccia a filo pavimento"
+    },
+    {
+      "id": "suite-14",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00037.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "L'attico di sera, con la scaletta illuminata"
+    },
+    {
+      "id": "suite-15",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00036.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "Il letto, di notte"
+    },
+    {
+      "id": "suite-16",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00021.png",
+      "w": 1084,
+      "h": 1451,
+      "didascalia": "I tetti e il mare, dopo il tramonto"
+    },
+    {
+      "id": "suite-17",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00027.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "La camera vista dall'alto"
+    },
+    {
+      "id": "suite-18",
+      "gruppo": "suite",
+      "ruolo": "extra",
+      "sorgente": "suite/image00040.png",
+      "w": 1086,
+      "h": 1448,
+      "didascalia": "La porta a vetri, dal terrazzo"
+    },
+    {
+      "id": "deluxe-01",
+      "gruppo": "deluxe",
+      "ruolo": "principale",
+      "sorgente": "deluxe/image00001.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La camera, con la parete in pietra a vista"
+    },
+    {
+      "id": "deluxe-02",
+      "gruppo": "deluxe",
+      "ruolo": "principale",
+      "sorgente": "deluxe/image00020.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il balcone sulla via Dione"
+    },
+    {
+      "id": "deluxe-03",
+      "gruppo": "deluxe",
+      "ruolo": "principale",
+      "sorgente": "deluxe/image00010.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il bagno, interno alla camera"
+    },
+    {
+      "id": "deluxe-04",
+      "gruppo": "deluxe",
+      "ruolo": "principale",
+      "sorgente": "deluxe/image00030.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La volta in pietra illuminata, sopra il bagno"
+    },
+    {
+      "id": "deluxe-05",
+      "gruppo": "deluxe",
+      "ruolo": "principale",
+      "sorgente": "deluxe/image00039.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La pietra retroilluminata dietro il letto"
+    },
+    {
+      "id": "deluxe-06",
+      "gruppo": "deluxe",
+      "ruolo": "principale",
+      "sorgente": "deluxe/image00021.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il divano che diventa il terzo letto"
+    },
+    {
+      "id": "standard-01",
+      "gruppo": "standard",
+      "ruolo": "principale",
+      "sorgente": "standard/image00002.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La camera, con la testiera intagliata originale"
+    },
+    {
+      "id": "standard-02",
+      "gruppo": "standard",
+      "ruolo": "principale",
+      "sorgente": "standard/image00008.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il balcone all'ora blu"
+    },
+    {
+      "id": "standard-03",
+      "gruppo": "standard",
+      "ruolo": "principale",
+      "sorgente": "standard/image00048.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Lo stesso balcone a mezzogiorno"
+    },
+    {
+      "id": "standard-04",
+      "gruppo": "standard",
+      "ruolo": "principale",
+      "sorgente": "standard/image00032.png",
+      "w": 1537,
+      "h": 1023,
+      "didascalia": "Lo specchio ovale e la pietra retroilluminata"
+    },
+    {
+      "id": "standard-05",
+      "gruppo": "standard",
+      "ruolo": "principale",
+      "sorgente": "standard/image00045.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il bagno privato, sul pianerottolo"
+    },
+    {
+      "id": "standard-06",
+      "gruppo": "standard",
+      "ruolo": "principale",
+      "sorgente": "standard/image00012.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il lavabo su mensola in legno massello"
+    },
+    {
+      "id": "superior-01",
+      "gruppo": "superior",
+      "ruolo": "principale",
+      "sorgente": "superior/image00006.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La camera, vista dalla porta"
+    },
+    {
+      "id": "superior-02",
+      "gruppo": "superior",
+      "ruolo": "principale",
+      "sorgente": "superior/image00004.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "L'angolo scrittoio e la nicchia armadio"
+    },
+    {
+      "id": "superior-03",
+      "gruppo": "superior",
+      "ruolo": "principale",
+      "sorgente": "superior/image00031.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il bagno si apre dentro la camera"
+    },
+    {
+      "id": "superior-04",
+      "gruppo": "superior",
+      "ruolo": "principale",
+      "sorgente": "superior/image00019.jpeg",
+      "w": 1564,
+      "h": 880,
+      "didascalia": "Il bagno, con la finestra sul cortile"
+    },
+    {
+      "id": "superior-05",
+      "gruppo": "superior",
+      "ruolo": "principale",
+      "sorgente": "superior/image00044.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La poltrona sotto lo specchio"
+    },
+    {
+      "id": "superior-06",
+      "gruppo": "superior",
+      "ruolo": "principale",
+      "sorgente": "superior/image00025.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il macramè e il soffitto in travi di legno"
+    },
+    {
+      "id": "comuni-01",
+      "gruppo": "comuni",
+      "ruolo": "principale",
+      "sorgente": "spazi comuni/image00034.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La sala comune, con la cassettiera da tipografo"
+    },
+    {
+      "id": "comuni-02",
+      "gruppo": "comuni",
+      "ruolo": "principale",
+      "sorgente": "spazi comuni/image00014.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Il corridoio e la nicchia dei fichi d'India"
+    },
+    {
+      "id": "comuni-03",
+      "gruppo": "comuni",
+      "ruolo": "principale",
+      "sorgente": "spazi comuni/image00011.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Lo stesso corridoio, di sera"
+    },
+    {
+      "id": "comuni-04",
+      "gruppo": "comuni",
+      "ruolo": "principale",
+      "sorgente": "spazi comuni/image00028.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Verso la camera, fra le poltroncine"
+    },
+    {
+      "id": "comuni-05",
+      "gruppo": "comuni",
+      "ruolo": "principale",
+      "sorgente": "spazi comuni/image00033.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "La pietra a vista e la parete di muschio"
+    },
+    {
+      "id": "comuni-06",
+      "gruppo": "comuni",
+      "ruolo": "principale",
+      "sorgente": "spazi comuni/image00026.png",
+      "w": 1672,
+      "h": 941,
+      "didascalia": "Una testa di moro, limoni e candele"
+    }
+  ]
+}

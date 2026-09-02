@@ -1,0 +1,30 @@
+{
+  "nome": "Standard Queen",
+  "occhiello": "Secondo piano · balcone su via Dione",
+  "piano": "Secondo piano",
+  "affaccio": "Balcone su via Dione",
+  "descrizione": "Testiera antica intagliata, balcone sulla via e due pareti in pietra a vista. Il bagno è privato ma si trova sul pianerottolo, di fronte alla porta: è l'unica camera della casa fatta così, ed è il motivo per cui costa meno della Deluxe.",
+  "metratura": 19,
+  "ospitiMax": 2,
+  "letto": "Letto queen",
+  "dotazioni": [
+    "balcone-su-via",
+    "bagno-sul-pianerottolo",
+    "letto-queen",
+    "pietra-a-vista"
+  ],
+  "foto": [
+    "standard-01",
+    "standard-02",
+    "standard-03",
+    "standard-04",
+    "standard-05",
+    "standard-06"
+  ],
+  "fotoExtra": [],
+  "tariffaDa": 105,
+  "tariffaConfermata": false,
+  "prenotabile": true,
+  "ordine": 3,
+  "avvertenza": "Il bagno è privato e riservato solo a chi alloggia qui, ma sta sul pianerottolo, di fronte alla porta della camera: per raggiungerlo si esce dalla stanza. È l'unica camera della casa organizzata così, e la tariffa ne tiene conto."
+}

@@ -1,0 +1,79 @@
+---
+import { casa } from "../data/casa";
+import { linkWhatsApp, richiestaVuota } from "../data/prenotazione";
+
+// Indirizzo di partenza: il collegamento funziona anche senza JavaScript, che
+// poi lo aggiorna con le date scelte (spec 003, FR-011).
+const wa = linkWhatsApp(richiestaVuota);
+
+const voci = [
+  { href: "#camere", testo: "Le camere" },
+  { href: "#suite", testo: "La suite" },
+  { href: "#mappa", testo: "La mappa" },
+  { href: "#palazzo", testo: "Il palazzo" },
+  { href: "#galleria", testo: "Foto" },
+  { href: "#ortigia", testo: "Ortigia" },
+  { href: "#domande", testo: "Prima di arrivare" },
+];
+---
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      {casa.nome}
+      <small>{casa.palazzo} · {casa.indirizzo.quartiere}</small>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      aria-expanded="false"
+      aria-controls="menu"
+    >
+      Menu
+    </button>
+
+    <nav class="principale" id="menu" aria-label="Sezioni del sito">
+      <ul>
+        {voci.map((v) => <li><a href={v.href}>{v.testo}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="navacts">
+      <a class="btn hidemob" data-wa href={wa} target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+      <a class="btn solid" href="#prenota">Prenota</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Il menu compatto sotto i 960 px: senza JavaScript la navigazione resta
+  // visibile perché `hidden` viene messo solo qui (spec 001, FR-006 e FR-009).
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+  if (toggle && menu) {
+    const compatto = window.matchMedia("(max-width: 960px)");
+    const applica = () => {
+      if (compatto.matches) {
+        menu.hidden = toggle.getAttribute("aria-expanded") !== "true";
+      } else {
+        menu.hidden = false;
+      }
+    };
+    toggle.addEventListener("click", () => {
+      const aperto = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!aperto));
+      applica();
+    });
+    menu.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).tagName === "A" && compatto.matches) {
+        toggle.setAttribute("aria-expanded", "false");
+        applica();
+      }
+    });
+    compatto.addEventListener("change", applica);
+    applica();
+  }
+</script>

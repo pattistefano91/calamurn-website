@@ -1,0 +1,162 @@
+---
+import { Picture } from "astro:assets";
+import { foto, etichetteAmbiente, type Ambiente } from "../data/foto";
+
+const ambienti = Object.keys(etichetteAmbiente) as Ambiente[];
+const presenti = ambienti.filter((a) => foto.some((f) => f.ambiente === a));
+
+const filtri = [
+  { chiave: "tutte", testo: "Tutte" },
+  ...presenti.map((a) => ({ chiave: a, testo: etichetteAmbiente[a] })),
+];
+---
+
+<section id="galleria">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Tutte le foto</h2>
+      <p class="kicker">filtra per ambiente · tocca per ingrandire</p>
+    </div>
+
+    <div class="gfilters" id="gfilters" role="group" aria-label="Filtra le fotografie per ambiente">
+      {
+        filtri.map((f) => (
+          <button type="button" data-f={f.chiave} aria-pressed={f.chiave === "tutte"}>
+            {f.testo}
+          </button>
+        ))
+      }
+    </div>
+
+    <ul class="ggrid" id="ggrid">
+      {
+        foto.map((f, i) => (
+          <li data-ambiente={f.ambiente}>
+            <button type="button" data-i={i} aria-label={`Ingrandisci: ${f.didascalia}`}>
+              <Picture formats={["webp"]} fallbackFormat="jpeg"
+                quality={70}
+                src={f.immagine}
+                alt={f.didascalia}
+                widths={[240, 480, 960, 1440]}
+                sizes="(max-width: 520px) 50vw, 220px"
+                loading="lazy"
+              />
+              <span class="cap">{etichetteAmbiente[f.ambiente]} · {f.didascalia}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="nota" style="max-width:62ch">
+      <span class="todo">in crescita</span>
+      Qui confluiscono tutte le fotografie della casa. Mancano ancora il cortile,
+      la scala, l'androne e il terrazzo visto da fuori.
+    </p>
+  </div>
+</section>
+
+<dialog class="lbox" id="lbox" aria-label="Fotografia ingrandita">
+  <button class="close" id="lb-close" type="button" aria-label="Chiudi">×</button>
+  <button class="prev" id="lb-prev" type="button" aria-label="Fotografia precedente">‹</button>
+  <button class="next" id="lb-next" type="button" aria-label="Fotografia successiva">›</button>
+  <div id="lb-figura"></div>
+  <p class="cap" id="lb-cap"></p>
+  <p class="num" id="lb-num"></p>
+</dialog>
+
+<script>
+  const griglia = document.getElementById("ggrid");
+  const filtri = document.getElementById("gfilters");
+  const lbox = document.getElementById("lbox") as HTMLDialogElement | null;
+  const lbFigura = document.getElementById("lb-figura");
+  const lbCap = document.getElementById("lb-cap");
+  const lbNum = document.getElementById("lb-num");
+
+  if (griglia && filtri && lbox && lbFigura && lbCap && lbNum) {
+    const voci = [...griglia.querySelectorAll<HTMLLIElement>("li")];
+    let visibili: HTMLLIElement[] = voci;
+    let corrente = 0;
+    let apertaDa: HTMLElement | null = null;
+
+    const applicaFiltro = (chiave: string, aggiornaIndirizzo = true) => {
+      visibili = [];
+      for (const li of voci) {
+        const dentro = chiave === "tutte" || li.dataset.ambiente === chiave;
+        li.hidden = !dentro;
+        if (dentro) visibili.push(li);
+      }
+      filtri
+        .querySelectorAll<HTMLButtonElement>("button")
+        .forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.f === chiave)));
+
+      if (aggiornaIndirizzo) {
+        const u = new URL(location.href);
+        if (chiave === "tutte") u.searchParams.delete("foto");
+        else u.searchParams.set("foto", chiave);
+        history.replaceState(null, "", u.toString() + (u.hash ? "" : "#galleria"));
+      }
+    };
+
+    filtri.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>("button");
+      if (b?.dataset.f) applicaFiltro(b.dataset.f);
+    });
+
+    const daIndirizzo = new URL(location.href).searchParams.get("foto");
+    if (daIndirizzo) applicaFiltro(daIndirizzo, false);
+
+    const apri = (i: number) => {
+      if (visibili.length === 0) return;
+      corrente = (i + visibili.length) % visibili.length;
+      const li = visibili[corrente];
+      const cap = li.querySelector(".cap")!;
+
+      // Si riusa lo stesso <picture> della griglia — quindi le stesse varianti
+      // AVIF/WebP — cambiando solo `sizes`: il browser sceglie da sé una
+      // variante grande, senza scaricare un secondo file (spec 006, FR-011).
+      const copia = li.querySelector("picture")!.cloneNode(true) as HTMLElement;
+      copia
+        .querySelectorAll<HTMLSourceElement | HTMLImageElement>("source, img")
+        .forEach((el) => el.setAttribute("sizes", "92vw"));
+      const immagine = copia.querySelector("img")!;
+      immagine.removeAttribute("loading");
+      immagine.removeAttribute("class");
+      lbFigura.replaceChildren(copia);
+
+      lbCap.textContent = cap.textContent;
+      lbNum.textContent = `${corrente + 1} / ${visibili.length}`;
+      if (!lbox.open) lbox.showModal();
+    };
+
+    griglia.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>("button");
+      if (!b) return;
+      apertaDa = b;
+      apri(visibili.indexOf(b.closest("li")!));
+    });
+
+    document.getElementById("lb-prev")?.addEventListener("click", () => apri(corrente - 1));
+    document.getElementById("lb-next")?.addEventListener("click", () => apri(corrente + 1));
+    document.getElementById("lb-close")?.addEventListener("click", () => lbox.close());
+
+    lbox.addEventListener("click", (e) => {
+      if (e.target === lbox) lbox.close();
+    });
+    lbox.addEventListener("close", () => apertaDa?.focus());
+    lbox.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); apri(corrente - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); apri(corrente + 1); }
+    });
+
+    // Trascinamento orizzontale su schermo tattile.
+    let x0: number | null = null;
+    lbox.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    lbox.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) apri(corrente + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  }
+</script>

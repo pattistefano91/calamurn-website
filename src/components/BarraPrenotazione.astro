@@ -1,0 +1,171 @@
+---
+import { getCollection } from "astro:content";
+import { casa } from "../data/casa";
+import {
+  linkPosta,
+  linkWhatsApp,
+  richiestaVuota,
+  contattiConfermati,
+} from "../data/prenotazione";
+
+const camere = (await getCollection("camere"))
+  .filter((c) => c.data.prenotabile)
+  .sort((a, b) => a.data.ordine - b.data.ordine);
+
+// Indirizzi di partenza: funzionano anche senza JavaScript (spec 003, FR-011).
+const waIniziale = linkWhatsApp(richiestaVuota);
+const mailIniziale = linkPosta(richiestaVuota);
+
+const oggi = new Date().toISOString().slice(0, 10);
+
+if (!contattiConfermati()) {
+  console.warn(
+    "\n  [Calamùrn] I contatti non sono confermati: il numero WhatsApp e/o " +
+      "l'e-mail\n  in src/data/casa.ts sono ancora segnaposto. La spec 003 " +
+      "(FR-007) chiede che\n  la costruzione fallisca prima della " +
+      "pubblicazione in produzione.\n",
+  );
+}
+
+const capienze = Object.fromEntries(
+  camere.map((c) => [c.data.nome, c.data.ospitiMax ?? casa.ospitiMax]),
+);
+---
+
+<div class="bar" id="prenota">
+  <div class="f">
+    <label for="arrivo">Arrivo</label>
+    <input type="date" id="arrivo" name="arrivo" min={oggi} />
+  </div>
+  <div class="f">
+    <label for="partenza">Partenza</label>
+    <input type="date" id="partenza" name="partenza" min={oggi} />
+  </div>
+  <div class="f">
+    <label for="ospiti">Ospiti</label>
+    <select id="ospiti" name="ospiti">
+      <option>1 ospite</option>
+      <option selected>2 ospiti</option>
+      <option>3 ospiti</option>
+    </select>
+  </div>
+  <div class="f">
+    <label for="camera">Camera</label>
+    <select id="camera" name="camera">
+      <option value="">Tutte</option>
+      {camere.map((c) => <option value={c.data.nome}>{c.data.nome}</option>)}
+    </select>
+  </div>
+  <a class="go" id="cta" data-wa href={waIniziale} target="_blank" rel="noopener">
+    Prenota la tua camera
+  </a>
+</div>
+
+<div class="barnote">
+  <div class="wrap">
+    <p class="barerr" id="barerr" role="status" aria-live="polite"></p>
+    Il pulsante apre <b>WhatsApp</b> con le tue date già scritte: non devi
+    ricopiare nulla. Ti rispondiamo di persona, di solito entro {
+      casa.contatti.rispostaEntro.valore
+    }, dalle {casa.contatti.orari.valore}. Nessuna commissione, nessun pagamento
+    online. {
+      !casa.contatti.rispostaEntro.confermato && (
+        <span class="todo">tempi da confermare</span>
+      )
+    }
+    Non usi WhatsApp? <a id="cta-mail" data-mail href={mailIniziale}>scrivici una mail</a>.
+    {
+      !contattiConfermati() && (
+        <>
+          <br />
+          <span class="todo">contatti da confermare</span>
+          Il numero WhatsApp e l'indirizzo e-mail sono ancora segnaposto: vanno
+          sostituiti con quelli veri prima della pubblicazione.
+        </>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  import {
+    linkPosta,
+    linkWhatsApp,
+    type Richiesta,
+  } from "../data/prenotazione";
+
+  const $ = <T extends HTMLElement>(id: string) =>
+    document.getElementById(id) as T | null;
+
+  const arrivo = $<HTMLInputElement>("arrivo");
+  const partenza = $<HTMLInputElement>("partenza");
+  const ospiti = $<HTMLSelectElement>("ospiti");
+  const camera = $<HTMLSelectElement>("camera");
+  const errore = $<HTMLParagraphElement>("barerr");
+
+  const CAPIENZE: Record<string, number> = JSON.parse(
+    document.getElementById("capienze")?.textContent ?? "{}",
+  );
+
+  if (arrivo && partenza && ospiti && camera && errore) {
+    const leggi = (): Richiesta => ({
+      arrivo: arrivo.value,
+      partenza: partenza.value,
+      ospiti: ospiti.value,
+      camera: camera.value,
+    });
+
+    const valida = (): string => {
+      if (arrivo.value && partenza.value && partenza.value <= arrivo.value) {
+        return "La partenza deve essere dopo l'arrivo.";
+      }
+      const max = CAPIENZE[camera.value];
+      const richiesti = parseInt(ospiti.value, 10);
+      if (max && richiesti > max) {
+        return `La ${camera.value} ospita al massimo ${max} persone: scrivici comunque, cerchiamo una soluzione.`;
+      }
+      return "";
+    };
+
+    const aggiorna = () => {
+      if (arrivo.value) partenza.min = arrivo.value;
+      errore.textContent = valida();
+      const r = leggi();
+      const wa = linkWhatsApp(r);
+      const mail = linkPosta(r);
+      document
+        .querySelectorAll<HTMLAnchorElement>("[data-wa]")
+        .forEach((a) => (a.href = wa));
+      document
+        .querySelectorAll<HTMLAnchorElement>("[data-mail]")
+        .forEach((a) => (a.href = mail));
+    };
+
+    [arrivo, partenza, ospiti, camera].forEach((el) =>
+      el.addEventListener("change", aggiorna),
+    );
+
+    // Date di cortesia: oggi e fra tre giorni.
+    const iso = (d: Date) => d.toISOString().slice(0, 10);
+    if (!arrivo.value) arrivo.value = iso(new Date());
+    if (!partenza.value) partenza.value = iso(new Date(Date.now() + 3 * 864e5));
+    aggiorna();
+
+    // I pulsanti «Prenota» sparsi in pagina scelgono la camera e portano qui
+    // (spec 003, FR-009).
+    document.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>("[data-camera]");
+      if (!b) return;
+      const nome = b.dataset.camera ?? "";
+      if ([...camera.options].some((o) => o.value === nome)) camera.value = nome;
+      aggiorna();
+      document.getElementById("prenota")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      arrivo.focus({ preventScroll: true });
+    });
+  }
+</script>
+
+<script type="application/json" id="capienze" set:html={JSON.stringify(capienze)} is:inline></script>

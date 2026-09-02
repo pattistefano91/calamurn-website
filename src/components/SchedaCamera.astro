@@ -1,0 +1,93 @@
+---
+import { Image, Picture } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { fotoDegli } from "../data/foto";
+import { etichetta, metraturaTesto, ospitiTesto } from "../data/dotazioni";
+
+interface Props {
+  camera: CollectionEntry<"camere">;
+  attiva?: boolean;
+}
+
+const { camera, attiva = false } = Astro.props;
+const d = camera.data;
+const scatti = fotoDegli(d.foto);
+
+const specifiche = [
+  metraturaTesto(d.metratura),
+  ospitiTesto(d.ospitiMax),
+  ...d.dotazioni.map(etichetta),
+].filter((x): x is string => Boolean(x));
+---
+
+<div class="pannello-camera" data-camera-id={camera.id} hidden={!attiva}>
+  {
+    scatti.length > 0 ? (
+      <div class="gal">
+        <div class="main">
+          {scatti.map((f, i) => (
+            <Picture formats={["webp"]} fallbackFormat="jpeg"
+              src={f.immagine}
+              alt={f.didascalia}
+              widths={[400, 800]}
+              sizes="(max-width: 900px) 100vw, 400px"
+              loading="lazy"
+              class={i === 0 ? "on" : ""}
+              data-i={i}
+            />
+          ))}
+        </div>
+        <div class="thumbs">
+          {scatti.map((f, i) => (
+            <button type="button" aria-current={i === 0} data-i={i}>
+              {/* Miniature da 80 px: una sola variante basta e alleggerisce
+                  la costruzione di sei immagini per camera. */}
+              <Image src={f.immagine} alt="" width={160} loading="lazy" />
+              <span class="solo-lettori">{f.didascalia}</span>
+            </button>
+          ))}
+        </div>
+        <p class="cap" data-didascalia>{scatti[0].didascalia}</p>
+      </div>
+    ) : (
+      <div class="roomshot">fotografia · {d.nome.toLowerCase()} — da fare</div>
+    )
+  }
+
+  <p class="kicker">{d.occhiello}</p>
+  <h3>{d.nome}</h3>
+  <p class="desc">{d.descrizione}</p>
+
+  {d.avvertenza && <p class="card avviso" style="border:none;background:var(--stone);margin:0 0 14px">{d.avvertenza}</p>}
+
+  <div class="specs">
+    {specifiche.map((s) => <span>{s}</span>)}
+    {d.metratura === null && d.prenotabile && (
+      <span class="todo">metratura da misurare</span>
+    )}
+  </div>
+
+  <div class="price">
+    {
+      !d.prenotabile ? (
+        <small>Spazio della casa</small>
+      ) : d.tariffaDa === null ? (
+        <>
+          da € <span class="blank">&nbsp;</span>
+          <small>/ notte · colazione inclusa</small>
+        </>
+      ) : (
+        <>
+          da {d.tariffaDa} €
+          <small>/ notte · colazione inclusa</small>
+          {!d.tariffaConfermata && <span class="todo">tariffa indicativa</span>}
+        </>
+      )
+    }
+    {d.prenotabile && (
+      <button class="btn sm" type="button" data-camera={d.nome}>
+        Prenota
+      </button>
+    )}
+  </div>
+</div>

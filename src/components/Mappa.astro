@@ -1,0 +1,167 @@
+---
+import { getCollection } from "astro:content";
+
+const luoghi = (await getCollection("luoghi")).sort(
+  (a, b) => a.data.ordine - b.data.ordine,
+);
+
+const categorie = [
+  { chiave: "monumenti", titolo: "Quello che sei venuto a vedere" },
+  { chiave: "mare", titolo: "Dove ci si bagna" },
+  { chiave: "mangiare", titolo: "Mangiare e bere" },
+  { chiave: "pratico", titolo: "Pratico" },
+] as const;
+
+const minutiTesto = (m: number | null, casa: boolean) => {
+  if (casa) return "—";
+  return m === null ? "— min" : `${m} min`;
+};
+
+const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
+---
+
+<section id="mappa">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Ortigia, come la conosciamo noi</h2>
+      <p class="kicker">tocca un punto · minuti a piedi dal portone</p>
+    </div>
+
+    <div class="mapgrid">
+      <div class="mcol">
+        <svg viewBox="0 0 460 680" role="img" aria-label="Mappa disegnata di Ortigia con i luoghi consigliati. L'elenco accanto riporta gli stessi luoghi con i minuti a piedi dal portone.">
+          <rect class="paper" x="0" y="0" width="460" height="680"></rect>
+          <g filter="url(#rough)">
+            <path class="water" d="M0 0 L460 0 L460 680 L0 680 Z"></path>
+            <path class="coast paper" d="M232 42 Q262 88 282 142 Q302 202 316 262 Q322 322 314 382
+              Q302 444 288 502 Q272 560 250 612 Q232 638 214 630 Q200 592 194 546 Q184 486 168 424
+              Q152 366 138 306 Q124 248 116 186 Q126 124 158 82 Q194 52 232 42 Z"></path>
+            <path class="street" d="M228 58 L216 178 M216 178 L204 300 M216 178 L300 196 M204 300 L142 306
+              M204 300 L216 420 M216 420 L214 600 M200 158 L262 96"></path>
+            <path class="street ghost" d="M232 42 L232 16"></path>
+            <text class="dim" x="196" y="12">verso la terraferma</text>
+            <text class="dim" x="18" y="330" transform="rotate(-90 18 330)">PORTO GRANDE</text>
+            <text class="dim" x="404" y="300" transform="rotate(90 404 300)">LUNGOMARE DI LEVANTE</text>
+
+            {
+              luoghi.map((l) => (
+                <>
+                  <circle
+                    class:list={["pin", { home: l.data.casa }]}
+                    data-p={l.id}
+                    cx={l.data.x}
+                    cy={l.data.y}
+                    r={l.data.casa ? 7 : 5}
+                    tabindex="0"
+                    role="button"
+                    aria-label={`${l.data.nome}, ${minutiTesto(l.data.minuti, l.data.casa)} a piedi`}
+                  />
+                  <text
+                    class="plbl"
+                    x={l.data.etichetta === "destra" ? l.data.x + 12 : l.data.x - 12}
+                    y={l.data.y - 4}
+                    text-anchor={l.data.etichetta === "destra" ? "start" : "end"}
+                    style={l.data.casa ? "fill:var(--lead);font-weight:500" : undefined}
+                  >
+                    {l.data.casa ? l.data.nome.toUpperCase() : l.data.nome}
+                  </text>
+                </>
+              ))
+            }
+
+            <path class="ln3" d="M392 640 L440 640 M392 636 L392 644 M440 636 L440 644"></path>
+            <text class="dim" x="392" y="660">0      200 m</text>
+          </g>
+          <rect class="grain" x="0" y="0" width="460" height="680" filter="url(#paperTex)"></rect>
+        </svg>
+      </div>
+
+      <div class="mlist">
+        {
+          categorie.map((cat) => {
+            const dentro = luoghi.filter((l) => l.data.categoria === cat.chiave);
+            if (dentro.length === 0) return null;
+            return (
+              <>
+                <p class="cat">{cat.titolo}</p>
+                <ul>
+                  {dentro.map((l) => (
+                    <li>
+                      <button
+                        type="button"
+                        data-p={l.id}
+                        aria-current={l.id === predefinito.id}
+                      >
+                        <span>{l.data.nome}</span>
+                        <em>
+                          {minutiTesto(l.data.minuti, l.data.casa)}
+                          {!l.data.minutiMisurati && !l.data.casa ? " ca." : ""}
+                        </em>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            );
+          })
+        }
+
+        <div class="mread" aria-live="polite">
+          {
+            luoghi.map((l) => (
+              <div data-luogo={l.id} hidden={l.id !== predefinito.id}>
+                <p class="kicker">
+                  {l.data.occhiello}
+                  {!l.data.casa && ` · ${minutiTesto(l.data.minuti, false)} a piedi`}
+                </p>
+                <h3>{l.data.nome}</h3>
+                <p>{l.data.consiglio}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="nota">
+      <span class="todo">minuti da cronometrare</span>
+      I minuti sono stime, non misure: vanno percorsi davvero, perché è la prima
+      cosa che gli ospiti verificano. E per ora ci sono solo i punti che nessuno
+      può sbagliare. Il valore vero arriva quando aggiungiamo i vostri: la granita
+      giusta con l'orario giusto, la trattoria dove mangiate voi, lo scoglio senza
+      turisti. Quella è la pagina che gli ospiti fotografano.
+    </p>
+  </div>
+</section>
+
+<script>
+  const sezione = document.getElementById("mappa");
+  if (sezione) {
+    const schede = [
+      ...sezione.querySelectorAll<HTMLElement>("[data-luogo]"),
+    ];
+
+    const mostra = (id: string) => {
+      for (const s of schede) s.hidden = s.dataset.luogo !== id;
+      sezione
+        .querySelectorAll<HTMLElement>("[data-p]")
+        .forEach((el) =>
+          el.setAttribute("aria-current", String(el.dataset.p === id)),
+        );
+    };
+
+    sezione.querySelectorAll<HTMLElement>("[data-p]").forEach((el) => {
+      const id = el.dataset.p!;
+      el.addEventListener("click", () => mostra(id));
+      el.addEventListener("mouseenter", () => mostra(id));
+      el.addEventListener("focus", () => mostra(id));
+      el.addEventListener("keydown", (e) => {
+        const ev = e as KeyboardEvent;
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          mostra(id);
+        }
+      });
+    });
+  }
+</script>

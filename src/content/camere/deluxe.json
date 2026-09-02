@@ -1,0 +1,30 @@
+{
+  "nome": "Deluxe Queen",
+  "occhiello": "Secondo piano · balcone su via Dione",
+  "piano": "Secondo piano",
+  "affaccio": "Balcone su via Dione",
+  "descrizione": "La più grande del piano: due pareti in pietra a vista con la luce nascosta a terra, il balcone sulla via e un divano che diventa il terzo letto.",
+  "metratura": 24,
+  "ospitiMax": 3,
+  "letto": "Letto queen",
+  "dotazioni": [
+    "balcone-su-via",
+    "bagno-interno",
+    "letto-queen",
+    "terzo-letto",
+    "pietra-a-vista"
+  ],
+  "foto": [
+    "deluxe-01",
+    "deluxe-02",
+    "deluxe-03",
+    "deluxe-04",
+    "deluxe-05",
+    "deluxe-06"
+  ],
+  "fotoExtra": [],
+  "tariffaDa": 125,
+  "tariffaConfermata": false,
+  "prenotabile": true,
+  "ordine": 2
+}

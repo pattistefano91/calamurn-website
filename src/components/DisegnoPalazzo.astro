@@ -1,0 +1,423 @@
+---
+import { getCollection } from "astro:content";
+import SchedaCamera from "./SchedaCamera.astro";
+
+const camere = await getCollection("camere");
+const nomi = Object.fromEntries(camere.map((c) => [c.id, c.data.nome]));
+const perId = Object.fromEntries(camere.map((c) => [c.id, c]));
+
+/** La camera mostrata all'apertura e senza JavaScript. */
+const PREDEFINITA = "deluxe";
+
+// Aree sensibili: conoscono l'identificativo della camera, non i suoi dati
+// (spec 005, FR-005).
+const puntiProspetto = [
+  { k: "suite", x: 340, y: 6, w: 324, h: 34 },
+  { k: "superior", x: 40, y: 6, w: 260, h: 34 },
+  { k: "standard", x: 336, y: 56, w: 152, h: 134 },
+  { k: "deluxe", x: 488, y: 56, w: 172, h: 134 },
+  { k: "androne", x: 168, y: 404, w: 108, h: 136 },
+];
+
+const puntiSezione = [
+  { k: "suite", x: 60, y: 92, w: 440, h: 88 },
+  { k: "comuni", x: 60, y: 180, w: 440, h: 26 },
+  { k: "standard", x: 60, y: 206, w: 150, h: 84 },
+  { k: "superior", x: 238, y: 220, w: 114, h: 62 },
+  { k: "deluxe", x: 380, y: 206, w: 120, h: 84 },
+  { k: "androne", x: 60, y: 400, w: 496, h: 90 },
+];
+
+const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "androne"];
+---
+
+<section id="camere">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Tutta la casa, in un disegno</h2>
+      <p class="kicker">tocca un ambiente · prospetto e sezione</p>
+    </div>
+
+    <!-- I filtri del tratto a matita: definiti una volta sola, sempre presenti
+         nel documento anche quando una delle due viste è nascosta. -->
+    <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+      <defs>
+            <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="9" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="paperTex">
+              <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" seed="3"/>
+              <feColorMatrix type="saturate" values="0"/>
+              <feComponentTransfer><feFuncA type="linear" slope="0.15"/></feComponentTransfer>
+            </filter>
+            <filter id="soft"><feGaussianBlur stdDeviation="8"/></filter>
+          </defs>
+    </svg>
+
+    <div class="drawgrid">
+      <div class="drawcol">
+        <div class="drawtabs" role="tablist" aria-label="Viste del palazzo">
+          <button id="tab-prospetto" role="tab" aria-selected="true" aria-controls="paneP">Prospetto</button>
+          <button id="tab-sezione" role="tab" aria-selected="false" aria-controls="paneS">Sezione</button>
+        </div>
+
+        <div class="viewbox" id="viewbox">
+          <div class="pane" id="paneP" role="tabpanel" aria-labelledby="tab-prospetto">
+            <svg viewBox="0 0 700 610" role="img" aria-label="Prospetto disegnato del palazzo su via Dione">
+          
+          <rect class="paper" x="0" y="0" width="700" height="610"/>
+          <g filter="url(#rough)">
+            <g filter="url(#soft)">
+              <ellipse class="washon d8" cx="520" cy="26" rx="170" ry="26" fill="var(--sky)"/>
+              <ellipse class="washon d8" cx="222" cy="470" rx="140" ry="62" fill="var(--shade)"/>
+            </g>
+
+            <path class="ghost draw d8" pathLength="1" d="M340 6 L664 6 L664 40 L340 40 Z"/>
+            <text class="lbl" x="356" y="20" style="fill:var(--lead-2)">SUITE CON TERRAZZO · IN ATTICO</text>
+            <text class="lbl" x="356" y="33" style="fill:var(--lead-2)">NON VISIBILE DA VIA DIONE</text>
+
+            <path class="ghost draw d8" pathLength="1" d="M40 6 L300 6 L300 40 L40 40 Z"/>
+            <text class="lbl" x="52" y="20" style="fill:var(--lead-2)">SUPERIOR — SUL CORTILE INTERNO,</text>
+            <text class="lbl" x="52" y="33" style="fill:var(--lead-2)">NON VISIBILE DAL PROSPETTO</text>
+            <path class="ghost draw d8" pathLength="1" d="M300 24 Q380 30 452 108"/>
+
+            <path class="ln draw d7" pathLength="1" d="M34 56 L666 56 M40 42 L660 42"/>
+            <g class="ln3 fade d7"><path d="M62 42 L62 56 M88 42 L88 56 M114 42 L114 56 M140 42 L140 56 M166 42 L166 56 M192 42 L192 56 M218 42 L218 56 M244 42 L244 56 M270 42 L270 56 M296 42 L296 56 M322 42 L322 56 M348 42 L348 56 M374 42 L374 56 M400 42 L400 56 M426 42 L426 56 M452 42 L452 56 M478 42 L478 56 M504 42 L504 56 M530 42 L530 56 M556 42 L556 56 M582 42 L582 56 M608 42 L608 56 M634 42 L634 56"/></g>
+
+            <!-- SECONDO PIANO -->
+            <path class="ln draw d6" pathLength="1" d="M40 56 L40 190 M660 56 L660 190"/>
+            <path class="ghost draw d6" pathLength="1" d="M336 56 L336 190 M488 56 L488 190"/>
+            <path class="ln draw d6" pathLength="1" d="M188 168 L188 108 Q222 76 256 108 L256 168"/>
+            <path class="ln2 draw d6" pathLength="1" d="M222 108 L222 168 M196 168 L196 114 M248 168 L248 114
+              M196 114 Q209 98 222 114 M222 114 Q235 98 248 114"/>
+            <circle class="ln2 fade d7" cx="222" cy="98" r="6"/>
+            <path class="ln draw d6" pathLength="1" d="M340 178 L474 178 L474 190 L340 190 Z M352 190 L345 210 L379 210 L372 190 M432 190 L425 210 L459 210 L452 190"/>
+            <path class="ln2 draw d6" pathLength="1" d="M340 122 L474 122"/>
+            <g class="ln3 fade d7"><path d="M348 122 L348 178 M360 122 L360 178 M372 122 L372 178 M384 122 L384 178 M396 122 L396 178 M408 122 L408 178 M420 122 L420 178 M432 122 L432 178 M444 122 L444 178 M456 122 L456 178 M468 122 L468 178"/></g>
+            <path class="ln2 draw d6" pathLength="1" d="M370 178 L370 96 L444 96 L444 178"/>
+            <path class="ln3 fade d7" d="M366 92 L448 92 L448 72 L366 72 Z"/>
+            <text class="lbl" x="352" y="70">STANDARD</text>
+            <path class="ln draw d6" pathLength="1" d="M500 178 L656 178 L656 190 L500 190 Z M512 190 L505 210 L539 210 L532 190 M600 190 L593 210 L627 210 L620 190"/>
+            <path class="ln2 draw d6" pathLength="1" d="M500 122 L656 122"/>
+            <g class="ln3 fade d7"><path d="M508 122 L508 178 M520 122 L520 178 M532 122 L532 178 M544 122 L544 178 M556 122 L556 178 M568 122 L568 178 M580 122 L580 178 M592 122 L592 178 M604 122 L604 178 M616 122 L616 178 M628 122 L628 178 M640 122 L640 178"/></g>
+            <path class="ln2 draw d6" pathLength="1" d="M534 178 L534 96 L622 96 L622 178"/>
+            <path class="ln3 fade d7" d="M530 92 L626 92 L626 72 L530 72 Z"/>
+            <text class="lbl" x="504" y="70">DELUXE</text>
+            <path class="ln2 draw d6" pathLength="1" d="M44 178 L166 178 L166 190 L44 190 Z M56 190 L49 210 L83 210 L76 190 M130 190 L123 210 L157 210 L150 190"/>
+            <g class="ln3 fade d7"><path d="M50 124 L50 178 M62 124 L62 178 M74 124 L74 178 M86 124 L86 178 M98 124 L98 178 M110 124 L110 178 M122 124 L122 178 M134 124 L134 178 M146 124 L146 178 M158 124 L158 178 M44 124 L166 124"/></g>
+            <text class="lbl" x="52" y="70" style="fill:var(--lead-2)">ALTRI</text>
+
+            <!-- PRIMO PIANO — altre strutture, come il secondo -->
+            <path class="ln draw d5" pathLength="1" d="M40 190 L660 190 M40 190 L40 330 M660 190 L660 330"/>
+            <path class="ln draw d5" pathLength="1" d="M172 296 L172 226 Q222 178 272 226 L272 296"/>
+            <path class="ln2 draw d5" pathLength="1" d="M222 226 L222 296 M182 296 L182 234 M262 296 L262 234
+              M182 234 Q202 208 222 234 M222 234 Q242 208 262 234"/>
+            <circle class="ln2 fade d6" cx="222" cy="212" r="9"/>
+            <path class="ln draw d5" pathLength="1" d="M118 300 L344 300 M118 328 L344 328"/>
+            <path class="ln2 draw d5" pathLength="1" d="M118 300 L118 328 M230 300 L230 328 L240 328 L240 300 Z M344 300 L344 328"/>
+            <g class="ln3 fade d6"><path d="M124 328 L140 300 M124 300 L140 328 M140 328 L156 300 M140 300 L156 328 M156 328 L172 300 M156 300 L172 328 M172 328 L188 300 M172 300 L188 328 M188 328 L204 300 M188 300 L204 328 M204 328 L220 300 M204 300 L220 328 M246 328 L262 300 M246 300 L262 328 M262 328 L278 300 M262 300 L278 328 M278 328 L294 300 M278 300 L294 328 M294 328 L310 300 M294 300 L310 328 M310 328 L326 300 M310 300 L326 328 M326 328 L342 300 M326 300 L342 328"/></g>
+            <path class="ln2 draw d4" pathLength="1" d="M348 318 L664 318 L664 330 L348 330 Z M360 330 L351 358 L395 358 L386 330 M434 330 L425 358 L469 358 L460 330 M508 330 L499 358 L543 358 L534 330 M582 330 L573 358 L617 358 L608 330"/>
+            <path class="ln2 draw d4" pathLength="1" d="M348 250 L664 250"/>
+            <g class="ln3 fade d5"><path d="M356 250 L356 318 M368 250 L368 318 M380 250 L380 318 M392 250 L392 318 M404 250 L404 318 M416 250 L416 318 M428 250 L428 318 M440 250 L440 318 M452 250 L452 318 M464 250 L464 318 M476 250 L476 318 M488 250 L488 318 M500 250 L500 318 M512 250 L512 318 M524 250 L524 318 M536 250 L536 318 M548 250 L548 318 M560 250 L560 318 M572 250 L572 318 M584 250 L584 318 M596 250 L596 318 M608 250 L608 318 M620 250 L620 318 M632 250 L632 318 M644 250 L644 318 M656 250 L656 318"/></g>
+            <path class="ln2 draw d4" pathLength="1" d="M380 318 L380 214 L444 214 L444 318 M500 318 L500 214 L564 214 L564 318
+              M600 318 L600 214 L656 214 L656 318"/>
+            <path class="ln2 draw d4" pathLength="1" d="M44 318 L120 318 L120 330 L44 330 Z M52 330 L43 358 L87 358 L78 330 M96 330 L87 358 L131 358 L122 330"/>
+            <g class="ln3 fade d5"><path d="M50 262 L50 318 M62 262 L62 318 M74 262 L74 318 M86 262 L86 318 M98 262 L98 318 M110 262 L110 318 M44 262 L120 262"/></g>
+            <text class="lbl" x="52" y="212" style="fill:var(--lead-2)">PRIMO PIANO · ALTRE STRUTTURE</text>
+
+            <!-- PIANO TERRA -->
+            <path class="ln draw d2" pathLength="1" d="M40 330 L40 540 M660 330 L660 540"/>
+            <path class="ln draw d1" pathLength="1" d="M96 540 L96 406 Q222 316 348 406 L348 540"/>
+            <path class="ln2 draw d2" pathLength="1" d="M122 540 L122 420 Q222 348 322 420 L322 540"/>
+            <g class="hatch fade d3"><path d="M100 418 L124 430 M104 394 L128 408 M114 374 L138 386 M130 356 L152 368
+              M152 342 L172 354 M180 330 L198 342 M212 324 L228 336 M246 326 L262 338 M278 334 L294 346
+              M306 348 L322 360 M328 368 L344 380 M340 394 L356 406"/></g>
+            <path class="ln draw d0" pathLength="1" d="M168 540 L168 452 Q222 404 276 452 L276 540 M222 452 L222 540"/>
+            <path class="ln2 draw d1" pathLength="1" d="M168 452 L276 452 M168 494 L276 494"/>
+            <path class="ln3 fade d2" d="M182 448 Q198 424 212 446 M234 446 Q248 424 264 448 M196 434 Q212 418 220 436 M226 436 Q238 418 252 434"/>
+            <g class="ln2 fade d2">
+              <circle cx="196" cy="473" r="9"/><circle cx="250" cy="473" r="9"/>
+              <circle cx="196" cy="516" r="9"/><circle cx="250" cy="516" r="9"/>
+              <circle cx="196" cy="473" r="4"/><circle cx="250" cy="473" r="4"/>
+              <circle cx="196" cy="516" r="4"/><circle cx="250" cy="516" r="4"/>
+            </g>
+            <path class="ln2 draw d3" pathLength="1" d="M214 372 L230 372 M222 372 L222 386"/>
+            <path class="ln draw d3" pathLength="1" d="M211 386 L233 386 L237 414 L207 414 Z M218 414 L226 420"/>
+            <path class="ln2 draw d3" pathLength="1" d="M356 424 L380 424 L380 444 L356 444 Z"/>
+            <text class="dim" x="361" y="439">58</text>
+            <path class="ln draw d3" pathLength="1" d="M44 540 L44 432 L92 432 L92 540"/>
+            <path class="ln2 draw d3" pathLength="1" d="M100 424 L124 424 L124 444 L100 444 Z"/>
+            <text class="dim" x="105" y="439">60</text>
+            <path class="ln draw d3" pathLength="1" d="M400 540 L400 428 L458 428 L458 540"/>
+            <g class="ln3 fade d4"><path d="M406 428 L406 540 M414 428 L414 540 M422 428 L422 540 M430 428 L430 540 M438 428 L438 540 M446 428 L446 540"/></g>
+            <path class="ln2 draw d3" pathLength="1" d="M466 424 L490 424 L490 444 L466 444 Z"/>
+            <text class="dim" x="471" y="439">56</text>
+            <path class="ln draw d4" pathLength="1" d="M560 540 L560 424 L620 424 L620 540"/>
+            <g class="ln3 fade d4"><path d="M568 424 L568 540 M577 424 L577 540 M586 424 L586 540 M595 424 L595 540 M604 424 L604 540 M560 456 L620 456 M560 492 L620 492"/></g>
+
+            <path class="ghost draw d8" pathLength="1" d="M222 42 L222 330" stroke-dasharray="10 4 2 4"/>
+            <text class="dim" x="228" y="352" style="fill:var(--lead-2)">asse del portone · il palazzo si divide qui</text>
+
+            <path class="ln draw d0" pathLength="1" d="M16 540 L684 540" stroke-width="3"/>
+            <g class="ln3 fade d0" opacity=".7"><path d="M40 540 L29 560 M70 540 L59 560 M100 540 L89 560 M130 540 L119 560 M160 540 L149 560 M190 540 L179 560 M220 540 L209 560 M250 540 L239 560 M280 540 L269 560 M310 540 L299 560 M340 540 L329 560 M370 540 L359 560 M400 540 L389 560 M430 540 L419 560 M460 540 L449 560 M490 540 L479 560 M520 540 L509 560 M550 540 L539 560 M580 540 L569 560 M610 540 L599 560 M640 540 L629 560 M670 540 L659 560"/></g>
+            <text class="dim" x="310" y="578">via Dione</text>
+
+            <g class="fade d8">
+              <path class="ln3" d="M26 6 L26 540 M20 6 L32 6 M20 42 L32 42 M20 190 L32 190 M20 330 L32 330 M20 540 L32 540"/>
+              <text class="dim" x="0" y="28">ATTICO</text>
+              <text class="dim" x="0" y="128">SECONDO</text>
+              <text class="dim" x="2" y="264">PRIMO</text>
+              <text class="dim" x="0" y="440">P. TERRA</text>
+              <text class="dim" x="596" y="584">scala 1:100</text>
+            </g>
+          </g>
+          <rect class="grain" x="0" y="0" width="700" height="610" filter="url(#paperTex)"/>
+          <g class="hits">
+            {puntiProspetto.map((h) => (
+              <rect
+                class:list={["rm", { on: h.k === PREDEFINITA }]}
+                data-k={h.k}
+                x={h.x} y={h.y} width={h.w} height={h.h}
+                tabindex="0"
+                role="button"
+                aria-label={`Mostra ${nomi[h.k] ?? h.k}`}
+              />
+            ))}
+          </g>
+        </svg>
+          </div>
+
+          <div class="pane" id="paneS" role="tabpanel" aria-labelledby="tab-sezione" hidden>
+            <svg viewBox="0 0 660 570" role="img" aria-label="Sezione disegnata: i quattro livelli, il cortile e la scala">
+          <rect class="paper" x="0" y="0" width="660" height="570"/>
+          <g filter="url(#rough)">
+            <g filter="url(#soft)">
+              <ellipse class="washon d8" cx="380" cy="110" rx="150" ry="42" fill="var(--sky)"/>
+              <ellipse class="washon d8" cx="296" cy="330" rx="46" ry="70" fill="var(--shade)"/>
+            </g>
+
+            <!-- ATTICO: suite con terrazzo -->
+            <path class="ln draw d6" pathLength="1" d="M60 92 L500 92 L500 180 L60 180 Z"/>
+            <path class="ghost draw d6" pathLength="1" d="M340 92 L340 180"/>
+            <text class="lbl" x="170" y="140">SUITE</text>
+            <text class="lbl" x="382" y="140" style="fill:var(--lead-2)">TERRAZZO</text>
+            <text class="dim" x="60" y="84">attico · non visibile da via Dione</text>
+
+            <!-- SECONDO: le camere -->
+            <path class="ln draw d5" pathLength="1" d="M60 180 L500 180 L500 206 L60 206 Z"/>
+            <text class="lbl" x="150" y="198">PIANEROTTOLO · SPAZI COMUNI</text>
+            <path class="ln draw d5" pathLength="1" d="M60 206 L210 206 L210 290 L60 290 Z"/>
+            <text class="lbl" x="98" y="252">STANDARD</text>
+            <path class="ln draw d5" pathLength="1" d="M380 206 L500 206 L500 290 L380 290 Z"/>
+            <text class="lbl" x="410" y="252">DELUXE</text>
+            <path class="void draw d4" pathLength="1" d="M210 206 L210 400 M380 206 L380 400"/>
+            <path class="ln2 draw d5" pathLength="1" d="M238 220 L352 220 L352 282 L238 282 Z"/>
+            <text class="lbl" x="258" y="248">SUPERIOR</text>
+            <text class="dim" x="248" y="264">oltre il cortile</text>
+            <text class="lbl" x="272" y="336" style="fill:var(--lead-2)">CORTILE</text>
+
+            <!-- balconi su via Dione -->
+            <path class="ln draw d5" pathLength="1" d="M60 254 L34 254 L34 242 M34 254 L34 268 M44 242 L44 268 M52 242 L52 268"/>
+            <path class="ln draw d5" pathLength="1" d="M500 254 L526 254 L526 242 M526 254 L526 268 M516 242 L516 268 M508 242 L508 268"/>
+            <text class="dim" x="516" y="300" style="fill:var(--lead-2)">balconi su via Dione</text>
+
+            <!-- scala -->
+            <path class="ln draw d3" pathLength="1" d="M556 92 L634 92 M556 92 L556 490 M634 92 L634 490"/>
+            <path class="ln2 draw d3" pathLength="1" d="M562 476 L578 476 L578 460 M578 460 L594 460 L594 444 M594 444 L612 444 L612 428
+                                                          M562 372 L578 372 L578 356 M578 356 L594 356 L594 340 M594 340 L612 340 L612 324
+                                                          M562 268 L578 268 L578 252 M578 252 L594 252 L594 236 M594 236 L612 236 L612 220"/>
+            <text class="lbl" x="566" y="140" style="fill:var(--lead-2)">SCALA</text>
+            <path class="ln2 draw d3" pathLength="1" d="M500 92 L556 92 M500 180 L556 180"/>
+
+            <!-- PRIMO: altri -->
+            <path class="ln2 draw d2" pathLength="1" d="M60 290 L210 290 M60 400 L210 400 M380 290 L500 290 M380 400 L500 400"/>
+            <g class="hatch fade d2"><path d="M112 290 L60 342 M140 290 L88 342 M168 290 L116 342 M196 290 L144 342 M432 290 L380 342 M460 290 L408 342 M488 290 L436 342"/></g>
+            <text class="lbl" x="72" y="330" style="fill:var(--lead-2)">PRIMO PIANO · ALTRE STRUTTURE</text>
+
+            <!-- PIANO TERRA -->
+            <path class="ln draw d1" pathLength="1" d="M60 400 L556 400 L556 490 L60 490 Z"/>
+            <text class="lbl" x="200" y="444">ANDRONE · INGRESSO AL 58</text>
+            <path class="ln draw d1" pathLength="1" d="M262 490 L262 450 Q302 410 342 450 L342 490"/>
+
+            <path class="ln draw d0" pathLength="1" d="M18 490 L642 490" stroke-width="3"/>
+            <text class="dim" x="268" y="520">via Dione 58</text>
+
+            <g class="fade d8">
+              <path class="ln3" d="M40 92 L40 490 M34 92 L46 92 M34 180 L46 180 M34 290 L46 290 M34 400 L46 400 M34 490 L46 490"/>
+              <text class="dim" x="4" y="140">ATTICO</text>
+              <text class="dim" x="0" y="240">SECONDO</text>
+              <text class="dim" x="4" y="348">PRIMO</text>
+              <text class="dim" x="2" y="450">P. TERRA</text>
+              <text class="dim" x="560" y="520">scala 1:100</text>
+            </g>
+          </g>
+          <rect class="grain" x="0" y="0" width="660" height="570" filter="url(#paperTex)"/>
+          <g class="hits">
+            {puntiSezione.map((h) => (
+              <rect
+                class:list={["rm", { on: h.k === PREDEFINITA }]}
+                data-k={h.k}
+                x={h.x} y={h.y} width={h.w} height={h.h}
+                tabindex="0"
+                role="button"
+                aria-label={`Mostra ${nomi[h.k] ?? h.k}`}
+              />
+            ))}
+          </g>
+        </svg>
+          </div>
+
+          <button class="replay" id="replay" type="button">↻ ridisegna</button>
+        </div>
+      </div>
+
+      <div class="info" id="info-camera">
+        {
+          ordineSchede.map((k) => (
+            <SchedaCamera camera={perId[k]} attiva={k === PREDEFINITA} />
+          ))
+        }
+        <p class="cap" id="lockhint" hidden>
+          ▸ passa sopra per esplorare, tocca per bloccare
+        </p>
+      </div>
+    </div>
+
+    <p class="nota">
+      <span class="todo">disegno, non rilievo</span>
+      Prospetto e sezione sono ricalcati dalle fotografie: arcone e portone al 58,
+      lanterna sulla chiave, bifore e balaustra traforata. Il portone divide il
+      palazzo in due: al primo piano stanno altre proprietà, al secondo le camere
+      sulla metà destra — Standard verso il centro, Deluxe all'estremità — e sopra,
+      in attico, la suite col terrazzo, che da via Dione non si vede.
+    </p>
+  </div>
+</section>
+
+<script>
+  const $ = (id: string) => document.getElementById(id);
+
+  const paneP = $("paneP");
+  const paneS = $("paneS");
+  const tabP = $("tab-prospetto");
+  const tabS = $("tab-sezione");
+  const viewbox = $("viewbox");
+  const info = $("info-camera");
+  const hint = $("lockhint");
+
+  const pannelli = info
+    ? [...info.querySelectorAll<HTMLElement>("[data-camera-id]")]
+    : [];
+
+  let bloccata: string | null = null;
+
+  function mostra(k: string) {
+    let trovata = false;
+    for (const p of pannelli) {
+      const suo = p.dataset.cameraId === k;
+      p.hidden = !suo;
+      if (suo) trovata = true;
+    }
+    if (!trovata) return;
+    document.querySelectorAll<SVGElement>(".rm").forEach((r) => {
+      r.classList.toggle("on", (r as SVGElement).dataset.k === k);
+    });
+  }
+
+  function aggiornaHint() {
+    if (!hint) return;
+    hint.hidden = false;
+    hint.textContent = bloccata
+      ? "● selezione bloccata — tocca di nuovo per sbloccare"
+      : "▸ passa sopra per esplorare, tocca per bloccare";
+  }
+
+  function collega() {
+    document.querySelectorAll<SVGElement>(".rm").forEach((el) => {
+      if (el.dataset.collegato) return;
+      el.dataset.collegato = "1";
+      const k = el.dataset.k!;
+      el.addEventListener("mouseenter", () => {
+        if (!bloccata) mostra(k);
+      });
+      el.addEventListener("focus", () => {
+        if (!bloccata) mostra(k);
+      });
+      const scegli = () => {
+        bloccata = bloccata === k ? null : k;
+        mostra(k);
+        aggiornaHint();
+      };
+      el.addEventListener("click", scegli);
+      el.addEventListener("keydown", (e) => {
+        const ev = e as KeyboardEvent;
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          scegli();
+        }
+      });
+    });
+  }
+
+  function ridisegna() {
+    if (!viewbox) return;
+    viewbox.classList.remove("go-anim");
+    void viewbox.offsetWidth;
+    viewbox.classList.add("go-anim");
+  }
+
+  function vista(sezione: boolean) {
+    if (!paneP || !paneS || !tabP || !tabS) return;
+    paneP.hidden = sezione;
+    paneS.hidden = !sezione;
+    tabP.setAttribute("aria-selected", String(!sezione));
+    tabS.setAttribute("aria-selected", String(sezione));
+    collega();
+    // La camera scelta resta la stessa se esiste anche nell'altra vista.
+    const corrente = pannelli.find((p) => !p.hidden)?.dataset.cameraId;
+    if (corrente) mostra(corrente);
+    ridisegna();
+  }
+
+  tabP?.addEventListener("click", () => vista(false));
+  tabS?.addEventListener("click", () => vista(true));
+  $("replay")?.addEventListener("click", ridisegna);
+
+  collega();
+  aggiornaHint();
+
+  if (viewbox) {
+    const osservatore = new IntersectionObserver(
+      (voci, o) => {
+        for (const v of voci) {
+          if (v.isIntersecting) {
+            ridisegna();
+            o.disconnect();
+          }
+        }
+      },
+      { threshold: 0.35 },
+    );
+    osservatore.observe(viewbox);
+  }
+
+  // Galleria dentro il pannello di camera.
+  info?.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>(
+      ".gal .thumbs button",
+    );
+    if (!b) return;
+    const gal = b.closest(".gal")!;
+    const i = b.dataset.i;
+    gal.querySelectorAll<HTMLElement>(".main img").forEach((img) => {
+      img.classList.toggle("on", img.dataset.i === i);
+    });
+    gal.querySelectorAll<HTMLElement>(".thumbs button").forEach((t) => {
+      t.setAttribute("aria-current", String(t.dataset.i === i));
+    });
+    const cap = gal.querySelector("[data-didascalia]");
+    const alt = gal.querySelector<HTMLImageElement>(`.main img[data-i="${i}"]`)?.alt;
+    if (cap && alt) cap.textContent = alt;
+  });
+</script>

@@ -1,0 +1,46 @@
+{
+  "nome": "Suite",
+  "occhiello": "Attico · terrazzo a uso esclusivo",
+  "piano": "Attico",
+  "affaccio": "Terrazzo privato, oltre i tetti il mare",
+  "descrizione": "Un piano intero in attico: letto a baldacchino contro il muro in pietra, soffitto in travi bianche, angolo colazione con macchina del caffè, cabina armadio e bagno con lucernario. Dalla camera una scaletta interna sale al terrazzo, che è solo tuo — pergola di canne, giare con le agavi, e oltre i tetti il mare.",
+  "metratura": null,
+  "ospitiMax": 2,
+  "letto": "Letto a baldacchino",
+  "dotazioni": [
+    "terrazzo-privato",
+    "vista-mare",
+    "cabina-armadio",
+    "doccia-a-filo",
+    "bagno-interno",
+    "letto-baldacchino",
+    "angolo-colazione",
+    "soffitto-in-travi"
+  ],
+  "foto": [
+    "suite-01",
+    "suite-02",
+    "suite-03",
+    "suite-04",
+    "suite-05",
+    "suite-06"
+  ],
+  "fotoExtra": [
+    "suite-07",
+    "suite-08",
+    "suite-09",
+    "suite-10",
+    "suite-11",
+    "suite-12",
+    "suite-13",
+    "suite-14",
+    "suite-15",
+    "suite-16",
+    "suite-17",
+    "suite-18"
+  ],
+  "tariffaDa": 180,
+  "tariffaConfermata": false,
+  "prenotabile": true,
+  "ordine": 1
+}

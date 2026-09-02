@@ -1,0 +1,111 @@
+---
+import { Picture } from "astro:assets";
+import { fotoConRuolo } from "../data/foto";
+import { casa } from "../data/casa";
+
+const giorno = fotoConRuolo("hero-giorno");
+const sera = fotoConRuolo("hero-sera");
+---
+
+<div class="hero" id="top">
+  <Picture
+    formats={["webp"]}
+    fallbackFormat="jpeg"
+    quality={62}
+    class="day"
+    src={giorno.immagine}
+    alt={giorno.didascalia}
+    widths={[640, 1024, 1600]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <!-- La fotografia della sera pesa quanto quella del giorno: entra nella
+       pagina solo quando qualcuno tocca il cursore, per non raddoppiare il
+       peso del primo viewport (spec 001, SC-002). -->
+  <template id="hero-sera">
+    <Picture
+      formats={["webp"]}
+      fallbackFormat="jpeg"
+      quality={62}
+      class="night"
+      src={sera.immagine}
+      alt=""
+      widths={[640, 1024, 1600]}
+      sizes="100vw"
+      loading="eager"
+      aria-hidden="true"
+    />
+  </template>
+
+  <div class="veil"></div>
+
+  <div class="inner">
+    <div class="wrap">
+      <p class="kicker">
+        {casa.indirizzo.via} · {casa.indirizzo.quartiere}, {casa.indirizzo.citta}
+      </p>
+      <h1>Il portone lo riconoscerai.</h1>
+      <p class="lede">
+        Quattro camere dentro un palazzo gotico-catalano, dietro Piazza
+        Archimede. L'arco, le bifore e la balaustra traforata sono gli stessi da
+        cinque secoli.
+      </p>
+
+      <!-- Potenziamento facoltativo: senza JavaScript resta la sola fotografia
+           di giorno (spec 001, FR-011). -->
+      <div class="lightctl" id="lightctl" hidden>
+        <span>La stessa facciata</span>
+        <input
+          type="range"
+          id="light"
+          min="0"
+          max="100"
+          value="0"
+          step="1"
+          aria-label="Ora del giorno sulla facciata"
+        />
+        <output id="lighth" for="light">18:40</output>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const ctl = document.getElementById("lightctl");
+  const cursore = document.getElementById("light") as HTMLInputElement | null;
+  const ora = document.getElementById("lighth");
+  const modello = document.getElementById("hero-sera") as HTMLTemplateElement | null;
+  const hero = document.querySelector<HTMLElement>(".hero");
+
+  if (ctl && cursore && ora && modello && hero) {
+    ctl.hidden = false;
+
+    const INIZIO = 18 * 60 + 40;
+    const FINE = 21 * 60 + 30;
+    let sera: HTMLElement | null = null;
+
+    const aggiorna = () => {
+      const v = Number(cursore.value);
+
+      if (!sera && v > 0) {
+        // Va sopra la fotografia di giorno ma sotto il velo: l'ordine nel DOM
+        // è quello che decide la sovrapposizione.
+        const velo = hero.querySelector(".veil");
+        hero.insertBefore(modello.content.cloneNode(true), velo);
+        sera = hero.querySelector<HTMLElement>(".night");
+      }
+      if (sera) sera.style.opacity = String(v / 100);
+
+      const m = Math.round(INIZIO + ((FINE - INIZIO) * v) / 100);
+      ora.textContent =
+        String(Math.floor(m / 60)).padStart(2, "0") +
+        ":" +
+        String(m % 60).padStart(2, "0");
+    };
+
+    cursore.addEventListener("input", aggiorna);
+    aggiorna();
+  }
+</script>

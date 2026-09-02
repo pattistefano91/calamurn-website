@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+
+const domande = (await getCollection("faq")).sort(
+  (a, b) => a.data.ordine - b.data.ordine,
+);
+
+// Dati strutturati solo per le domande che una risposta ce l'hanno davvero
+// (spec 010, FR-003): dichiararne una vuota sarebbe peggio che non dichiararla.
+const risposte = domande.filter((d) => d.data.risposta);
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: risposte.map((d) => ({
+    "@type": "Question",
+    name: d.data.domanda,
+    acceptedAnswer: { "@type": "Answer", text: d.data.risposta },
+  })),
+};
+---
+
+<section id="domande">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Prima di arrivare</h2>
+      <p class="kicker">le domande vere</p>
+    </div>
+
+    {
+      domande.map((d) => (
+        <details open={d.data.apertaDiDefault}>
+          <summary>{d.data.domanda}</summary>
+          {d.data.risposta ? (
+            <p>{d.data.risposta}</p>
+          ) : (
+            <p>
+              <span class="todo">senza risposta</span>
+              Non l'abbiamo ancora scritta perché non vogliamo scrivere una
+              risposta generica. Serve: {d.data.daConfermare}
+            </p>
+          )}
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+{risposte.length > 0 && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}

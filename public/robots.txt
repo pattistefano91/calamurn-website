@@ -1,0 +1,8 @@
+# Calamùrn · Palazzo Di Natale
+# Solo il dominio di produzione va indicizzato: le anteprime di Vercel
+# rispondono con l'intestazione X-Robots-Tag e con un noindex in pagina.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://calamurn.it/sitemap-index.xml

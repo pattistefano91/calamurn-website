@@ -1,0 +1,92 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import { fotoDi } from "../data/foto";
+import { etichetta, metraturaTesto, ospitiTesto } from "../data/dotazioni";
+
+const camere = (await getCollection("camere"))
+  .filter((c) => c.data.prenotabile)
+  .sort((a, b) => a.data.ordine - b.data.ordine);
+
+const nonConfermate = camere.filter((c) => !c.data.tariffaConfermata).length;
+---
+
+<section id="le-camere">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Le quattro camere</h2>
+      <p class="kicker">metratura reale, affacci diversi</p>
+    </div>
+
+    <div class="rooms">
+      {
+        camere.map((c) => {
+          const d = c.data;
+          const copertina = d.foto[0] ? fotoDi(d.foto[0]) : null;
+          const meta = [
+            metraturaTesto(d.metratura),
+            ospitiTesto(d.ospitiMax),
+            d.dotazioni[0] ? etichetta(d.dotazioni[0]) : null,
+          ].filter((x): x is string => Boolean(x));
+
+          return (
+            <article class="card">
+              <div class="ph">
+                {copertina ? (
+                  <Picture formats={["webp"]} fallbackFormat="jpeg"
+                    quality={70}
+                    src={copertina.immagine}
+                    alt={copertina.didascalia}
+                    widths={[320, 640]}
+                    sizes="(max-width: 640px) 100vw, 300px"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="roomshot" style="margin:0;border:none;height:100%">
+                    fotografia da fare
+                  </div>
+                )}
+              </div>
+
+              <div class="body">
+                <h3>{d.nome}</h3>
+                <div class="meta">
+                  {meta.map((m) => <span>{m}</span>)}
+                  {d.metratura === null && <span class="todo">m² da misurare</span>}
+                </div>
+                <p class="desc">{d.descrizione}</p>
+                {d.avvertenza && <p class="avviso">{d.avvertenza}</p>}
+                <div class="foot">
+                  <span style="font-family:var(--disp);font-size:15px">
+                    {d.tariffaDa === null ? (
+                      <>
+                        da € <span class="blank">&nbsp;</span>
+                      </>
+                    ) : (
+                      <>da {d.tariffaDa} €</>
+                    )}
+                    <small style="font-size:12px;color:var(--ink-60)"> / notte</small>
+                  </span>
+                  <button class="btn sm" type="button" data-camera={d.nome}>
+                    Prenota
+                  </button>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    {
+      nonConfermate > 0 && (
+        <p class="nota">
+          <span class="todo">tariffe indicative</span>
+          Le tariffe mostrate sono ricavate dalle schede pubbliche: la più bassa
+          rilevata è 95 € a notte. Vanno sostituite con il tariffario per stagione
+          della casa — e la metratura della suite manca del tutto.
+        </p>
+      )
+    }
+  </div>
+</section>

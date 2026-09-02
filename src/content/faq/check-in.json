@@ -1,0 +1,6 @@
+{
+  "domanda": "A che ora posso fare il check-in?",
+  "risposta": "Check-in autonomo dalle 15:00 alle 23:30, check-out entro le 11:00. Le istruzioni arrivano su WhatsApp il giorno prima, con le foto del portone e del percorso dal parcheggio.",
+  "apertaDiDefault": false,
+  "ordine": 6
+}

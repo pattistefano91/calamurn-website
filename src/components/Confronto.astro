@@ -1,0 +1,87 @@
+---
+import { casa } from "../data/casa";
+
+interface Riga {
+  voce: string;
+  portale: string;
+  diretto: string;
+  daDefinire?: boolean;
+}
+
+const righe: Riga[] = [
+  {
+    voce: "Tariffa a notte (Standard)",
+    portale: "da 105 €",
+    diretto: "da 99 €",
+    daDefinire: true,
+  },
+  {
+    voce: "Colazione",
+    portale: "a parte",
+    diretto: casa.soggiorno.colazione.valore,
+    daDefinire: !casa.soggiorno.colazione.confermato,
+  },
+  {
+    voce: "Check-out",
+    portale: "11:00 fisso",
+    diretto: "flessibile, se la camera è libera",
+  },
+  {
+    voce: "Chi risponde",
+    portale: "assistenza del portale",
+    diretto: "noi, su WhatsApp",
+  },
+  {
+    voce: "Conferma",
+    portale: "immediata, automatica",
+    diretto: `entro ${casa.contatti.rispostaEntro.valore}, con una persona vera`,
+  },
+  {
+    voce: "Cancellazione",
+    portale: "secondo il portale",
+    diretto: casa.soggiorno.cancellazione.valore ?? "gratuita fino a __ giorni prima",
+    daDefinire: !casa.soggiorno.cancellazione.confermato,
+  },
+];
+---
+
+<section id="confronto">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Qui o sul portale</h2>
+      <p class="kicker">stesso letto, condizioni diverse</p>
+    </div>
+
+    <div class="cmp-scroll">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th scope="col"><span class="solo-lettori">Condizione</span></th>
+            <th scope="col">Sul portale</th>
+            <th scope="col">Qui, diretto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            righe.map((r) => (
+              <tr>
+                <th scope="row" style="font-weight:400">{r.voce}</th>
+                <td>{r.portale}</td>
+                <td class="you">
+                  {r.diretto}
+                  {r.daDefinire && <span class="todo">da definire</span>}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="nota" style="max-width:60ch">
+      Nessuna clausola ci obbliga più a pareggiare i portali: possiamo dirlo
+      apertamente, ed è la riga che converte chi arriva qui dopo aver guardato
+      Booking.
+    </p>
+  </div>
+</section>

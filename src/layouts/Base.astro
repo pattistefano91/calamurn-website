@@ -1,0 +1,100 @@
+---
+import "../styles/ombra.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { casa } from "../data/casa";
+
+interface Props {
+  titolo: string;
+  descrizione: string;
+  /** Percorso dell'immagine sociale, relativo alla radice del sito. */
+  immagineSociale?: string;
+  indicizzabile?: boolean;
+}
+
+const {
+  titolo,
+  descrizione,
+  immagineSociale = "/og-calamurn.jpg",
+  indicizzabile = true,
+} = Astro.props;
+
+// Solo la produzione è indicizzabile: le anteprime di Vercel — e ogni
+// costruzione che non sia quella di produzione — restano fuori dai motori
+// (spec 011, FR-003).
+const inProduzione =
+  process.env.VERCEL_ENV === undefined || process.env.VERCEL_ENV === "production";
+
+const canonico = new URL(Astro.url.pathname, Astro.site).href;
+const og = new URL(immagineSociale, Astro.site).href;
+
+// Dati strutturati (spec 010, FR-002). Coordinate e contatti vengono dalla
+// stessa fonte usata dal resto del sito.
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BedAndBreakfast",
+  name: `${casa.nome} · ${casa.palazzo}`,
+  description: descrizione,
+  url: Astro.site?.href,
+  image: og,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: casa.indirizzo.via,
+    postalCode: casa.indirizzo.cap,
+    addressLocality: casa.indirizzo.citta,
+    addressRegion: "SR",
+    addressCountry: casa.indirizzo.paese,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: casa.coordinate.valore.lat,
+    longitude: casa.coordinate.valore.lon,
+  },
+  numberOfRooms: 4,
+  identifier: casa.cin.valore,
+};
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titolo}</title>
+    <meta name="description" content={descrizione} />
+    <link rel="canonical" href={canonico} />
+    {
+      (!indicizzabile || !inProduzione) && (
+        <meta name="robots" content="noindex, nofollow" />
+      )
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={casa.nome} />
+    <meta property="og:title" content={titolo} />
+    <meta property="og:description" content={descrizione} />
+    <meta property="og:image" content={og} />
+    <meta property="og:url" content={canonico} />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#c4b69c" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a class="salta" href="#contenuto">Salta al contenuto</a>
+    <Header />
+    <main id="contenuto">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

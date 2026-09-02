@@ -1,0 +1,27 @@
+{
+  "nome": "Il pianerottolo",
+  "occhiello": "Secondo piano · spazi comuni delle tre camere",
+  "piano": "Secondo piano",
+  "affaccio": "Interno",
+  "descrizione": "Il pianerottolo del secondo piano non è un corridoio: è una stanza. Pietra a vista, una cassettiera da tipografo, cesti sospesi dal soffitto in legno e una nicchia di fichi d'India illuminata da terra.",
+  "metratura": null,
+  "ospitiMax": null,
+  "letto": null,
+  "dotazioni": [
+    "pietra-a-vista",
+    "soffitto-in-travi"
+  ],
+  "foto": [
+    "comuni-01",
+    "comuni-02",
+    "comuni-03",
+    "comuni-04",
+    "comuni-05",
+    "comuni-06"
+  ],
+  "fotoExtra": [],
+  "tariffaDa": null,
+  "tariffaConfermata": true,
+  "prenotabile": false,
+  "ordine": 5
+}

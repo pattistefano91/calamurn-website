@@ -1,0 +1,29 @@
+{
+  "nome": "Superior Queen",
+  "occhiello": "Secondo piano · affaccio sul cortile interno",
+  "piano": "Secondo piano",
+  "affaccio": "Finestra sul cortile interno",
+  "descrizione": "Finestra sul cortile interno: silenzio totale e qualche grado in meno quando fuori sono trentotto. Soffitto in travi di legno chiaro, nicchia guardaroba a muro e bagno interno alla camera.",
+  "metratura": 17,
+  "ospitiMax": 2,
+  "letto": "Letto queen",
+  "dotazioni": [
+    "vista-cortile",
+    "bagno-interno",
+    "letto-queen",
+    "soffitto-in-travi"
+  ],
+  "foto": [
+    "superior-01",
+    "superior-02",
+    "superior-03",
+    "superior-04",
+    "superior-05",
+    "superior-06"
+  ],
+  "fotoExtra": [],
+  "tariffaDa": 95,
+  "tariffaConfermata": false,
+  "prenotabile": true,
+  "ordine": 4
+}
