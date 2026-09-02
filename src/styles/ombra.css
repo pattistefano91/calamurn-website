@@ -87,6 +87,11 @@ h3 {
 img {
   display: block;
   max-width: 100%;
+  /* Gli attributi width/height servono a riservare lo spazio prima del
+     caricamento; senza questo l'altezza resterebbe quella intrinseca mentre la
+     larghezza si adatta, e la fotografia si allunga. Le regole che impongono
+     un'altezza — testata, schede, galleria — sono più specifiche e vincono. */
+  height: auto;
 }
 
 /* <Picture> avvolge l'immagine in un <picture>: così l'elemento non entra nel
@@ -131,6 +136,7 @@ a {
   text-transform: uppercase;
   color: var(--todo-tx);
   white-space: nowrap;
+  margin: 0 5px;
 }
 
 .nota {
@@ -1197,6 +1203,12 @@ svg .street {
   }
 }
 
+/* Un <dialog> chiuso lo nasconde il browser, ma la regola `display` qui sotto
+   è d'autore e vincerebbe su quella del browser: va richiusa a mano, o il
+   pannello nero copre la pagina fin dall'apertura. */
+.lbox:not([open]) {
+  display: none;
+}
 .lbox {
   position: fixed;
   inset: 0;
