@@ -1,7 +1,17 @@
 {
-  "domanda": "Posso arrivare in auto fin sotto il portone?",
-  "risposta": null,
   "apertaDiDefault": true,
   "ordine": 1,
-  "daConfermare": "Regole e orari della ZTL di Ortigia: se si può entrare per scaricare i bagagli, con quale permesso e chi lo richiede."
+  "domanda": {
+    "it": "Posso arrivare in auto fin sotto il portone?",
+    "en": "Can I drive right up to the door?",
+    "fr": "Puis-je arriver en voiture jusqu'à la porte ?",
+    "de": "Kann ich mit dem Auto bis vor das Tor fahren?"
+  },
+  "risposta": null,
+  "daConfermare": {
+    "it": "Regole e orari della ZTL di Ortigia: se si può entrare per scaricare i bagagli, con quale permesso e chi lo richiede.",
+    "en": "The rules and hours of the Ortigia restricted traffic zone: whether you may drive in to unload luggage, with what permit, and who applies for it.",
+    "fr": "Les règles et horaires de la zone à trafic limité d'Ortygie : peut-on entrer pour décharger les bagages, avec quelle autorisation et qui la demande.",
+    "de": "Regeln und Zeiten der verkehrsberuhigten Zone von Ortigia: ob man zum Ausladen des Gepäcks einfahren darf, mit welcher Genehmigung und wer sie beantragt."
+  }
 }

@@ -1,12 +1,6 @@
 {
-  "nome": "Superior Queen",
-  "occhiello": "Secondo piano · affaccio sul cortile interno",
-  "piano": "Secondo piano",
-  "affaccio": "Finestra sul cortile interno",
-  "descrizione": "Finestra sul cortile interno: silenzio totale e qualche grado in meno quando fuori sono trentotto. Soffitto in travi di legno chiaro, nicchia guardaroba a muro e bagno interno alla camera.",
   "metratura": 17,
   "ospitiMax": 2,
-  "letto": "Letto queen",
   "dotazioni": [
     "vista-cortile",
     "bagno-interno",
@@ -25,5 +19,23 @@
   "tariffaDa": 95,
   "tariffaConfermata": false,
   "prenotabile": true,
-  "ordine": 4
+  "ordine": 4,
+  "nome": {
+    "it": "Superior Queen",
+    "en": "Superior Queen",
+    "fr": "Superior Queen",
+    "de": "Superior Queen"
+  },
+  "occhiello": {
+    "it": "Secondo piano · affaccio sul cortile interno",
+    "en": "Second floor · looking onto the inner courtyard",
+    "fr": "Deuxième étage · vue sur la cour intérieure",
+    "de": "Zweiter Stock · Blick in den Innenhof"
+  },
+  "descrizione": {
+    "it": "Finestra sul cortile interno: silenzio totale e qualche grado in meno quando fuori sono trentotto. Soffitto in travi di legno chiaro, nicchia guardaroba a muro e bagno interno alla camera.",
+    "en": "A window onto the inner courtyard: complete silence, and a few degrees cooler when it is thirty-eight outside. A ceiling of pale wooden beams, a wardrobe niche in the wall, and a bathroom inside the room.",
+    "fr": "Une fenêtre sur la cour intérieure : silence complet et quelques degrés de moins quand il fait trente-huit dehors. Plafond à poutres de bois clair, niche-penderie dans le mur et salle de bains dans la chambre.",
+    "de": "Ein Fenster zum Innenhof: völlige Stille und ein paar Grad weniger, wenn es draußen achtunddreißig hat. Decke aus hellen Holzbalken, eine Schranknische in der Wand und ein Bad im Zimmer."
+  }
 }

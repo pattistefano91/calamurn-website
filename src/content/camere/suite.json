@@ -1,12 +1,6 @@
 {
-  "nome": "Suite",
-  "occhiello": "Attico · terrazzo a uso esclusivo",
-  "piano": "Attico",
-  "affaccio": "Terrazzo privato, oltre i tetti il mare",
-  "descrizione": "Un piano intero in attico: letto a baldacchino contro il muro in pietra, soffitto in travi bianche, angolo colazione con macchina del caffè, cabina armadio e bagno con lucernario. Dalla camera una scaletta interna sale al terrazzo, che è solo tuo — pergola di canne, giare con le agavi, e oltre i tetti il mare.",
   "metratura": null,
   "ospitiMax": 2,
-  "letto": "Letto a baldacchino",
   "dotazioni": [
     "terrazzo-privato",
     "vista-mare",
@@ -42,5 +36,23 @@
   "tariffaDa": 180,
   "tariffaConfermata": false,
   "prenotabile": true,
-  "ordine": 1
+  "ordine": 1,
+  "nome": {
+    "it": "Suite",
+    "en": "Suite",
+    "fr": "Suite",
+    "de": "Suite"
+  },
+  "occhiello": {
+    "it": "Attico · terrazzo a uso esclusivo",
+    "en": "Top floor · terrace for your use alone",
+    "fr": "Dernier étage · terrasse à usage exclusif",
+    "de": "Dachgeschoss · Terrasse zur alleinigen Nutzung"
+  },
+  "descrizione": {
+    "it": "Un piano intero in attico: letto a baldacchino contro il muro in pietra, soffitto in travi bianche, angolo colazione con macchina del caffè, cabina armadio e bagno con lucernario. Dalla camera una scaletta interna sale al terrazzo, che è solo tuo — pergola di canne, giare con le agavi, e oltre i tetti il mare.",
+    "en": "A whole floor under the roof: a four-poster bed against the stone wall, white beamed ceiling, a breakfast corner with a coffee machine, a walk-in wardrobe and a bathroom with a skylight. From the room a small internal staircase climbs to the terrace, which is yours alone — a cane pergola, great jars planted with agaves, and beyond the rooftops, the sea.",
+    "fr": "Un étage entier sous les combles : lit à baldaquin contre le mur de pierre, plafond à poutres blanches, coin petit-déjeuner avec machine à café, dressing et salle de bains avec verrière. De la chambre, un petit escalier intérieur monte à la terrasse, qui n'est qu'à vous — pergola de roseaux, jarres plantées d'agaves, et par-dessus les toits, la mer.",
+    "de": "Ein ganzes Geschoss unter dem Dach: ein Himmelbett vor der Steinwand, weiße Balkendecke, eine Frühstücksecke mit Kaffeemaschine, ein begehbarer Kleiderschrank und ein Bad mit Dachfenster. Vom Zimmer führt eine kleine Innentreppe hinauf zur Terrasse, die Ihnen allein gehört — Schilfpergola, Krüge mit Agaven, und über den Dächern das Meer."
+  }
 }

@@ -1,17 +1,29 @@
 {
-  "nome": "Androne e ingresso",
-  "occhiello": "Piano terra · via Dione 58",
-  "piano": "Piano terra",
-  "affaccio": "Via Dione",
-  "descrizione": "Un solo portone, poi la scala. Check-in autonomo dalle 15:00 alle 23:30, con le istruzioni che arrivano su WhatsApp il giorno prima, insieme alle foto del portone e del percorso dal parcheggio.",
   "metratura": null,
   "ospitiMax": null,
-  "letto": null,
   "dotazioni": [],
   "foto": [],
   "fotoExtra": [],
   "tariffaDa": null,
   "tariffaConfermata": true,
   "prenotabile": false,
-  "ordine": 6
+  "ordine": 6,
+  "nome": {
+    "it": "Androne e ingresso",
+    "en": "Entrance hall",
+    "fr": "Le hall d'entrée",
+    "de": "Durchfahrt und Eingang"
+  },
+  "occhiello": {
+    "it": "Piano terra · via Dione 58",
+    "en": "Ground floor · via Dione 58",
+    "fr": "Rez-de-chaussée · via Dione 58",
+    "de": "Erdgeschoss · Via Dione 58"
+  },
+  "descrizione": {
+    "it": "Un solo portone, poi la scala. Check-in autonomo dalle 15:00 alle 23:30, con le istruzioni che arrivano su WhatsApp il giorno prima, insieme alle foto del portone e del percorso dal parcheggio.",
+    "en": "One door, then the stairs. Self check-in from 15:00 to 23:30, with instructions arriving on WhatsApp the day before, along with photographs of the door and of the walk from the car park.",
+    "fr": "Une seule porte, puis l'escalier. Arrivée en autonomie de 15h00 à 23h30, avec les instructions envoyées sur WhatsApp la veille, accompagnées des photos de la porte et du trajet depuis le parking.",
+    "de": "Ein einziges Tor, dann die Treppe. Selbstständiger Check-in von 15:00 bis 23:30 Uhr, die Anleitung kommt am Vortag über WhatsApp, zusammen mit Fotos des Tores und des Wegs vom Parkplatz."
+  }
 }

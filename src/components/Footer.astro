@@ -1,19 +1,27 @@
 ---
 import { casa } from "../data/casa";
 import { linkWhatsApp, richiestaVuota } from "../data/prenotazione";
+import {
+  LINGUE,
+  NOME_LINGUA,
+  TRADUZIONE_RIVISTA,
+  percorso,
+  t,
+  type Lingua,
+} from "../i18n";
 
-// Indirizzo di partenza: il collegamento funziona anche senza JavaScript, che
-// poi lo aggiorna con le date scelte (spec 003, FR-011).
-const wa = linkWhatsApp(richiestaVuota);
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
+
+const wa = linkWhatsApp(lingua, richiestaVuota(lingua));
 
 // Le pagine locali della feature 010 non esistono ancora: finché non hanno un
 // contenuto proprio non vanno pubblicate (spec 010, FR-008), quindi qui
 // l'elenco è vuoto e la colonna non compare.
 const pagineLocali: { href: string; testo: string }[] = [];
-
-// Le altre lingue arrivano con la feature 009: elencarle ora porterebbe a
-// pagine inesistenti.
-const lingue = [{ codice: "it", nome: "Italiano", href: "/" }];
 ---
 
 <footer>
@@ -29,22 +37,22 @@ const lingue = [{ codice: "it", nome: "Italiano", href: "/" }];
       </div>
 
       <div>
-        <h2>Prenota diretto</h2>
+        <h2>{testi.footer.prenotaDiretto}</h2>
         <ul>
-          <li><a href="#prenota">Verifica disponibilità</a></li>
+          <li><a href="#prenota">{testi.footer.verificaDisponibilita}</a></li>
           <li>
             <a data-wa href={wa} target="_blank" rel="noopener">
-              Scrivici su WhatsApp
+              {testi.footer.scriviciWhatsApp}
             </a>
           </li>
-          <li><a href="#suite">La suite con il terrazzo</a></li>
+          <li><a href="#suite">{testi.footer.laSuite}</a></li>
         </ul>
       </div>
 
       {
         pagineLocali.length > 0 && (
           <div>
-            <h2>Dormire a Ortigia</h2>
+            <h2>{testi.footer.dormireAOrtigia}</h2>
             <ul>
               {pagineLocali.map((p) => (
                 <li><a href={p.href}>{p.testo}</a></li>
@@ -54,23 +62,36 @@ const lingue = [{ codice: "it", nome: "Italiano", href: "/" }];
         )
       }
 
-      <div>
-        <h2>Lingue</h2>
+      <nav aria-label={testi.footer.selettoreLingua}>
+        <h2>{testi.footer.lingue}</h2>
         <ul>
-          {lingue.map((l) => <li><a href={l.href}>{l.nome}</a></li>)}
+          {
+            LINGUE.map((l) => (
+              <li>
+                <a
+                  href={percorso(l, "/")}
+                  hreflang={l}
+                  lang={l}
+                  aria-current={l === lingua ? "true" : undefined}
+                  style={l === lingua ? "text-decoration:underline" : undefined}
+                >
+                  {NOME_LINGUA[l]}
+                </a>
+                {!TRADUZIONE_RIVISTA[l] && (
+                  <span class="todo">{t(l).traduzione.bozza}</span>
+                )}
+              </li>
+            ))
+          }
         </ul>
-        <p style="margin:10px 0 0;font-size:12px">
-          <span class="todo">in lavorazione</span>
-          English, Français e Deutsch arrivano con la traduzione completa.
-        </p>
-      </div>
+      </nav>
     </div>
 
     <div class="legal">
-      <span>CIN {casa.cin.valore}</span>
-      <span>Privacy</span>
-      <span>Cookie</span>
-      <span>Condizioni</span>
+      <span>{testi.footer.cin} {casa.cin.valore}</span>
+      <span>{testi.footer.privacy}</span>
+      <span>{testi.footer.cookie}</span>
+      <span>{testi.footer.condizioni}</span>
     </div>
   </div>
 </footer>

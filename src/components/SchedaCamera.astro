@@ -1,22 +1,25 @@
 ---
 import { Image, Picture } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { fotoDegli } from "../data/foto";
+import { fotoDegli, didascalia } from "../data/foto";
 import { etichetta, metraturaTesto, ospitiTesto } from "../data/dotazioni";
+import { euro, t, type Lingua } from "../i18n";
 
 interface Props {
+  lingua: Lingua;
   camera: CollectionEntry<"camere">;
   attiva?: boolean;
 }
 
-const { camera, attiva = false } = Astro.props;
+const { lingua, camera, attiva = false } = Astro.props;
+const testi = t(lingua);
 const d = camera.data;
 const scatti = fotoDegli(d.foto);
 
 const specifiche = [
   metraturaTesto(d.metratura),
-  ospitiTesto(d.ospitiMax),
-  ...d.dotazioni.map(etichetta),
+  ospitiTesto(lingua, d.ospitiMax),
+  ...d.dotazioni.map((k) => etichetta(lingua, k)),
 ].filter((x): x is string => Boolean(x));
 ---
 
@@ -26,9 +29,11 @@ const specifiche = [
       <div class="gal">
         <div class="main">
           {scatti.map((f, i) => (
-            <Picture formats={["webp"]} fallbackFormat="jpeg"
+            <Picture
+              formats={["webp"]}
+              fallbackFormat="jpeg"
               src={f.immagine}
-              alt={f.didascalia}
+              alt={didascalia(f, lingua)}
               widths={[400, 800]}
               sizes="(max-width: 900px) 100vw, 400px"
               loading="lazy"
@@ -40,54 +45,63 @@ const specifiche = [
         <div class="thumbs">
           {scatti.map((f, i) => (
             <button type="button" aria-current={i === 0} data-i={i}>
-              {/* Miniature da 80 px: una sola variante basta e alleggerisce
-                  la costruzione di sei immagini per camera. */}
+              {/* Miniature da 80 px: una sola variante basta. */}
               <Image src={f.immagine} alt="" width={160} loading="lazy" />
-              <span class="solo-lettori">{f.didascalia}</span>
+              <span class="solo-lettori">{didascalia(f, lingua)}</span>
             </button>
           ))}
         </div>
-        <p class="cap" data-didascalia>{scatti[0].didascalia}</p>
+        <p class="cap" data-didascalia>{didascalia(scatti[0], lingua)}</p>
       </div>
     ) : (
-      <div class="roomshot">fotografia · {d.nome.toLowerCase()} — da fare</div>
+      <div class="roomshot">{testi.camere.fotografiaDaFare}</div>
     )
   }
 
-  <p class="kicker">{d.occhiello}</p>
-  <h3>{d.nome}</h3>
-  <p class="desc">{d.descrizione}</p>
+  <p class="kicker">{d.occhiello[lingua]}</p>
+  <h3>{d.nome[lingua]}</h3>
+  <p class="desc">{d.descrizione[lingua]}</p>
 
-  {d.avvertenza && <p class="card avviso" style="border:none;background:var(--stone);margin:0 0 14px">{d.avvertenza}</p>}
+  {
+    d.avvertenza && (
+      <p class="avviso" style="margin:0 0 14px">{d.avvertenza[lingua]}</p>
+    )
+  }
 
   <div class="specs">
     {specifiche.map((s) => <span>{s}</span>)}
-    {d.metratura === null && d.prenotabile && (
-      <span class="todo">metratura da misurare</span>
-    )}
+    {
+      d.metratura === null && d.prenotabile && (
+        <span class="todo">{testi.camere.metraturaDaMisurare}</span>
+      )
+    }
   </div>
 
   <div class="price">
     {
       !d.prenotabile ? (
-        <small>Spazio della casa</small>
+        <small>{testi.camere.spazioDellaCasa}</small>
       ) : d.tariffaDa === null ? (
         <>
-          da € <span class="blank">&nbsp;</span>
-          <small>/ notte · colazione inclusa</small>
+          <span class="blank">&nbsp;</span>
+          <small>{testi.camere.perNotteColazione}</small>
         </>
       ) : (
         <>
-          da {d.tariffaDa} €
-          <small>/ notte · colazione inclusa</small>
-          {!d.tariffaConfermata && <span class="todo">tariffa indicativa</span>}
+          {testi.camere.daPrezzo(euro(lingua, d.tariffaDa))}
+          <small>{testi.camere.perNotteColazione}</small>
+          {!d.tariffaConfermata && (
+            <span class="todo">{testi.camere.tariffaIndicativa}</span>
+          )}
         </>
       )
     }
-    {d.prenotabile && (
-      <button class="btn sm" type="button" data-camera={d.nome}>
-        Prenota
-      </button>
-    )}
+    {
+      d.prenotabile && (
+        <button class="btn sm" type="button" data-camera={d.nome[lingua]}>
+          {testi.camere.prenota}
+        </button>
+      )
+    }
   </div>
 </div>

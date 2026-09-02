@@ -7,14 +7,22 @@ import {
   richiestaVuota,
   contattiConfermati,
 } from "../data/prenotazione";
+import { LOCALE, t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const camere = (await getCollection("camere"))
   .filter((c) => c.data.prenotabile)
   .sort((a, b) => a.data.ordine - b.data.ordine);
 
 // Indirizzi di partenza: funzionano anche senza JavaScript (spec 003, FR-011).
-const waIniziale = linkWhatsApp(richiestaVuota);
-const mailIniziale = linkPosta(richiestaVuota);
+const vuota = richiestaVuota(lingua);
+const waIniziale = linkWhatsApp(lingua, vuota);
+const mailIniziale = linkPosta(lingua, vuota);
 
 const oggi = new Date().toISOString().slice(0, 10);
 
@@ -28,59 +36,90 @@ if (!contattiConfermati()) {
 }
 
 const capienze = Object.fromEntries(
-  camere.map((c) => [c.data.nome, c.data.ospitiMax ?? casa.ospitiMax]),
+  camere.map((c) => [c.data.nome[lingua], c.data.ospitiMax ?? casa.ospitiMax]),
 );
+
+const opzioniOspiti = Array.from({ length: casa.ospitiMax }, (_, i) =>
+  testi.generale.ospiti(i + 1),
+);
+
+// Solo ciò che serve nel browser, nella lingua di questa pagina.
+const frasi = {
+  locale: LOCALE[lingua],
+  numero: casa.contatti.whatsapp.valore,
+  email: casa.contatti.email.valore,
+  apertura: testi.prenotazione.messaggioApertura,
+  arrivo: testi.prenotazione.messaggioArrivo,
+  partenza: testi.prenotazione.messaggioPartenza,
+  ospiti: testi.prenotazione.messaggioOspiti,
+  camera: testi.prenotazione.messaggioCamera,
+  indifferente: testi.prenotazione.messaggioIndifferente,
+  daDefinire: testi.prenotazione.messaggioDaDefinire,
+  saluto: testi.prenotazione.messaggioSaluto,
+  oggetto: testi.prenotazione.oggettoMail,
+  erroreDate: testi.prenotazione.erroreDate,
+  erroreCapienza: testi.prenotazione.erroreCapienza("{camera}", "{max}"),
+  capienze,
+};
 ---
 
-<div class="bar" id="prenota" data-capienze={JSON.stringify(capienze)}>
+<div class="bar" id="prenota" data-frasi={JSON.stringify(frasi)}>
   <div class="f">
-    <label for="arrivo">Arrivo</label>
+    <label for="arrivo">{testi.prenotazione.arrivo}</label>
     <input type="date" id="arrivo" name="arrivo" min={oggi} />
   </div>
   <div class="f">
-    <label for="partenza">Partenza</label>
+    <label for="partenza">{testi.prenotazione.partenza}</label>
     <input type="date" id="partenza" name="partenza" min={oggi} />
   </div>
   <div class="f">
-    <label for="ospiti">Ospiti</label>
+    <label for="ospiti">{testi.prenotazione.ospiti}</label>
     <select id="ospiti" name="ospiti">
-      <option>1 ospite</option>
-      <option selected>2 ospiti</option>
-      <option>3 ospiti</option>
+      {
+        opzioniOspiti.map((o, i) => (
+          <option selected={i === 1}>{o}</option>
+        ))
+      }
     </select>
   </div>
   <div class="f">
-    <label for="camera">Camera</label>
+    <label for="camera">{testi.prenotazione.camera}</label>
     <select id="camera" name="camera">
-      <option value="">Tutte</option>
-      {camere.map((c) => <option value={c.data.nome}>{c.data.nome}</option>)}
+      <option value="">{testi.prenotazione.tutte}</option>
+      {
+        camere.map((c) => (
+          <option value={c.data.nome[lingua]}>{c.data.nome[lingua]}</option>
+        ))
+      }
     </select>
   </div>
   <a class="go" id="cta" data-wa href={waIniziale} target="_blank" rel="noopener">
-    Prenota la tua camera
+    {testi.prenotazione.invia}
   </a>
 </div>
 
 <div class="barnote">
   <div class="wrap">
     <p class="barerr" id="barerr" role="status" aria-live="polite"></p>
-    Il pulsante apre <b>WhatsApp</b> con le tue date già scritte: non devi
-    ricopiare nulla. Ti rispondiamo di persona, di solito entro {
-      casa.contatti.rispostaEntro.valore
-    }, dalle {casa.contatti.orari.valore}. Nessuna commissione, nessun pagamento
-    online. {
-      !casa.contatti.rispostaEntro.confermato && (
-        <span class="todo">tempi da confermare</span>
+    {
+      testi.prenotazione.nota(
+        casa.contatti.rispostaEntro.valore[lingua],
+        casa.contatti.orari.valore,
       )
     }
-    Non usi WhatsApp? <a id="cta-mail" data-mail href={mailIniziale}>scrivici una mail</a>.
+    {
+      !casa.contatti.rispostaEntro.confermato && (
+        <span class="todo">{testi.prenotazione.tempiDaConfermare}</span>
+      )
+    }
+    {testi.prenotazione.nonUsiWhatsApp}
+    <a id="cta-mail" data-mail href={mailIniziale}>{testi.prenotazione.scriviMail}</a>.
     {
       !contattiConfermati() && (
         <>
           <br />
-          <span class="todo">contatti da confermare</span>
-          Il numero WhatsApp e l'indirizzo e-mail sono ancora segnaposto: vanno
-          sostituiti con quelli veri prima della pubblicazione.
+          <span class="todo">{testi.prenotazione.contattiDaConfermare}</span>
+          {testi.prenotazione.contattiSpiegazione}
         </>
       )
     }
@@ -88,26 +127,67 @@ const capienze = Object.fromEntries(
 </div>
 
 <script>
-  import {
-    linkPosta,
-    linkWhatsApp,
-    type Richiesta,
-  } from "../data/prenotazione";
+  // Il client riceve solo le stringhe che gli servono, non i quattro dizionari:
+  // importarli qui costerebbe una ventina di KB e sfonderebbe il budget del
+  // Principio III.
+  interface Richiesta {
+    arrivo: string;
+    partenza: string;
+    ospiti: string;
+    camera: string;
+  }
+
+  interface Frasi {
+    locale: string;
+    numero: string;
+    email: string;
+    apertura: string;
+    arrivo: string;
+    partenza: string;
+    ospiti: string;
+    camera: string;
+    indifferente: string;
+    daDefinire: string;
+    saluto: string;
+    oggetto: string;
+    erroreDate: string;
+    erroreCapienza: string;
+    capienze: Record<string, number>;
+  }
 
   const $ = <T extends HTMLElement>(id: string) =>
     document.getElementById(id) as T | null;
 
+  const barra = $("prenota");
   const arrivo = $<HTMLInputElement>("arrivo");
   const partenza = $<HTMLInputElement>("partenza");
   const ospiti = $<HTMLSelectElement>("ospiti");
   const camera = $<HTMLSelectElement>("camera");
   const errore = $<HTMLParagraphElement>("barerr");
 
-  const CAPIENZE: Record<string, number> = JSON.parse(
-    document.getElementById("prenota")?.dataset.capienze ?? "{}",
-  );
+  if (barra && arrivo && partenza && ospiti && camera && errore) {
+    const f: Frasi = JSON.parse(barra.dataset.frasi!);
 
-  if (arrivo && partenza && ospiti && camera && errore) {
+    const data = (iso: string) => {
+      if (!iso) return f.daDefinire;
+      const d = new Date(iso + "T00:00:00");
+      if (Number.isNaN(d.getTime())) return f.daDefinire;
+      return new Intl.DateTimeFormat(f.locale, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(d);
+    };
+
+    const messaggio = (r: Richiesta) =>
+      [
+        f.apertura,
+        `${f.arrivo}: ${data(r.arrivo)}`,
+        `${f.partenza}: ${data(r.partenza)}`,
+        `${f.ospiti}: ${r.ospiti}`,
+        `${f.camera}: ${r.camera || f.indifferente}`,
+      ].join("\n");
+
     const leggi = (): Richiesta => ({
       arrivo: arrivo.value,
       partenza: partenza.value,
@@ -117,12 +197,14 @@ const capienze = Object.fromEntries(
 
     const valida = (): string => {
       if (arrivo.value && partenza.value && partenza.value <= arrivo.value) {
-        return "La partenza deve essere dopo l'arrivo.";
+        return f.erroreDate;
       }
-      const max = CAPIENZE[camera.value];
+      const max = f.capienze[camera.value];
       const richiesti = parseInt(ospiti.value, 10);
       if (max && richiesti > max) {
-        return `La ${camera.value} ospita al massimo ${max} persone: scrivici comunque, cerchiamo una soluzione.`;
+        return f.erroreCapienza
+          .replace("{camera}", camera.value)
+          .replace("{max}", String(max));
       }
       return "";
     };
@@ -130,9 +212,11 @@ const capienze = Object.fromEntries(
     const aggiorna = () => {
       if (arrivo.value) partenza.min = arrivo.value;
       errore.textContent = valida();
-      const r = leggi();
-      const wa = linkWhatsApp(r);
-      const mail = linkPosta(r);
+      const testo = messaggio(leggi());
+      const wa = `https://wa.me/${f.numero}?text=${encodeURIComponent(testo)}`;
+      const mail =
+        `mailto:${f.email}?subject=${encodeURIComponent(f.oggetto)}` +
+        `&body=${encodeURIComponent(testo + "\n\n" + f.saluto)}`;
       document
         .querySelectorAll<HTMLAnchorElement>("[data-wa]")
         .forEach((a) => (a.href = wa));
@@ -159,10 +243,7 @@ const capienze = Object.fromEntries(
       const nome = b.dataset.camera ?? "";
       if ([...camera.options].some((o) => o.value === nome)) camera.value = nome;
       aggiorna();
-      document.getElementById("prenota")?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
+      barra.scrollIntoView({ behavior: "smooth", block: "center" });
       arrivo.focus({ preventScroll: true });
     });
   }

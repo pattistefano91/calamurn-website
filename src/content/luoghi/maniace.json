@@ -1,6 +1,4 @@
 {
-  "nome": "Castello Maniace",
-  "occhiello": "La punta dell'isola",
   "categoria": "monumenti",
   "x": 214,
   "y": 608,
@@ -8,5 +6,22 @@
   "minuti": 14,
   "minutiMisurati": false,
   "ordine": 11,
-  "consiglio": "La passeggiata per arrivarci vale quanto il castello. Controlla gli orari, chiude presto."
+  "nome": {
+    "it": "Castello Maniace",
+    "en": "Castello Maniace",
+    "fr": "Castello Maniace",
+    "de": "Castello Maniace"
+  },
+  "occhiello": {
+    "it": "La punta dell'isola",
+    "en": "The tip of the island",
+    "fr": "La pointe de l'île",
+    "de": "Die Spitze der Insel"
+  },
+  "consiglio": {
+    "it": "La passeggiata per arrivarci vale quanto il castello. Controlla gli orari, chiude presto.",
+    "en": "The walk to get there is worth as much as the castle. Check the opening times, it closes early.",
+    "fr": "La promenade pour y arriver vaut autant que le château. Vérifiez les horaires, il ferme tôt.",
+    "de": "Der Weg dorthin ist so viel wert wie die Burg selbst. Prüfen Sie die Öffnungszeiten, sie schließt früh."
+  }
 }

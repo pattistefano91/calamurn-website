@@ -1,20 +1,24 @@
 ---
 import { getCollection } from "astro:content";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const luoghi = (await getCollection("luoghi")).sort(
   (a, b) => a.data.ordine - b.data.ordine,
 );
 
-const categorie = [
-  { chiave: "monumenti", titolo: "Quello che sei venuto a vedere" },
-  { chiave: "mare", titolo: "Dove ci si bagna" },
-  { chiave: "mangiare", titolo: "Mangiare e bere" },
-  { chiave: "pratico", titolo: "Pratico" },
-] as const;
+const categorie = (["monumenti", "mare", "mangiare", "pratico"] as const).map(
+  (chiave) => ({ chiave, titolo: testi.mappa.categorie[chiave] }),
+);
 
 const minutiTesto = (m: number | null, casa: boolean) => {
   if (casa) return "—";
-  return m === null ? "— min" : `${m} min`;
+  return m === null ? `— ${testi.mappa.min}` : `${m} ${testi.mappa.min}`;
 };
 
 const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
@@ -23,13 +27,13 @@ const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
 <section id="mappa">
   <div class="wrap">
     <div class="sec-h">
-      <h2>Ortigia, come la conosciamo noi</h2>
-      <p class="kicker">tocca un punto · minuti a piedi dal portone</p>
+      <h2>{testi.mappa.titolo}</h2>
+      <p class="kicker">{testi.mappa.occhiello}</p>
     </div>
 
     <div class="mapgrid">
       <div class="mcol">
-        <svg viewBox="0 0 460 680" role="img" aria-label="Mappa disegnata di Ortigia con i luoghi consigliati. L'elenco accanto riporta gli stessi luoghi con i minuti a piedi dal portone.">
+        <svg viewBox="0 0 460 680" role="img" aria-label={testi.mappa.etichettaSvg}>
           <rect class="paper" x="0" y="0" width="460" height="680"></rect>
           <g filter="url(#rough)">
             <path class="water" d="M0 0 L460 0 L460 680 L0 680 Z"></path>
@@ -54,7 +58,7 @@ const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
                     r={l.data.casa ? 7 : 5}
                     tabindex="0"
                     role="button"
-                    aria-label={`${l.data.nome}, ${minutiTesto(l.data.minuti, l.data.casa)} a piedi`}
+                    aria-label={testi.mappa.puntoEtichetta(l.data.nome[lingua], minutiTesto(l.data.minuti, l.data.casa))}
                   />
                   <text
                     class="plbl"
@@ -63,7 +67,7 @@ const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
                     text-anchor={l.data.etichetta === "destra" ? "start" : "end"}
                     style={l.data.casa ? "fill:var(--lead);font-weight:500" : undefined}
                   >
-                    {l.data.casa ? l.data.nome.toUpperCase() : l.data.nome}
+                    {l.data.casa ? l.data.nome[lingua].toUpperCase() : l.data.nome[lingua]}
                   </text>
                 </>
               ))
@@ -92,10 +96,10 @@ const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
                         data-p={l.id}
                         aria-current={l.id === predefinito.id}
                       >
-                        <span>{l.data.nome}</span>
+                        <span>{l.data.nome[lingua]}</span>
                         <em>
                           {minutiTesto(l.data.minuti, l.data.casa)}
-                          {!l.data.minutiMisurati && !l.data.casa ? " ca." : ""}
+                          {!l.data.minutiMisurati && !l.data.casa ? ` ${testi.mappa.circa}` : ""}
                         </em>
                       </button>
                     </li>
@@ -111,11 +115,12 @@ const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
             luoghi.map((l) => (
               <div data-luogo={l.id} hidden={l.id !== predefinito.id}>
                 <p class="kicker">
-                  {l.data.occhiello}
-                  {!l.data.casa && ` · ${minutiTesto(l.data.minuti, false)} a piedi`}
+                  {l.data.occhiello[lingua]}
+                  {!l.data.casa &&
+                    ` · ${minutiTesto(l.data.minuti, false)} ${testi.mappa.aPiedi}`}
                 </p>
-                <h3>{l.data.nome}</h3>
-                <p>{l.data.consiglio}</p>
+                <h3>{l.data.nome[lingua]}</h3>
+                <p>{l.data.consiglio[lingua]}</p>
               </div>
             ))
           }
@@ -124,12 +129,8 @@ const predefinito = luoghi.find((l) => l.data.casa) ?? luoghi[0];
     </div>
 
     <p class="nota">
-      <span class="todo">minuti da cronometrare</span>
-      I minuti sono stime, non misure: vanno percorsi davvero, perché è la prima
-      cosa che gli ospiti verificano. E per ora ci sono solo i punti che nessuno
-      può sbagliare. Il valore vero arriva quando aggiungiamo i vostri: la granita
-      giusta con l'orario giusto, la trattoria dove mangiate voi, lo scoglio senza
-      turisti. Quella è la pagina che gli ospiti fotografano.
+      <span class="todo">{testi.mappa.minutiDaCronometrare}</span>
+      {testi.mappa.nota}
     </p>
   </div>
 </section>

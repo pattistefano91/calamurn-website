@@ -1,0 +1,19 @@
+---
+import Base from "../../layouts/Base.astro";
+import Home from "../../components/Home.astro";
+import { LINGUE, LINGUA_PREDEFINITA, t, type Lingua } from "../../i18n";
+
+// L'italiano sta alla radice: qui solo le altre tre (spec 009, FR-002).
+export function getStaticPaths() {
+  return LINGUE.filter((l) => l !== LINGUA_PREDEFINITA).map((lingua) => ({
+    params: { lingua },
+  }));
+}
+
+const lingua = Astro.params.lingua as Lingua;
+const testi = t(lingua);
+---
+
+<Base lingua={lingua} titolo={testi.meta.titolo} descrizione={testi.meta.descrizione}>
+  <Home lingua={lingua} />
+</Base>

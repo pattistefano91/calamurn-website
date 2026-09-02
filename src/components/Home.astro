@@ -1,0 +1,45 @@
+---
+import Hero from "./Hero.astro";
+import BarraPrenotazione from "./BarraPrenotazione.astro";
+import DisegnoPalazzo from "./DisegnoPalazzo.astro";
+import Camere from "./Camere.astro";
+import Suite from "./Suite.astro";
+import Palazzo from "./Palazzo.astro";
+import APiedi from "./APiedi.astro";
+import Mappa from "./Mappa.astro";
+import Gradini from "./Gradini.astro";
+import Confronto from "./Confronto.astro";
+import Galleria from "./Galleria.astro";
+import Domande from "./Domande.astro";
+import { TRADUZIONE_RIVISTA, t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
+---
+
+{
+  !TRADUZIONE_RIVISTA[lingua] && (
+    <div class="barnote">
+      <div class="wrap">
+        <span class="todo">{testi.traduzione.bozza}</span>
+        {testi.traduzione.avviso}
+      </div>
+    </div>
+  )
+}
+
+<Hero lingua={lingua} />
+<BarraPrenotazione lingua={lingua} />
+<DisegnoPalazzo lingua={lingua} />
+<Camere lingua={lingua} />
+<Suite lingua={lingua} />
+<Palazzo lingua={lingua} />
+<APiedi lingua={lingua} />
+<Mappa lingua={lingua} />
+<Gradini lingua={lingua} />
+<Confronto lingua={lingua} />
+<Galleria lingua={lingua} />
+<Domande lingua={lingua} />

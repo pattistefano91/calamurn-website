@@ -1,12 +1,6 @@
 {
-  "nome": "Deluxe Queen",
-  "occhiello": "Secondo piano · balcone su via Dione",
-  "piano": "Secondo piano",
-  "affaccio": "Balcone su via Dione",
-  "descrizione": "La più grande del piano: due pareti in pietra a vista con la luce nascosta a terra, il balcone sulla via e un divano che diventa il terzo letto.",
   "metratura": 24,
   "ospitiMax": 3,
-  "letto": "Letto queen",
   "dotazioni": [
     "balcone-su-via",
     "bagno-interno",
@@ -26,5 +20,23 @@
   "tariffaDa": 125,
   "tariffaConfermata": false,
   "prenotabile": true,
-  "ordine": 2
+  "ordine": 2,
+  "nome": {
+    "it": "Deluxe Queen",
+    "en": "Deluxe Queen",
+    "fr": "Deluxe Queen",
+    "de": "Deluxe Queen"
+  },
+  "occhiello": {
+    "it": "Secondo piano · balcone su via Dione",
+    "en": "Second floor · balcony over via Dione",
+    "fr": "Deuxième étage · balcon sur la via Dione",
+    "de": "Zweiter Stock · Balkon zur Via Dione"
+  },
+  "descrizione": {
+    "it": "La più grande del piano: due pareti in pietra a vista con la luce nascosta a terra, il balcone sulla via e un divano che diventa il terzo letto.",
+    "en": "The largest room on the floor: two walls of exposed stone lit from below, the balcony over the street, and a sofa that becomes a third bed.",
+    "fr": "La plus grande de l'étage : deux murs en pierre apparente éclairés depuis le sol, le balcon sur la rue et un canapé qui devient le troisième couchage.",
+    "de": "Das größte Zimmer der Etage: zwei Wände aus Sichtmauerwerk, vom Boden aus beleuchtet, der Balkon zur Straße und ein Sofa, das zum dritten Bett wird."
+  }
 }

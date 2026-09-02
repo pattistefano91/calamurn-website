@@ -1,21 +1,26 @@
 ---
 import Base from "../layouts/Base.astro";
+import { LINGUA_PREDEFINITA, t } from "../i18n";
+
+// Vercel serve questa pagina per ogni indirizzo sconosciuto, in qualunque
+// lingua: perciò l'unica onesta è quella predefinita, con il selettore di
+// lingua del piè di pagina a portata.
+const lingua = LINGUA_PREDEFINITA;
+const testi = t(lingua);
 ---
 
 <Base
-  titolo="Pagina non trovata · Calamùrn"
-  descrizione="La pagina cercata non esiste. Torna alla home del Calamùrn, in via Dione 58 a Ortigia."
+  lingua={lingua}
+  titolo={testi.nonTrovata.meta.titolo}
+  descrizione={testi.nonTrovata.meta.descrizione}
   indicizzabile={false}
 >
   <div class="wrap vuota">
-    <p class="kicker">Errore 404</p>
-    <h1>Questo indirizzo non porta da nessuna parte.</h1>
-    <p>
-      Il portone giusto è al 58 di via Dione. Se stavi cercando una camera, le
-      quattro sono tutte in home.
-    </p>
+    <p class="kicker">{testi.nonTrovata.kicker}</p>
+    <h1>{testi.nonTrovata.titolo}</h1>
+    <p>{testi.nonTrovata.testo}</p>
     <p style="margin-top:22px">
-      <a class="btn solid" href="/">Torna alla home</a>
+      <a class="btn solid" href="/">{testi.nonTrovata.torna}</a>
     </p>
   </div>
 </Base>

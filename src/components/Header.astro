@@ -1,25 +1,32 @@
 ---
 import { casa } from "../data/casa";
 import { linkWhatsApp, richiestaVuota } from "../data/prenotazione";
+import { percorso, t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 // Indirizzo di partenza: il collegamento funziona anche senza JavaScript, che
 // poi lo aggiorna con le date scelte (spec 003, FR-011).
-const wa = linkWhatsApp(richiestaVuota);
+const wa = linkWhatsApp(lingua, richiestaVuota(lingua));
 
 const voci = [
-  { href: "#camere", testo: "Le camere" },
-  { href: "#suite", testo: "La suite" },
-  { href: "#mappa", testo: "La mappa" },
-  { href: "#palazzo", testo: "Il palazzo" },
-  { href: "#galleria", testo: "Foto" },
-  { href: "#ortigia", testo: "Ortigia" },
-  { href: "#domande", testo: "Prima di arrivare" },
+  { href: "#camere", testo: testi.nav.voci.camere },
+  { href: "#suite", testo: testi.nav.voci.suite },
+  { href: "#mappa", testo: testi.nav.voci.mappa },
+  { href: "#palazzo", testo: testi.nav.voci.palazzo },
+  { href: "#galleria", testo: testi.nav.voci.galleria },
+  { href: "#ortigia", testo: testi.nav.voci.ortigia },
+  { href: "#domande", testo: testi.nav.voci.domande },
 ];
 ---
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top">
+    <a class="brand" href={percorso(lingua, "/")}>
       {casa.nome}
       <small>{casa.palazzo} · {casa.indirizzo.quartiere}</small>
     </a>
@@ -30,10 +37,10 @@ const voci = [
       aria-expanded="false"
       aria-controls="menu"
     >
-      Menu
+      {testi.nav.menu}
     </button>
 
-    <nav class="principale" id="menu" aria-label="Sezioni del sito">
+    <nav class="principale" id="menu" aria-label={testi.nav.etichetta}>
       <ul>
         {voci.map((v) => <li><a href={v.href}>{v.testo}</a></li>)}
       </ul>
@@ -43,7 +50,7 @@ const voci = [
       <a class="btn hidemob" data-wa href={wa} target="_blank" rel="noopener">
         WhatsApp
       </a>
-      <a class="btn solid" href="#prenota">Prenota</a>
+      <a class="btn solid" href="#prenota">{testi.nav.prenota}</a>
     </div>
   </div>
 </header>

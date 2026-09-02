@@ -1,6 +1,4 @@
 {
-  "nome": "Piazza Archimede",
-  "occhiello": "La Fontana di Diana",
   "categoria": "monumenti",
   "x": 216,
   "y": 180,
@@ -8,5 +6,22 @@
   "minuti": 1,
   "minutiMisurati": false,
   "ordine": 1,
-  "consiglio": "La colazione con il ticket si fa qui, in piazza, davanti alla fontana. Non in una saletta."
+  "nome": {
+    "it": "Piazza Archimede",
+    "en": "Piazza Archimede",
+    "fr": "Piazza Archimede",
+    "de": "Piazza Archimede"
+  },
+  "occhiello": {
+    "it": "La Fontana di Diana",
+    "en": "The Fountain of Diana",
+    "fr": "La fontaine de Diane",
+    "de": "Der Dianabrunnen"
+  },
+  "consiglio": {
+    "it": "La colazione con il ticket si fa qui, in piazza, davanti alla fontana. Non in una saletta.",
+    "en": "Breakfast on the voucher happens here, on the square, in front of the fountain. Not in a back room.",
+    "fr": "Le petit-déjeuner avec le ticket se prend ici, sur la place, devant la fontaine. Pas dans une arrière-salle.",
+    "de": "Das Frühstück mit dem Gutschein gibt es hier, auf dem Platz, vor dem Brunnen. Nicht in einem Hinterzimmer."
+  }
 }

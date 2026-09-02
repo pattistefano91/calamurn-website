@@ -1,5 +1,5 @@
 {
-  "nota": "Selezione e ordine ricavati dal prototipo material/calamurn-sito-ombra.html; il file sorgente e' l'originale ad alta risoluzione abbinato per average-hash.",
+  "nota": "Selezione e ordine ricavati dal prototipo material/calamurn-sito-ombra.html; il file sorgente e' l'originale ad alta risoluzione abbinato per average-hash. Le didascalie sono anche i testi alternativi, e valgono in tutte le lingue.",
   "foto": [
     {
       "id": "palazzo-01",
@@ -8,7 +8,12 @@
       "sorgente": "palazzo/image00042.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il portone del palazzo su via Dione, di giorno"
+      "didascalie": {
+        "it": "Il portone del palazzo su via Dione, di giorno",
+        "en": "The palazzo door on via Dione, by day",
+        "fr": "La porte du palais sur la via Dione, de jour",
+        "de": "Das Tor des Palazzo an der Via Dione, bei Tag"
+      }
     },
     {
       "id": "palazzo-02",
@@ -17,7 +22,12 @@
       "sorgente": "palazzo/image00009.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Lo stesso portone al calare della sera, con la lanterna accesa"
+      "didascalie": {
+        "it": "Lo stesso portone al calare della sera, con la lanterna accesa",
+        "en": "The same door as evening falls, with the lantern lit",
+        "fr": "La même porte à la tombée du soir, la lanterne allumée",
+        "de": "Dasselbe Tor bei einbrechendem Abend, mit brennender Laterne"
+      }
     },
     {
       "id": "palazzo-03",
@@ -26,7 +36,12 @@
       "sorgente": "palazzo/image00041.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Le bifore e le balaustre traforate della facciata, viste dal basso"
+      "didascalie": {
+        "it": "Le bifore e le balaustre traforate della facciata, viste dal basso",
+        "en": "The mullioned windows and pierced balustrades of the façade, seen from below",
+        "fr": "Les fenêtres géminées et les balustrades ajourées de la façade, vues d'en bas",
+        "de": "Die Biforien und die durchbrochenen Balustraden der Fassade, von unten gesehen"
+      }
     },
     {
       "id": "suite-01",
@@ -35,7 +50,12 @@
       "sorgente": "suite/image00025.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "L'attico, con il letto a baldacchino sotto la pietra"
+      "didascalie": {
+        "it": "L'attico, con il letto a baldacchino sotto la pietra",
+        "en": "The attic room, with the four-poster bed under the stone",
+        "de": "Das Dachzimmer, mit dem Himmelbett unter dem Stein",
+        "fr": "La chambre sous les combles, le lit à baldaquin sous la pierre"
+      }
     },
     {
       "id": "suite-02",
@@ -44,7 +64,12 @@
       "sorgente": "suite/image00023.jpeg",
       "w": 1050,
       "h": 1400,
-      "didascalia": "Il letto, contro il muro in pietra retroilluminato"
+      "didascalie": {
+        "it": "Il letto, contro il muro in pietra retroilluminato",
+        "en": "The bed, against the backlit stone wall",
+        "fr": "Le lit, contre le mur de pierre rétroéclairé",
+        "de": "Das Bett vor der hinterleuchteten Steinwand"
+      }
     },
     {
       "id": "suite-03",
@@ -53,7 +78,12 @@
       "sorgente": "suite/image00024.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "L'angolo colazione, con il tavolo in terrazzo"
+      "didascalie": {
+        "it": "L'angolo colazione, con il tavolo in terrazzo",
+        "en": "The breakfast corner, with the table out on the terrace",
+        "fr": "Le coin petit-déjeuner, avec la table sur la terrasse",
+        "de": "Die Frühstücksecke, mit dem Tisch auf der Terrasse"
+      }
     },
     {
       "id": "suite-04",
@@ -62,7 +92,12 @@
       "sorgente": "suite/image00039.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "La scaletta interna che sale al terrazzo"
+      "didascalie": {
+        "it": "La scaletta interna che sale al terrazzo",
+        "en": "The internal staircase up to the terrace",
+        "fr": "Le petit escalier intérieur qui monte à la terrasse",
+        "de": "Die Innentreppe hinauf zur Terrasse"
+      }
     },
     {
       "id": "suite-05",
@@ -71,7 +106,12 @@
       "sorgente": "suite/image00028.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "Il bagno, con il lucernario sul tetto"
+      "didascalie": {
+        "it": "Il bagno, con il lucernario sul tetto",
+        "en": "The bathroom, with the skylight in the roof",
+        "fr": "La salle de bains, avec la verrière dans le toit",
+        "de": "Das Bad, mit dem Dachfenster"
+      }
     },
     {
       "id": "suite-06",
@@ -80,7 +120,12 @@
       "sorgente": "suite/image00014.png",
       "w": 1448,
       "h": 1086,
-      "didascalia": "Il terrazzo, sotto la pergola di canne"
+      "didascalie": {
+        "it": "Il terrazzo, sotto la pergola di canne",
+        "en": "The terrace, under the cane pergola",
+        "fr": "La terrasse, sous la pergola de roseaux",
+        "de": "Die Terrasse, unter der Schilfpergola"
+      }
     },
     {
       "id": "suite-07",
@@ -89,7 +134,12 @@
       "sorgente": "suite/image00016.png",
       "w": 1085,
       "h": 1450,
-      "didascalia": "Il mare, oltre i tetti di Ortigia"
+      "didascalie": {
+        "it": "Il mare, oltre i tetti di Ortigia",
+        "en": "The sea, beyond the rooftops of Ortigia",
+        "fr": "La mer, par-dessus les toits d'Ortygie",
+        "de": "Das Meer, über den Dächern von Ortigia"
+      }
     },
     {
       "id": "suite-08",
@@ -98,7 +148,12 @@
       "sorgente": "suite/image00009.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "Le sdraio all'ombra dell'ombrellone"
+      "didascalie": {
+        "it": "Le sdraio all'ombra dell'ombrellone",
+        "en": "The deckchairs in the shade of the parasol",
+        "fr": "Les transats à l'ombre du parasol",
+        "de": "Die Liegestühle im Schatten des Sonnenschirms"
+      }
     },
     {
       "id": "suite-09",
@@ -107,7 +162,12 @@
       "sorgente": "suite/image00007.png",
       "w": 1448,
       "h": 1086,
-      "didascalia": "La tavola davanti alle finestre"
+      "didascalie": {
+        "it": "La tavola davanti alle finestre",
+        "en": "The table in front of the windows",
+        "fr": "La table devant les fenêtres",
+        "de": "Der Tisch vor den Fenstern"
+      }
     },
     {
       "id": "suite-10",
@@ -116,7 +176,12 @@
       "sorgente": "suite/image00018.jpeg",
       "w": 1040,
       "h": 1387,
-      "didascalia": "Il tramonto dal terrazzo"
+      "didascalie": {
+        "it": "Il tramonto dal terrazzo",
+        "en": "Sunset from the terrace",
+        "fr": "Le coucher du soleil depuis la terrasse",
+        "de": "Sonnenuntergang von der Terrasse"
+      }
     },
     {
       "id": "suite-11",
@@ -125,7 +190,12 @@
       "sorgente": "suite/image00020.png",
       "w": 1448,
       "h": 1086,
-      "didascalia": "La sera, con le luci accese"
+      "didascalie": {
+        "it": "La sera, con le luci accese",
+        "en": "Evening, with the lights on",
+        "fr": "Le soir, les lumières allumées",
+        "de": "Der Abend, mit eingeschaltetem Licht"
+      }
     },
     {
       "id": "suite-12",
@@ -134,7 +204,12 @@
       "sorgente": "suite/image00033.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "La cabina armadio"
+      "didascalie": {
+        "it": "La cabina armadio",
+        "en": "The walk-in wardrobe",
+        "fr": "Le dressing",
+        "de": "Der begehbare Kleiderschrank"
+      }
     },
     {
       "id": "suite-13",
@@ -143,7 +218,12 @@
       "sorgente": "suite/image00030.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "La doccia a filo pavimento"
+      "didascalie": {
+        "it": "La doccia a filo pavimento",
+        "en": "The walk-in shower",
+        "fr": "La douche à l'italienne",
+        "de": "Die bodengleiche Dusche"
+      }
     },
     {
       "id": "suite-14",
@@ -152,7 +232,12 @@
       "sorgente": "suite/image00037.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "L'attico di sera, con la scaletta illuminata"
+      "didascalie": {
+        "it": "L'attico di sera, con la scaletta illuminata",
+        "en": "The attic room at night, with the staircase lit",
+        "fr": "La chambre sous les combles le soir, l'escalier éclairé",
+        "de": "Das Dachzimmer am Abend, mit beleuchteter Treppe"
+      }
     },
     {
       "id": "suite-15",
@@ -161,7 +246,12 @@
       "sorgente": "suite/image00036.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "Il letto, di notte"
+      "didascalie": {
+        "it": "Il letto, di notte",
+        "en": "The bed, at night",
+        "fr": "Le lit, la nuit",
+        "de": "Das Bett, bei Nacht"
+      }
     },
     {
       "id": "suite-16",
@@ -170,7 +260,12 @@
       "sorgente": "suite/image00021.png",
       "w": 1084,
       "h": 1451,
-      "didascalia": "I tetti e il mare, dopo il tramonto"
+      "didascalie": {
+        "it": "I tetti e il mare, dopo il tramonto",
+        "en": "The rooftops and the sea, after sunset",
+        "fr": "Les toits et la mer, après le coucher du soleil",
+        "de": "Die Dächer und das Meer, nach Sonnenuntergang"
+      }
     },
     {
       "id": "suite-17",
@@ -179,7 +274,12 @@
       "sorgente": "suite/image00027.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "La camera vista dall'alto"
+      "didascalie": {
+        "it": "La camera vista dall'alto",
+        "en": "The room seen from above",
+        "fr": "La chambre vue d'en haut",
+        "de": "Das Zimmer von oben gesehen"
+      }
     },
     {
       "id": "suite-18",
@@ -188,7 +288,12 @@
       "sorgente": "suite/image00040.png",
       "w": 1086,
       "h": 1448,
-      "didascalia": "La porta a vetri, dal terrazzo"
+      "didascalie": {
+        "it": "La porta a vetri, dal terrazzo",
+        "en": "The glass door, from the terrace",
+        "fr": "La porte vitrée, depuis la terrasse",
+        "de": "Die Glastür, von der Terrasse aus"
+      }
     },
     {
       "id": "deluxe-01",
@@ -197,7 +302,12 @@
       "sorgente": "deluxe/image00001.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La camera, con la parete in pietra a vista"
+      "didascalie": {
+        "it": "La camera, con la parete in pietra a vista",
+        "en": "The room, with its wall of exposed stone",
+        "fr": "La chambre, avec son mur en pierre apparente",
+        "de": "Das Zimmer, mit der Wand aus Sichtmauerwerk"
+      }
     },
     {
       "id": "deluxe-02",
@@ -206,7 +316,12 @@
       "sorgente": "deluxe/image00020.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il balcone sulla via Dione"
+      "didascalie": {
+        "it": "Il balcone sulla via Dione",
+        "en": "The balcony over via Dione",
+        "fr": "Le balcon sur la via Dione",
+        "de": "Der Balkon zur Via Dione"
+      }
     },
     {
       "id": "deluxe-03",
@@ -215,7 +330,12 @@
       "sorgente": "deluxe/image00010.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il bagno, interno alla camera"
+      "didascalie": {
+        "it": "Il bagno, interno alla camera",
+        "en": "The bathroom, inside the room",
+        "fr": "La salle de bains, dans la chambre",
+        "de": "Das Bad, im Zimmer"
+      }
     },
     {
       "id": "deluxe-04",
@@ -224,7 +344,12 @@
       "sorgente": "deluxe/image00030.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La volta in pietra illuminata, sopra il bagno"
+      "didascalie": {
+        "it": "La volta in pietra illuminata, sopra il bagno",
+        "en": "The lit stone vault above the bathroom",
+        "fr": "La voûte de pierre éclairée, au-dessus de la salle de bains",
+        "de": "Das beleuchtete Steingewölbe über dem Bad"
+      }
     },
     {
       "id": "deluxe-05",
@@ -233,7 +358,12 @@
       "sorgente": "deluxe/image00039.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La pietra retroilluminata dietro il letto"
+      "didascalie": {
+        "it": "La pietra retroilluminata dietro il letto",
+        "en": "The backlit stone behind the bed",
+        "fr": "La pierre rétroéclairée derrière le lit",
+        "de": "Der hinterleuchtete Stein hinter dem Bett"
+      }
     },
     {
       "id": "deluxe-06",
@@ -242,7 +372,12 @@
       "sorgente": "deluxe/image00021.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il divano che diventa il terzo letto"
+      "didascalie": {
+        "it": "Il divano che diventa il terzo letto",
+        "en": "The sofa that becomes the third bed",
+        "fr": "Le canapé qui devient le troisième couchage",
+        "de": "Das Sofa, das zum dritten Bett wird"
+      }
     },
     {
       "id": "standard-01",
@@ -251,7 +386,12 @@
       "sorgente": "standard/image00002.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La camera, con la testiera intagliata originale"
+      "didascalie": {
+        "it": "La camera, con la testiera intagliata originale",
+        "en": "The room, with its original carved headboard",
+        "fr": "La chambre, avec sa tête de lit sculptée d'origine",
+        "de": "Das Zimmer, mit dem originalen geschnitzten Kopfteil"
+      }
     },
     {
       "id": "standard-02",
@@ -260,7 +400,12 @@
       "sorgente": "standard/image00008.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il balcone all'ora blu"
+      "didascalie": {
+        "it": "Il balcone all'ora blu",
+        "en": "The balcony at blue hour",
+        "fr": "Le balcon à l'heure bleue",
+        "de": "Der Balkon zur blauen Stunde"
+      }
     },
     {
       "id": "standard-03",
@@ -269,7 +414,12 @@
       "sorgente": "standard/image00048.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Lo stesso balcone a mezzogiorno"
+      "didascalie": {
+        "it": "Lo stesso balcone a mezzogiorno",
+        "en": "The same balcony at midday",
+        "fr": "Le même balcon à midi",
+        "de": "Derselbe Balkon am Mittag"
+      }
     },
     {
       "id": "standard-04",
@@ -278,7 +428,12 @@
       "sorgente": "standard/image00032.png",
       "w": 1537,
       "h": 1023,
-      "didascalia": "Lo specchio ovale e la pietra retroilluminata"
+      "didascalie": {
+        "it": "Lo specchio ovale e la pietra retroilluminata",
+        "en": "The oval mirror and the backlit stone",
+        "fr": "Le miroir ovale et la pierre rétroéclairée",
+        "de": "Der ovale Spiegel und der hinterleuchtete Stein"
+      }
     },
     {
       "id": "standard-05",
@@ -287,7 +442,12 @@
       "sorgente": "standard/image00045.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il bagno privato, sul pianerottolo"
+      "didascalie": {
+        "it": "Il bagno privato, sul pianerottolo",
+        "en": "The private bathroom, on the landing",
+        "fr": "La salle de bains privée, sur le palier",
+        "de": "Das eigene Bad, auf dem Treppenabsatz"
+      }
     },
     {
       "id": "standard-06",
@@ -296,7 +456,12 @@
       "sorgente": "standard/image00012.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il lavabo su mensola in legno massello"
+      "didascalie": {
+        "it": "Il lavabo su mensola in legno massello",
+        "en": "The basin on its solid wood shelf",
+        "fr": "Le lavabo sur sa tablette en bois massif",
+        "de": "Das Waschbecken auf dem Massivholzbrett"
+      }
     },
     {
       "id": "superior-01",
@@ -305,7 +470,12 @@
       "sorgente": "superior/image00006.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La camera, vista dalla porta"
+      "didascalie": {
+        "it": "La camera, vista dalla porta",
+        "en": "The room, seen from the door",
+        "fr": "La chambre, vue depuis la porte",
+        "de": "Das Zimmer, von der Tür aus gesehen"
+      }
     },
     {
       "id": "superior-02",
@@ -314,7 +484,12 @@
       "sorgente": "superior/image00004.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "L'angolo scrittoio e la nicchia armadio"
+      "didascalie": {
+        "it": "L'angolo scrittoio e la nicchia armadio",
+        "en": "The writing corner and the wardrobe niche",
+        "fr": "Le coin bureau et la niche-penderie",
+        "de": "Die Schreibecke und die Schranknische"
+      }
     },
     {
       "id": "superior-03",
@@ -323,7 +498,12 @@
       "sorgente": "superior/image00031.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il bagno si apre dentro la camera"
+      "didascalie": {
+        "it": "Il bagno si apre dentro la camera",
+        "en": "The bathroom opens inside the room",
+        "fr": "La salle de bains s'ouvre dans la chambre",
+        "de": "Das Bad öffnet sich im Zimmer"
+      }
     },
     {
       "id": "superior-04",
@@ -332,7 +512,12 @@
       "sorgente": "superior/image00019.jpeg",
       "w": 1564,
       "h": 880,
-      "didascalia": "Il bagno, con la finestra sul cortile"
+      "didascalie": {
+        "it": "Il bagno, con la finestra sul cortile",
+        "en": "The bathroom, with its window onto the courtyard",
+        "fr": "La salle de bains, avec sa fenêtre sur la cour",
+        "de": "Das Bad, mit dem Fenster zum Hof"
+      }
     },
     {
       "id": "superior-05",
@@ -341,7 +526,12 @@
       "sorgente": "superior/image00044.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La poltrona sotto lo specchio"
+      "didascalie": {
+        "it": "La poltrona sotto lo specchio",
+        "en": "The armchair beneath the mirror",
+        "fr": "Le fauteuil sous le miroir",
+        "de": "Der Sessel unter dem Spiegel"
+      }
     },
     {
       "id": "superior-06",
@@ -350,7 +540,12 @@
       "sorgente": "superior/image00025.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il macramè e il soffitto in travi di legno"
+      "didascalie": {
+        "it": "Il macramè e il soffitto in travi di legno",
+        "en": "The macramé and the wooden beamed ceiling",
+        "fr": "Le macramé et le plafond à poutres de bois",
+        "de": "Das Makramee und die hölzerne Balkendecke"
+      }
     },
     {
       "id": "comuni-01",
@@ -359,7 +554,12 @@
       "sorgente": "spazi comuni/image00034.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La sala comune, con la cassettiera da tipografo"
+      "didascalie": {
+        "it": "La sala comune, con la cassettiera da tipografo",
+        "en": "The shared room, with the printer's type cabinet",
+        "fr": "La pièce commune, avec le casier de typographe",
+        "de": "Der Gemeinschaftsraum, mit dem Setzkasten aus der Druckerei"
+      }
     },
     {
       "id": "comuni-02",
@@ -368,7 +568,12 @@
       "sorgente": "spazi comuni/image00014.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Il corridoio e la nicchia dei fichi d'India"
+      "didascalie": {
+        "it": "Il corridoio e la nicchia dei fichi d'India",
+        "en": "The corridor and the niche of prickly pears",
+        "fr": "Le couloir et la niche de figuiers de Barbarie",
+        "de": "Der Flur und die Nische mit den Feigenkakteen"
+      }
     },
     {
       "id": "comuni-03",
@@ -377,7 +582,12 @@
       "sorgente": "spazi comuni/image00011.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Lo stesso corridoio, di sera"
+      "didascalie": {
+        "it": "Lo stesso corridoio, di sera",
+        "en": "The same corridor, in the evening",
+        "fr": "Le même couloir, le soir",
+        "de": "Derselbe Flur, am Abend"
+      }
     },
     {
       "id": "comuni-04",
@@ -386,7 +596,12 @@
       "sorgente": "spazi comuni/image00028.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Verso la camera, fra le poltroncine"
+      "didascalie": {
+        "it": "Verso la camera, fra le poltroncine",
+        "en": "Towards the room, between the small armchairs",
+        "fr": "Vers la chambre, entre les fauteuils",
+        "de": "Zum Zimmer hin, zwischen den Sesseln"
+      }
     },
     {
       "id": "comuni-05",
@@ -395,7 +610,12 @@
       "sorgente": "spazi comuni/image00033.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "La pietra a vista e la parete di muschio"
+      "didascalie": {
+        "it": "La pietra a vista e la parete di muschio",
+        "en": "The exposed stone and the wall of moss",
+        "fr": "La pierre apparente et le mur de mousse",
+        "de": "Das Sichtmauerwerk und die Mooswand"
+      }
     },
     {
       "id": "comuni-06",
@@ -404,7 +624,12 @@
       "sorgente": "spazi comuni/image00026.png",
       "w": 1672,
       "h": 941,
-      "didascalia": "Una testa di moro, limoni e candele"
+      "didascalie": {
+        "it": "Una testa di moro, limoni e candele",
+        "en": "A testa di moro, lemons and candles",
+        "fr": "Une testa di moro, des citrons et des bougies",
+        "de": "Ein Testa di moro, Zitronen und Kerzen"
+      }
     }
   ]
 }

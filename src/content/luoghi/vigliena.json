@@ -1,6 +1,4 @@
 {
-  "nome": "Solarium di Forte Vigliena",
-  "occhiello": "Lungomare di Levante",
   "categoria": "mare",
   "x": 300,
   "y": 418,
@@ -8,5 +6,22 @@
   "minuti": 11,
   "minutiMisurati": false,
   "ordine": 10,
-  "consiglio": "Il solarium più noto dell'isola, gratuito e con le docce. Guarda a est: qui si viene la mattina presto."
+  "nome": {
+    "it": "Solarium di Forte Vigliena",
+    "en": "Forte Vigliena sun deck",
+    "fr": "Solarium du Forte Vigliena",
+    "de": "Sonnendeck am Forte Vigliena"
+  },
+  "occhiello": {
+    "it": "Lungomare di Levante",
+    "en": "Eastern seafront",
+    "fr": "Front de mer est",
+    "de": "Uferpromenade im Osten"
+  },
+  "consiglio": {
+    "it": "Il solarium più noto dell'isola, gratuito e con le docce. Guarda a est: qui si viene la mattina presto.",
+    "en": "The best-known sun deck on the island, free, with showers. It faces east: come here early in the morning.",
+    "fr": "Le solarium le plus connu de l'île, gratuit et avec douches. Il regarde vers l'est : on y vient tôt le matin.",
+    "de": "Das bekannteste Sonnendeck der Insel, kostenlos und mit Duschen. Es liegt nach Osten: Hierher kommt man früh am Morgen."
+  }
 }

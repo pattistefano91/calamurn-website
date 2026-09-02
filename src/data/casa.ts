@@ -1,7 +1,14 @@
 /**
  * I dati della casa che si ripetono in più punti del sito.
  * Unica fonte: cambiarli qui li cambia ovunque (spec 008, FR-011).
+ *
+ * Alcuni di questi valori sono prosa, non numeri — «entro un'ora», «inclusa, in
+ * Piazza Archimede» — e vanno quindi scritti in tutte le lingue come qualsiasi
+ * altro testo (spec 009, FR-005).
  */
+import type { Lingua } from "../i18n/lingue";
+
+export type Frase = Record<Lingua, string>;
 
 export interface DatoDaConfermare<T> {
   valore: T;
@@ -48,19 +55,30 @@ export const casa = {
       "ciao@calamurn.it",
       "Indirizzo e-mail: verificare che la casella sia attiva.",
     ),
-    rispostaEntro: daConfermare("un'ora", "Tempo di risposta dichiarato agli ospiti."),
+    rispostaEntro: daConfermare<Frase>(
+      { it: "un'ora", en: "an hour", fr: "une heure", de: "einer Stunde" },
+      "Tempo di risposta dichiarato agli ospiti.",
+    ),
+    /** Un intervallo orario si legge uguale in tutte e quattro le lingue. */
     orari: daConfermare("9:00 – 22:00", "Orari in cui la casa risponde davvero."),
   },
 
   soggiorno: {
+    // Non compaiono in pagina: la risposta alle domande frequenti li racconta
+    // già, tradotti. Se un giorno serviranno qui, andranno resi Frase.
     checkIn: confermato("dalle 15:00 alle 23:30, in autonomia"),
     checkOut: confermato("entro le 11:00"),
-    colazione: daConfermare(
-      "inclusa, in Piazza Archimede",
+    colazione: daConfermare<Frase>(
+      {
+        it: "inclusa, in Piazza Archimede",
+        en: "included, on Piazza Archimede",
+        fr: "compris, sur la Piazza Archimede",
+        de: "inbegriffen, an der Piazza Archimede",
+      },
       "Bar convenzionato: nome, orari, cosa comprende il ticket, cosa ordinare.",
     ),
-    cancellazione: daConfermare(
-      null as string | null,
+    cancellazione: daConfermare<Frase | null>(
+      null,
       "Giorni di cancellazione gratuita e politica di caparra.",
     ),
     gradini: daConfermare(
@@ -71,7 +89,7 @@ export const casa = {
   },
 
   ospitiMax: 3,
-} as const;
+};
 
 /** Tutti i dati ancora da confermare, per lo script e per i segnaposto in pagina. */
 export function datiMancanti(): { chiave: string; nota: string }[] {

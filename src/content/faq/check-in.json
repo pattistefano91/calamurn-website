@@ -1,6 +1,16 @@
 {
-  "domanda": "A che ora posso fare il check-in?",
-  "risposta": "Check-in autonomo dalle 15:00 alle 23:30, check-out entro le 11:00. Le istruzioni arrivano su WhatsApp il giorno prima, con le foto del portone e del percorso dal parcheggio.",
   "apertaDiDefault": false,
-  "ordine": 6
+  "ordine": 6,
+  "domanda": {
+    "it": "A che ora posso fare il check-in?",
+    "en": "What time can I check in?",
+    "fr": "À quelle heure puis-je arriver ?",
+    "de": "Wann kann ich einchecken?"
+  },
+  "risposta": {
+    "it": "Check-in autonomo dalle 15:00 alle 23:30, check-out entro le 11:00. Le istruzioni arrivano su WhatsApp il giorno prima, con le foto del portone e del percorso dal parcheggio.",
+    "en": "Self check-in from 15:00 to 23:30, check-out by 11:00. The instructions arrive on WhatsApp the day before, with photographs of the door and of the walk from the car park.",
+    "fr": "Arrivée en autonomie de 15h00 à 23h30, départ avant 11h00. Les instructions arrivent sur WhatsApp la veille, avec les photos de la porte et du trajet depuis le parking.",
+    "de": "Selbstständiger Check-in von 15:00 bis 23:30 Uhr, Check-out bis 11:00 Uhr. Die Anleitung kommt am Vortag über WhatsApp, mit Fotos des Tores und des Wegs vom Parkplatz."
+  }
 }

@@ -1,11 +1,17 @@
 ---
 import { Picture } from "astro:assets";
 import { casa } from "../data/casa";
-import { fotoDi } from "../data/foto";
+import { fotoDi, didascalia } from "../data/foto";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const gradini = casa.soggiorno.gradini;
-// «Il corridoio e la nicchia dei fichi d'India»: la scala vera non è ancora
-// fotografata, e la sezione lo dichiara.
+// La scala vera non è ancora fotografata, e la sezione lo dichiara.
 const scatto = fotoDi("comuni-02");
 ---
 
@@ -13,22 +19,22 @@ const scatto = fotoDi("comuni-02");
   <div class="wrap">
     <div class="stairs">
       <div>
-        <p class="kicker">Onestà preventiva</p>
+        <p class="kicker">{testi.gradini.occhiello}</p>
         <div class="big">
-          {gradini.valore ?? "__"}<span>gradini</span>
+          {gradini.valore ?? "__"}<span>{testi.gradini.gradini}</span>
         </div>
         <p>
-          {!gradini.confermato && <span class="todo">da contare</span>}
-          Le camere sono al penultimo piano, la suite all'ultimo, e nel palazzo non
-          c'è ascensore. Preferiamo dirlo qui, in home, invece di lasciartelo
-          scoprire con la valigia in mano.
+          {!gradini.confermato && <span class="todo">{testi.gradini.daContare}</span>}
+          {testi.gradini.testo}
         </p>
       </div>
 
       <figure style="margin:0">
-        <Picture formats={["webp"]} fallbackFormat="jpeg"
+        <Picture
+          formats={["webp"]}
+          fallbackFormat="jpeg"
           src={scatto.immagine}
-          alt={scatto.didascalia}
+          alt={didascalia(scatto, lingua)}
           widths={[480, 800, 1200]}
           sizes="(max-width: 760px) 100vw, 600px"
           loading="lazy"
@@ -36,8 +42,8 @@ const scatto = fotoDi("comuni-02");
         <figcaption
           style="font-family:var(--mono);font-size:10.5px;color:var(--ink-30);margin-top:8px"
         >
-          <span class="todo">foto da fare</span>
-          Al posto della scala, per ora, il pianerottolo del secondo piano.
+          <span class="todo">{testi.gradini.fotoDaFare}</span>
+          {testi.gradini.didascalia}
         </figcaption>
       </figure>
     </div>

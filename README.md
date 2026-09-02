@@ -3,9 +3,10 @@
 Il sito di quattro camere in un palazzo tardo-gotico catalano, in via Dione 58 a Ortigia
 (Siracusa). Sito statico, prenotazione diretta su WhatsApp, nessun backend.
 
-**Online:** <https://calamurn-website.vercel.app> — deploy automatico a ogni push su `main`,
-anteprima su ogni pull request. Il sito è dichiarato `noindex` finché non viene collegato un
-dominio proprio: per ora è un'anteprima, non una vetrina pubblicata.
+**Online:** <https://calamurn-website.vercel.app> — in italiano, inglese, francese e tedesco
+(`/`, `/en`, `/fr`, `/de`). Deploy automatico a ogni push su `main`, anteprima su ogni pull
+request. Il sito è dichiarato `noindex` finché non viene collegato un dominio proprio: per ora
+è un'anteprima, non una vetrina pubblicata.
 
 Il progetto segue [Spec-Driven Development](https://github.com/github/spec-kit): prima la
 specifica, poi il codice. Le regole che valgono su tutto stanno nella
@@ -39,6 +40,7 @@ export PATH="/usr/local/opt/node@22/bin:$PATH"
 | `npm run check` | Controllo dei tipi su componenti e contenuti. |
 | `npm run foto:ingest` | Rigenera le sorgenti fotografiche da `material/` (serve solo a chi ha gli originali). |
 | `npm run dati:mancanti` | **Elenca tutto ciò che è ancora da confermare.** È la lista da mandare al proprietario. |
+| `npm run traduzioni:mancanti` | Elenca le traduzioni mancanti, lingua per lingua. |
 
 ## Com'è fatto
 
@@ -55,6 +57,7 @@ src/
   components/        una sezione della home per file
   content/           camere, luoghi di Ortigia, domande frequenti
   data/              casa.ts (dati della casa), foto.ts (registro), manifesto
+  i18n/              lingue.ts e i quattro dizionari di testi
   layouts/Base.astro cornice comune: metadati, dati strutturati, testata, piè di pagina
   pages/             index.astro, 404.astro
   styles/ombra.css   il sistema visivo: ogni colore del sito nasce qui
@@ -80,6 +83,28 @@ componenti. I dati della casa che si ripetono in più punti — orari, colazione
 cancellazione, contatti — stanno tutti in `src/data/casa.ts`, ognuno con il proprio stato di
 conferma.
 
+### Le quattro lingue
+
+I numeri vivono una volta sola; solo la prosa esiste in quattro copie. In un file di
+contenuto i fatti stanno alla radice e i testi sotto la lingua:
+
+```json
+{ "metratura": 24, "tariffaDa": 125,
+  "nome": { "it": "Deluxe Queen", "en": "…", "fr": "…", "de": "…" } }
+```
+
+I testi dell'interfaccia stanno in `src/i18n/testi/{it,en,fr,de}.ts`. L'italiano è la fonte:
+`Record<Lingua, Testi>` fa fallire la compilazione se una lingua perde una chiave, e lo
+schema dei contenuti fa fallire la costruzione se manca una traduzione — nessuna pagina viene
+mai pubblicata con il testo di un'altra lingua. `npm run traduzioni:mancanti` dice cosa manca
+prima di provarci.
+
+Aggiungere una quinta lingua significa toccare `src/i18n/lingue.ts`, aggiungere un dizionario
+e le traduzioni nei contenuti. Nessun componente sa quante lingue esistono.
+
+**Inglese, francese e tedesco non sono ancora stati riletti da un madrelingua**, e ogni
+pagina tradotta lo dichiara in cima.
+
 ## Le specifiche
 
 | | Feature | Stato |
@@ -92,7 +117,7 @@ conferma.
 | 006 | [Galleria fotografica](specs/006-galleria-fotografica/spec.md) | implementata |
 | 007 | [Mappa di Ortigia](specs/007-mappa-ortigia/spec.md) | implementata, minuti da cronometrare |
 | 008 | [Contenuti editoriali](specs/008-contenuti-editoriali/spec.md) | parziale: quattro domande senza risposta |
-| 009 | [Internazionalizzazione IT·EN·FR·DE](specs/009-internazionalizzazione/spec.md) | da fare |
+| 009 | [Internazionalizzazione IT·EN·FR·DE](specs/009-internazionalizzazione/spec.md) | implementata, traduzioni da rilettura |
 | 010 | [Reperibilità e pagine locali](specs/010-seo-e-pagine-locali/spec.md) | parziale: dati strutturati e sitemap sì, pagine locali no |
 | 011 | [Pubblicazione su Vercel](specs/011-deploy-vercel/spec.md) | implementata, manca il dominio |
 
@@ -111,7 +136,8 @@ sintesi:
 - **il numero di gradini** dal portone al secondo piano e all'attico;
 - **i minuti a piedi cronometrati** verso gli undici luoghi della mappa;
 - **le regole della ZTL, i parcheggi, la colazione, la cancellazione**;
-- **le tre traduzioni** (inglese, francese, tedesco);
+- **la rilettura delle tre traduzioni** da parte di un madrelingua: sono pubblicate come
+  bozza dichiarata;
 - **il dominio** da collegare: quando c'è, va impostata la variabile d'ambiente `SITE_URL`
   sul progetto Vercel — è quella a togliere il `noindex` e a rendere corretti indirizzi
   canonici e mappa del sito.

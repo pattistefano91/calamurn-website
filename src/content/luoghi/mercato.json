@@ -1,6 +1,4 @@
 {
-  "nome": "Il mercato di Ortigia",
-  "occhiello": "Via Emanuele De Benedictis",
   "categoria": "mangiare",
   "x": 268,
   "y": 114,
@@ -8,5 +6,22 @@
   "minuti": 5,
   "minutiMisurati": false,
   "ordine": 3,
-  "consiglio": "Chiude verso l'una e mezza. Alle undici è già tardi: alle nove è un'altra cosa."
+  "nome": {
+    "it": "Il mercato di Ortigia",
+    "en": "The Ortigia market",
+    "fr": "Le marché d'Ortygie",
+    "de": "Der Markt von Ortigia"
+  },
+  "occhiello": {
+    "it": "Via Emanuele De Benedictis",
+    "en": "Via Emanuele De Benedictis",
+    "fr": "Via Emanuele De Benedictis",
+    "de": "Via Emanuele De Benedictis"
+  },
+  "consiglio": {
+    "it": "Chiude verso l'una e mezza. Alle undici è già tardi: alle nove è un'altra cosa.",
+    "en": "It closes around half past one. Eleven is already late: nine is another thing entirely.",
+    "fr": "Il ferme vers treize heures trente. À onze heures il est déjà tard : à neuf heures, c'est autre chose.",
+    "de": "Er schließt gegen halb zwei. Um elf ist es schon spät; um neun ist es etwas ganz anderes."
+  }
 }

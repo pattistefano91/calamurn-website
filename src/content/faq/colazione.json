@@ -1,7 +1,17 @@
 {
-  "domanda": "Com'è la colazione?",
-  "risposta": null,
   "apertaDiDefault": false,
   "ordine": 7,
-  "daConfermare": "Se si fa al bar convenzionato va detto e trasformato in un pregio: nome del posto, cosa ordinare, orari."
+  "domanda": {
+    "it": "Com'è la colazione?",
+    "en": "What is breakfast like?",
+    "fr": "Comment est le petit-déjeuner ?",
+    "de": "Wie ist das Frühstück?"
+  },
+  "risposta": null,
+  "daConfermare": {
+    "it": "Se si fa al bar convenzionato va detto e trasformato in un pregio: nome del posto, cosa ordinare, orari.",
+    "en": "If it is taken at a partner café, that should be said and turned into an asset: the name of the place, what to order, the hours.",
+    "fr": "S'il se prend dans un café partenaire, il faut le dire et en faire un atout : le nom du lieu, quoi commander, les horaires.",
+    "de": "Wenn es in einem Partnercafé stattfindet, sollte man das sagen und daraus einen Vorzug machen: Name des Lokals, was man bestellt, Öffnungszeiten."
+  }
 }

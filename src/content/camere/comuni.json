@@ -1,12 +1,6 @@
 {
-  "nome": "Il pianerottolo",
-  "occhiello": "Secondo piano · spazi comuni delle tre camere",
-  "piano": "Secondo piano",
-  "affaccio": "Interno",
-  "descrizione": "Il pianerottolo del secondo piano non è un corridoio: è una stanza. Pietra a vista, una cassettiera da tipografo, cesti sospesi dal soffitto in legno e una nicchia di fichi d'India illuminata da terra.",
   "metratura": null,
   "ospitiMax": null,
-  "letto": null,
   "dotazioni": [
     "pietra-a-vista",
     "soffitto-in-travi"
@@ -23,5 +17,23 @@
   "tariffaDa": null,
   "tariffaConfermata": true,
   "prenotabile": false,
-  "ordine": 5
+  "ordine": 5,
+  "nome": {
+    "it": "Il pianerottolo",
+    "en": "The landing",
+    "fr": "Le palier",
+    "de": "Der Treppenabsatz"
+  },
+  "occhiello": {
+    "it": "Secondo piano · spazi comuni delle tre camere",
+    "en": "Second floor · shared by the three rooms",
+    "fr": "Deuxième étage · espaces communs aux trois chambres",
+    "de": "Zweiter Stock · Gemeinschaftsraum der drei Zimmer"
+  },
+  "descrizione": {
+    "it": "Il pianerottolo del secondo piano non è un corridoio: è una stanza. Pietra a vista, una cassettiera da tipografo, cesti sospesi dal soffitto in legno e una nicchia di fichi d'India illuminata da terra.",
+    "en": "The second-floor landing is not a corridor: it is a room. Exposed stone, a printer's type cabinet, baskets hanging from the wooden ceiling and a niche of prickly pears lit from the floor.",
+    "fr": "Le palier du deuxième étage n'est pas un couloir : c'est une pièce. Pierre apparente, un casier de typographe, des paniers suspendus au plafond de bois et une niche de figuiers de Barbarie éclairée depuis le sol.",
+    "de": "Der Treppenabsatz im zweiten Stock ist kein Flur, sondern ein Raum. Sichtmauerwerk, ein Setzkasten aus einer Druckerei, Körbe, die von der Holzdecke hängen, und eine vom Boden beleuchtete Nische mit Feigenkakteen."
+  }
 }

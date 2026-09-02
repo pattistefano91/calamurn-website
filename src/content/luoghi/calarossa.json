@@ -1,6 +1,4 @@
 {
-  "nome": "Cala Rossa",
-  "occhiello": "Lungomare di Levante, dove sbocca via Roma",
   "categoria": "mare",
   "x": 316,
   "y": 256,
@@ -8,5 +6,22 @@
   "minuti": 9,
   "minutiMisurati": false,
   "ordine": 9,
-  "consiglio": "Una caletta di ciottoli sotto le mura, si scende da una scalinata. Piccola, libera, molto amata dai siracusani; nel pomeriggio va in ombra."
+  "nome": {
+    "it": "Cala Rossa",
+    "en": "Cala Rossa",
+    "fr": "Cala Rossa",
+    "de": "Cala Rossa"
+  },
+  "occhiello": {
+    "it": "Lungomare di Levante, dove sbocca via Roma",
+    "en": "Eastern seafront, where via Roma comes out",
+    "fr": "Front de mer est, au débouché de la via Roma",
+    "de": "Uferpromenade im Osten, wo die Via Roma endet"
+  },
+  "consiglio": {
+    "it": "Una caletta di ciottoli sotto le mura, si scende da una scalinata. Piccola, libera, molto amata dai siracusani; nel pomeriggio va in ombra.",
+    "en": "A pebble cove beneath the walls, reached down a flight of steps. Small, free, much loved by the people of Syracuse; it falls into shade in the afternoon.",
+    "fr": "Une petite crique de galets sous les remparts, à laquelle on descend par un escalier. Petite, gratuite, très aimée des Syracusains ; elle passe à l'ombre l'après-midi.",
+    "de": "Eine Kieselbucht unterhalb der Mauern, über eine Treppe zu erreichen. Klein, frei zugänglich, bei den Syrakusanern sehr beliebt; am Nachmittag liegt sie im Schatten."
+  }
 }

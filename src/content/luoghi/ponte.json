@@ -1,6 +1,4 @@
 {
-  "nome": "Ponte Umbertino",
-  "occhiello": "L'ingresso all'isola",
   "categoria": "pratico",
   "x": 232,
   "y": 46,
@@ -8,5 +6,22 @@
   "minuti": 8,
   "minutiMisurati": false,
   "ordine": 6,
-  "consiglio": "Dove Ortigia si stacca dalla terraferma. Se arrivi in auto, oltre questo punto comanda la ZTL."
+  "nome": {
+    "it": "Ponte Umbertino",
+    "en": "Ponte Umbertino",
+    "fr": "Ponte Umbertino",
+    "de": "Ponte Umbertino"
+  },
+  "occhiello": {
+    "it": "L'ingresso all'isola",
+    "en": "The way onto the island",
+    "fr": "L'entrée de l'île",
+    "de": "Der Zugang zur Insel"
+  },
+  "consiglio": {
+    "it": "Dove Ortigia si stacca dalla terraferma. Se arrivi in auto, oltre questo punto comanda la ZTL.",
+    "en": "Where Ortigia parts from the mainland. If you arrive by car, beyond this point the restricted traffic zone takes over.",
+    "fr": "Là où Ortygie se détache du continent. Si vous arrivez en voiture, au-delà de ce point c'est la zone à trafic limité qui commande.",
+    "de": "Dort löst sich Ortigia vom Festland. Wer mit dem Auto kommt, betritt hinter diesem Punkt die verkehrsberuhigte Zone."
+  }
 }

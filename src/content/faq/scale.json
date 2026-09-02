@@ -1,7 +1,17 @@
 {
-  "domanda": "Quante scale ci sono?",
-  "risposta": null,
   "apertaDiDefault": false,
   "ordine": 3,
-  "daConfermare": "Numero esatto di gradini, presenza o assenza di ascensore, e come si fa con le valigie."
+  "domanda": {
+    "it": "Quante scale ci sono?",
+    "en": "How many stairs are there?",
+    "fr": "Combien y a-t-il de marches ?",
+    "de": "Wie viele Treppen gibt es?"
+  },
+  "risposta": null,
+  "daConfermare": {
+    "it": "Numero esatto di gradini, presenza o assenza di ascensore, e come si fa con le valigie.",
+    "en": "The exact number of steps, whether there is a lift, and what to do about suitcases.",
+    "fr": "Le nombre exact de marches, la présence ou non d'un ascenseur, et comment faire avec les valises.",
+    "de": "Die genaue Zahl der Stufen, ob es einen Aufzug gibt, und wie man es mit den Koffern macht."
+  }
 }

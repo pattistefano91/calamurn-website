@@ -1,11 +1,15 @@
 /**
  * Registro delle fotografie (spec 002).
  *
- * Il manifesto dichiara identificativo, ambiente, ruolo e didascalia; le sorgenti
- * versionate stanno in src/assets/photos/ e vengono generate da
- * scripts/ingest-photos.py a partire dagli originali in material/.
+ * Il manifesto dichiara identificativo, ambiente, ruolo e le didascalie nelle
+ * quattro lingue; le sorgenti versionate stanno in src/assets/photos/ e vengono
+ * generate da scripts/ingest-photos.py a partire dagli originali in material/.
+ *
+ * La fotografia è una sola per tutte le lingue: cambiano solo didascalia e
+ * testo alternativo (spec 009).
  */
 import manifesto from "./foto.manifest.json";
+import { LINGUE, type Lingua } from "../i18n/lingue";
 
 export type Ambiente =
   | "palazzo"
@@ -19,7 +23,7 @@ export interface Foto {
   id: string;
   ambiente: Ambiente;
   ruolo: string;
-  didascalia: string;
+  didascalie: Record<Lingua, string>;
   immagine: ImageMetadata;
 }
 
@@ -42,11 +46,20 @@ export const foto: Foto[] = manifesto.foto.map((voce) => {
         `manifesto ma non esiste. Esegui «npm run foto:ingest».`,
     );
   }
+  // Una didascalia mancante ferma la costruzione (spec 009, FR-006).
+  for (const lingua of LINGUE) {
+    if (!voce.didascalie?.[lingua]) {
+      throw new Error(
+        `Didascalia mancante in «${lingua}» per la fotografia «${voce.id}». ` +
+          `Aggiungila in src/data/foto.manifest.json.`,
+      );
+    }
+  }
   return {
     id: voce.id,
     ambiente: voce.gruppo as Ambiente,
     ruolo: voce.ruolo,
-    didascalia: voce.didascalia,
+    didascalie: voce.didascalie as Record<Lingua, string>,
     immagine,
   };
 });
@@ -73,12 +86,5 @@ export function fotoConRuolo(ruolo: string): Foto {
   return f;
 }
 
-/** Etichette degli ambienti, per i filtri della galleria (spec 006). */
-export const etichetteAmbiente: Record<Ambiente, string> = {
-  palazzo: "Il palazzo",
-  deluxe: "Deluxe",
-  standard: "Standard",
-  superior: "Superior",
-  suite: "Suite",
-  comuni: "Spazi comuni",
-};
+export const didascalia = (f: Foto, lingua: Lingua): string =>
+  f.didascalie[lingua];

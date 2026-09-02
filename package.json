@@ -13,7 +13,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "foto:ingest": "python3 scripts/ingest-photos.py",
-    "dati:mancanti": "node scripts/dati-mancanti.mjs"
+    "dati:mancanti": "node scripts/dati-mancanti.mjs",
+    "traduzioni:mancanti": "node scripts/traduzioni-mancanti.mjs"
   },
   "dependencies": {
     "astro": "^7.2.10",

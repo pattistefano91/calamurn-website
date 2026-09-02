@@ -1,6 +1,16 @@
 {
-  "domanda": "Il terrazzo è di tutti?",
-  "risposta": "No: il terrazzo è a uso esclusivo della suite. Le altre camere hanno il balcone sulla via o l'affaccio sul cortile interno.",
   "apertaDiDefault": false,
-  "ordine": 5
+  "ordine": 5,
+  "domanda": {
+    "it": "Il terrazzo è di tutti?",
+    "en": "Is the terrace shared?",
+    "fr": "La terrasse est-elle commune ?",
+    "de": "Ist die Terrasse für alle?"
+  },
+  "risposta": {
+    "it": "No: il terrazzo è a uso esclusivo della suite. Le altre camere hanno il balcone sulla via o l'affaccio sul cortile interno.",
+    "en": "No: the terrace belongs to the suite alone. The other rooms have either a balcony over the street or a window onto the inner courtyard.",
+    "fr": "Non : la terrasse est à l'usage exclusif de la suite. Les autres chambres ont un balcon sur la rue ou une vue sur la cour intérieure.",
+    "de": "Nein: Die Terrasse gehört allein zur Suite. Die anderen Zimmer haben einen Balkon zur Straße oder Blick in den Innenhof."
+  }
 }

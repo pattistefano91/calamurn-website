@@ -1,6 +1,4 @@
 {
-  "nome": "Tempio di Apollo",
-  "occhiello": "Piazza Pancali",
   "categoria": "monumenti",
   "x": 248,
   "y": 86,
@@ -8,5 +6,22 @@
   "minuti": 6,
   "minutiMisurati": false,
   "ordine": 4,
-  "consiglio": "Il più antico tempio dorico della Sicilia. Ci passi davanti senza accorgertene: fermati."
+  "nome": {
+    "it": "Tempio di Apollo",
+    "en": "Temple of Apollo",
+    "fr": "Temple d'Apollon",
+    "de": "Apollontempel"
+  },
+  "occhiello": {
+    "it": "Piazza Pancali",
+    "en": "Piazza Pancali",
+    "fr": "Piazza Pancali",
+    "de": "Piazza Pancali"
+  },
+  "consiglio": {
+    "it": "Il più antico tempio dorico della Sicilia. Ci passi davanti senza accorgertene: fermati.",
+    "en": "The oldest Doric temple in Sicily. You walk past it without noticing: stop.",
+    "fr": "Le plus ancien temple dorique de Sicile. On passe devant sans le voir : arrêtez-vous.",
+    "de": "Der älteste dorische Tempel Siziliens. Man geht daran vorbei, ohne ihn zu bemerken: Halten Sie an."
+  }
 }

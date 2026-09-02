@@ -1,5 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 // Le stesse distanze della mappa: una sola fonte (spec 008, FR-011).
 const luoghi = (await getCollection("luoghi"))
@@ -13,8 +20,8 @@ const tuttiStimati = luoghi.every((l) => !l.data.minutiMisurati);
 <section id="ortigia">
   <div class="wrap">
     <div class="sec-h">
-      <h2>A piedi da qui</h2>
-      <p class="kicker">nessun trasferimento, nessuna auto</p>
+      <h2>{testi.aPiedi.titolo}</h2>
+      <p class="kicker">{testi.aPiedi.occhiello}</p>
     </div>
 
     <div class="feet">
@@ -23,9 +30,9 @@ const tuttiStimati = luoghi.every((l) => !l.data.minutiMisurati);
           <div>
             <div class="n">
               {l.data.minuti}
-              <em>min</em>
+              <em>{testi.aPiedi.min}</em>
             </div>
-            <div class="t">{l.data.nome}</div>
+            <div class="t">{l.data.nome[lingua]}</div>
           </div>
         ))
       }
@@ -34,10 +41,8 @@ const tuttiStimati = luoghi.every((l) => !l.data.minutiMisurati);
     {
       tuttiStimati && (
         <p class="nota">
-          <span class="todo">da cronometrare</span>
-          Questi minuti sono stimati, non misurati. Vanno percorsi davvero: è la
-          prima cosa che gli ospiti verificano, ed è anche la più facile da
-          smentire.
+          <span class="todo">{testi.aPiedi.daCronometrare}</span>
+          {testi.aPiedi.nota}
         </p>
       )
     }

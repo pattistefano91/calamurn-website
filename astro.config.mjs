@@ -11,7 +11,27 @@ export default defineConfig({
   site: SITO,
   output: "static",
   trailingSlash: "ignore",
-  integrations: [sitemap()],
+
+  // Italiano alla radice, le altre sotto prefisso. Nessuna redirezione
+  // automatica sulla lingua del browser: sceglie il visitatore
+  // (spec 009, FR-002 e FR-009).
+  i18n: {
+    defaultLocale: "it",
+    locales: ["it", "en", "fr", "de"],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
+
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: "it",
+        locales: { it: "it-IT", en: "en-GB", fr: "fr-FR", de: "de-DE" },
+      },
+    }),
+  ],
 
   security: {
     // La politica di sicurezza dei contenuti la scrive Astro, perché è l'unico
@@ -39,6 +59,12 @@ export default defineConfig({
 
   build: {
     inlineStylesheets: "auto",
+  },
+
+  // Nessun blocco di codice nel sito: l'evidenziatore aggiungerebbe soltanto
+  // stili incorporati che la politica di sicurezza dovrebbe autorizzare.
+  markdown: {
+    syntaxHighlight: false,
   },
   image: {
     // Le sorgenti in src/assets/photos/ arrivano già a 2400 px dal manifesto;

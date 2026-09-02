@@ -473,6 +473,22 @@ nav.principale a:hover {
   display: none;
 }
 
+/* Sotto i 560 px un campo data nativo non entra in mezza riga: non si
+   restringe sotto la sua larghezza intrinseca e spinge in largo tutta la
+   pagina. Qui i campi vanno uno sotto l'altro. */
+@media (max-width: 560px) {
+  .bar .f {
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar .go {
+    width: 100%;
+    justify-content: center;
+    padding: 16px;
+  }
+}
+
 /* ---------- sezioni ---------- */
 section {
   border-bottom: 1px solid var(--rule);

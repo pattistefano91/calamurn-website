@@ -1,7 +1,14 @@
 ---
 import { Picture } from "astro:assets";
 import { getEntry } from "astro:content";
-import { fotoDi } from "../data/foto";
+import { fotoDi, didascalia } from "../data/foto";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const suite = await getEntry("camere", "suite");
 // «Il terrazzo, sotto la pergola di canne»: l'ultima delle sei principali.
@@ -12,32 +19,27 @@ const terrazzo = fotoDi(suite!.data.foto[5] ?? suite!.data.foto[0]);
   <div class="wrap">
     <div class="waitbox">
       <div>
-        <p class="kicker" style="color:var(--acc-pale)">
-          Ultimo piano · terrazzo a uso esclusivo
-        </p>
-        <h3>La suite ha un terrazzo che non divide con nessuno.</h3>
-        <p>
-          Un piano intero sotto il cielo di Ortigia, e sopra non c'è nessun altro.
-          Il terrazzo ha una pergola di canne per l'ombra, le giare con le agavi, e
-          oltre i tetti si vede il mare. La colazione la porti fuori; la sera il
-          sole se ne va dietro la Maddalena mentre tu sei ancora seduto.
-        </p>
+        <p class="kicker" style="color:var(--acc-pale)">{testi.suite.occhiello}</p>
+        <h3>{testi.suite.titolo}</h3>
+        <p>{testi.suite.testo}</p>
         <p style="margin-top:18px">
-          <button class="btn light" type="button" data-camera={suite!.data.nome}>
-            Prenota la suite
+          <button class="btn light" type="button" data-camera={suite!.data.nome[lingua]}>
+            {testi.suite.prenota}
           </button>
         </p>
       </div>
 
       <figure>
-        <Picture formats={["webp"]} fallbackFormat="jpeg"
+        <Picture
+          formats={["webp"]}
+          fallbackFormat="jpeg"
           src={terrazzo.immagine}
-          alt={terrazzo.didascalia}
+          alt={didascalia(terrazzo, lingua)}
           widths={[480, 800, 1200]}
           sizes="(max-width: 780px) 100vw, 460px"
           loading="lazy"
         />
-        <figcaption>{terrazzo.didascalia}</figcaption>
+        <figcaption>{didascalia(terrazzo, lingua)}</figcaption>
       </figure>
     </div>
   </div>

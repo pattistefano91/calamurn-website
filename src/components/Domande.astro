@@ -1,5 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const domande = (await getCollection("faq")).sort(
   (a, b) => a.data.ordine - b.data.ordine,
@@ -13,8 +20,8 @@ const schema = {
   "@type": "FAQPage",
   mainEntity: risposte.map((d) => ({
     "@type": "Question",
-    name: d.data.domanda,
-    acceptedAnswer: { "@type": "Answer", text: d.data.risposta },
+    name: d.data.domanda[lingua],
+    acceptedAnswer: { "@type": "Answer", text: d.data.risposta![lingua] },
   })),
 };
 ---
@@ -22,21 +29,21 @@ const schema = {
 <section id="domande">
   <div class="wrap">
     <div class="sec-h">
-      <h2>Prima di arrivare</h2>
-      <p class="kicker">le domande vere</p>
+      <h2>{testi.domande.titolo}</h2>
+      <p class="kicker">{testi.domande.occhiello}</p>
     </div>
 
     {
       domande.map((d) => (
         <details open={d.data.apertaDiDefault}>
-          <summary>{d.data.domanda}</summary>
+          <summary>{d.data.domanda[lingua]}</summary>
           {d.data.risposta ? (
-            <p>{d.data.risposta}</p>
+            <p>{d.data.risposta[lingua]}</p>
           ) : (
             <p>
-              <span class="todo">senza risposta</span>
-              Non l'abbiamo ancora scritta perché non vogliamo scrivere una
-              risposta generica. Serve: {d.data.daConfermare}
+              <span class="todo">{testi.domande.senzaRisposta}</span>
+              {testi.domande.spiegazioneSenzaRisposta}{" "}
+              {d.data.daConfermare?.[lingua]}
             </p>
           )}
         </details>
@@ -45,4 +52,8 @@ const schema = {
   </div>
 </section>
 
-{risposte.length > 0 && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
+{
+  risposte.length > 0 && (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  )
+}

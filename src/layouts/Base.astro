@@ -3,21 +3,36 @@ import "../styles/ombra.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { casa } from "../data/casa";
+import {
+  CODICE_HTML,
+  LINGUA_PREDEFINITA,
+  LINGUE,
+  percorso,
+  t,
+  type Lingua,
+} from "../i18n";
 
 interface Props {
+  lingua: Lingua;
   titolo: string;
   descrizione: string;
   /** Percorso dell'immagine sociale, relativo alla radice del sito. */
   immagineSociale?: string;
   indicizzabile?: boolean;
+  /** Il percorso della stessa pagina, senza prefisso di lingua. */
+  dentro?: string;
 }
 
 const {
+  lingua,
   titolo,
   descrizione,
   immagineSociale = "/og-calamurn.jpg",
   indicizzabile = true,
+  dentro = "/",
 } = Astro.props;
+
+const testi = t(lingua);
 
 // Restano fuori dai motori di ricerca sia le anteprime di Vercel (spec 011,
 // FR-003) sia l'intero sito finché vive su un indirizzo di servizio: senza un
@@ -28,11 +43,16 @@ const anteprimaDiRamo =
 const dominioProprio = Boolean(process.env.SITE_URL);
 const pubblicabile = dominioProprio && !anteprimaDiRamo;
 
-const canonico = new URL(Astro.url.pathname, Astro.site).href;
+const canonico = new URL(percorso(lingua, dentro), Astro.site).href;
 const og = new URL(immagineSociale, Astro.site).href;
 
-// Dati strutturati (spec 010, FR-002). Coordinate e contatti vengono dalla
-// stessa fonte usata dal resto del sito.
+// Ogni pagina dichiara sé stessa, le altre tre lingue e una versione
+// predefinita (spec 009, FR-003).
+const alternative = LINGUE.map((l) => ({
+  hreflang: CODICE_HTML[l],
+  href: new URL(percorso(l, dentro), Astro.site).href,
+}));
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "BedAndBreakfast",
@@ -59,7 +79,7 @@ const schema = {
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={CODICE_HTML[lingua]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -72,13 +92,24 @@ const schema = {
       )
     }
 
+    {
+      alternative.map((a) => (
+        <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(percorso(LINGUA_PREDEFINITA, dentro), Astro.site).href}
+    />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={casa.nome} />
     <meta property="og:title" content={titolo} />
     <meta property="og:description" content={descrizione} />
     <meta property="og:image" content={og} />
     <meta property="og:url" content={canonico} />
-    <meta property="og:locale" content="it_IT" />
+    <meta property="og:locale" content={CODICE_HTML[lingua]} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <meta name="theme-color" content="#c4b69c" />
@@ -93,11 +124,11 @@ const schema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
-    <a class="salta" href="#contenuto">Salta al contenuto</a>
-    <Header />
+    <a class="salta" href="#contenuto">{testi.generale.saltaAlContenuto}</a>
+    <Header lingua={lingua} />
     <main id="contenuto">
       <slot />
     </main>
-    <Footer />
+    <Footer lingua={lingua} />
   </body>
 </html>

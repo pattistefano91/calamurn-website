@@ -1,6 +1,4 @@
 {
-  "nome": "Solarium di Ponente",
-  "occhiello": "Lungomare vicino alla Fonte Aretusa",
   "categoria": "mare",
   "x": 150,
   "y": 366,
@@ -8,5 +6,22 @@
   "minuti": 8,
   "minutiMisurati": false,
   "ordine": 8,
-  "consiglio": "Piattaforme in legno sugli scogli, sul lato che guarda il tramonto. Il posto giusto per l'ultimo bagno della giornata."
+  "nome": {
+    "it": "Solarium di Ponente",
+    "en": "The western sun deck",
+    "fr": "Le solarium de Ponente",
+    "de": "Sonnendeck im Westen"
+  },
+  "occhiello": {
+    "it": "Lungomare vicino alla Fonte Aretusa",
+    "en": "Seafront near the Fountain of Arethusa",
+    "fr": "Front de mer près de la fontaine Aréthuse",
+    "de": "Uferpromenade bei der Arethusaquelle"
+  },
+  "consiglio": {
+    "it": "Piattaforme in legno sugli scogli, sul lato che guarda il tramonto. Il posto giusto per l'ultimo bagno della giornata.",
+    "en": "Wooden platforms over the rocks, on the side that faces the sunset. The right place for the last swim of the day.",
+    "fr": "Des plateformes de bois sur les rochers, du côté qui regarde le coucher du soleil. L'endroit qu'il faut pour le dernier bain de la journée.",
+    "de": "Holzplattformen über den Felsen, auf der Seite zum Sonnenuntergang. Der richtige Ort für das letzte Bad des Tages."
+  }
 }

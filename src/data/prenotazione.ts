@@ -1,10 +1,13 @@
 /**
  * Composizione della richiesta di disponibilità (spec 003).
  *
- * Nessun dato lascia il browser: qui si costruiscono solo due indirizzi,
- * uno per WhatsApp e uno per la posta.
+ * Nessun dato lascia il browser: qui si costruiscono solo due indirizzi, uno
+ * per WhatsApp e uno per la posta. Il messaggio è nella lingua della pagina,
+ * con le date scritte per esteso perché «12/06» non significa la stessa cosa
+ * ovunque (spec 009, FR-010).
  */
 import { casa } from "./casa";
+import { t, dataLunga, type Lingua } from "../i18n";
 
 export interface Richiesta {
   arrivo: string; // ISO, oppure "" se non scelta
@@ -13,50 +16,43 @@ export interface Richiesta {
   camera: string; // nome pubblico della camera, oppure "" per indifferente
 }
 
-const SEGNAPOSTO_DATA = "(da definire)";
-
-/** Data non ambigua in tutte le lingue: 12 giugno 2026, non 12/06. */
-export function dataLeggibile(iso: string): string {
-  if (!iso) return SEGNAPOSTO_DATA;
-  const d = new Date(iso + "T00:00:00");
-  if (Number.isNaN(d.getTime())) return SEGNAPOSTO_DATA;
-  return new Intl.DateTimeFormat("it-IT", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(d);
+export function dataLeggibile(lingua: Lingua, iso: string): string {
+  return dataLunga(lingua, iso) ?? t(lingua).prenotazione.messaggioDaDefinire;
 }
 
-export function messaggio(r: Richiesta): string {
+export function messaggio(lingua: Lingua, r: Richiesta): string {
+  const p = t(lingua).prenotazione;
   return [
-    `Buongiorno, vorrei verificare la disponibilità al ${casa.nome}.`,
-    `Arrivo: ${dataLeggibile(r.arrivo)}`,
-    `Partenza: ${dataLeggibile(r.partenza)}`,
-    `Ospiti: ${r.ospiti || "2 ospiti"}`,
-    `Camera: ${r.camera || "indifferente"}`,
+    p.messaggioApertura,
+    `${p.messaggioArrivo}: ${dataLeggibile(lingua, r.arrivo)}`,
+    `${p.messaggioPartenza}: ${dataLeggibile(lingua, r.partenza)}`,
+    `${p.messaggioOspiti}: ${r.ospiti}`,
+    `${p.messaggioCamera}: ${r.camera || p.messaggioIndifferente}`,
   ].join("\n");
 }
 
-export function linkWhatsApp(r: Richiesta): string {
+export function linkWhatsApp(lingua: Lingua, r: Richiesta): string {
   const numero = casa.contatti.whatsapp.valore;
-  return `https://wa.me/${numero}?text=${encodeURIComponent(messaggio(r))}`;
+  return `https://wa.me/${numero}?text=${encodeURIComponent(messaggio(lingua, r))}`;
 }
 
-export function linkPosta(r: Richiesta): string {
+export function linkPosta(lingua: Lingua, r: Richiesta): string {
+  const p = t(lingua).prenotazione;
   const indirizzo = casa.contatti.email.valore;
-  const oggetto = `Richiesta disponibilità ${casa.nome}`;
-  const corpo = `${messaggio(r)}\n\nGrazie`;
+  const corpo = `${messaggio(lingua, r)}\n\n${p.messaggioSaluto}`;
   return `mailto:${indirizzo}?subject=${encodeURIComponent(
-    oggetto,
+    p.oggettoMail,
   )}&body=${encodeURIComponent(corpo)}`;
 }
 
-export const richiestaVuota: Richiesta = {
-  arrivo: "",
-  partenza: "",
-  ospiti: "2 ospiti",
-  camera: "",
-};
+export function richiestaVuota(lingua: Lingua): Richiesta {
+  return {
+    arrivo: "",
+    partenza: "",
+    ospiti: t(lingua).generale.ospiti(2),
+    camera: "",
+  };
+}
 
 /**
  * Spec 003, FR-007 chiede che la costruzione fallisca finché i contatti sono

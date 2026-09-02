@@ -1,6 +1,4 @@
 {
-  "nome": "La Giudecca",
-  "occhiello": "Il quartiere ebraico, a levante",
   "categoria": "monumenti",
   "x": 292,
   "y": 292,
@@ -8,5 +6,22 @@
   "minuti": 8,
   "minutiMisurati": false,
   "ordine": 7,
-  "consiglio": "Vicoli stretti fra via Roma e via Alagona, e sotto uno di questi palazzi il miqweh scavato nella roccia."
+  "nome": {
+    "it": "La Giudecca",
+    "en": "La Giudecca",
+    "fr": "La Giudecca",
+    "de": "La Giudecca"
+  },
+  "occhiello": {
+    "it": "Il quartiere ebraico, a levante",
+    "en": "The Jewish quarter, to the east",
+    "fr": "Le quartier juif, à l'est",
+    "de": "Das jüdische Viertel im Osten"
+  },
+  "consiglio": {
+    "it": "Vicoli stretti fra via Roma e via Alagona, e sotto uno di questi palazzi il miqweh scavato nella roccia.",
+    "en": "Narrow lanes between via Roma and via Alagona, and beneath one of these buildings the mikveh cut into the rock.",
+    "fr": "Ruelles étroites entre la via Roma et la via Alagona, et sous l'un de ces immeubles le miqvé creusé dans la roche.",
+    "de": "Enge Gassen zwischen Via Roma und Via Alagona, und unter einem dieser Häuser die in den Fels gehauene Mikwe."
+  }
 }

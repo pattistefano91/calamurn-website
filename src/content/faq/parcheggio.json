@@ -1,7 +1,17 @@
 {
-  "domanda": "Dove parcheggio?",
-  "risposta": null,
   "apertaDiDefault": false,
   "ordine": 2,
-  "daConfermare": "Talete, Molo Sant'Antonio, Marina: nomi, minuti a piedi, tariffa giornaliera indicativa, eventuale convenzione."
+  "domanda": {
+    "it": "Dove parcheggio?",
+    "en": "Where do I park?",
+    "fr": "Où se garer ?",
+    "de": "Wo parke ich?"
+  },
+  "risposta": null,
+  "daConfermare": {
+    "it": "Talete, Molo Sant'Antonio, Marina: nomi, minuti a piedi, tariffa giornaliera indicativa, eventuale convenzione.",
+    "en": "Talete, Molo Sant'Antonio, Marina: names, walking times, indicative daily rate, any arrangement the house has.",
+    "fr": "Talete, Molo Sant'Antonio, Marina : noms, temps de marche, tarif journalier indicatif, éventuel accord avec la maison.",
+    "de": "Talete, Molo Sant'Antonio, Marina: Namen, Gehzeiten, ungefährer Tagespreis, eventuelle Vereinbarung des Hauses."
+  }
 }

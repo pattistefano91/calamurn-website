@@ -1,5 +1,13 @@
 ---
 import { casa } from "../data/casa";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
+const r = testi.confronto.righe;
 
 interface Riga {
   voce: string;
@@ -9,37 +17,24 @@ interface Riga {
 }
 
 const righe: Riga[] = [
+  { voce: r.tariffa, portale: r.tariffaPortale, diretto: r.tariffaDiretto, daDefinire: true },
   {
-    voce: "Tariffa a notte (Standard)",
-    portale: "da 105 €",
-    diretto: "da 99 €",
-    daDefinire: true,
-  },
-  {
-    voce: "Colazione",
-    portale: "a parte",
-    diretto: casa.soggiorno.colazione.valore,
+    voce: r.colazione,
+    portale: r.colazionePortale,
+    diretto: casa.soggiorno.colazione.valore[lingua],
     daDefinire: !casa.soggiorno.colazione.confermato,
   },
+  { voce: r.checkout, portale: r.checkoutPortale, diretto: r.checkoutDiretto },
+  { voce: r.chiRisponde, portale: r.chiRispondePortale, diretto: r.chiRispondeDiretto },
   {
-    voce: "Check-out",
-    portale: "11:00 fisso",
-    diretto: "flessibile, se la camera è libera",
+    voce: r.conferma,
+    portale: r.confermaPortale,
+    diretto: r.confermaDiretto(casa.contatti.rispostaEntro.valore[lingua]),
   },
   {
-    voce: "Chi risponde",
-    portale: "assistenza del portale",
-    diretto: "noi, su WhatsApp",
-  },
-  {
-    voce: "Conferma",
-    portale: "immediata, automatica",
-    diretto: `entro ${casa.contatti.rispostaEntro.valore}, con una persona vera`,
-  },
-  {
-    voce: "Cancellazione",
-    portale: "secondo il portale",
-    diretto: casa.soggiorno.cancellazione.valore ?? "gratuita fino a __ giorni prima",
+    voce: r.cancellazione,
+    portale: r.cancellazionePortale,
+    diretto: casa.soggiorno.cancellazione.valore?.[lingua] ?? r.cancellazioneDiretto,
     daDefinire: !casa.soggiorno.cancellazione.confermato,
   },
 ];
@@ -48,28 +43,30 @@ const righe: Riga[] = [
 <section id="confronto">
   <div class="wrap">
     <div class="sec-h">
-      <h2>Qui o sul portale</h2>
-      <p class="kicker">stesso letto, condizioni diverse</p>
+      <h2>{testi.confronto.titolo}</h2>
+      <p class="kicker">{testi.confronto.occhiello}</p>
     </div>
 
     <div class="cmp-scroll">
       <table class="cmp">
         <thead>
           <tr>
-            <th scope="col"><span class="solo-lettori">Condizione</span></th>
-            <th scope="col">Sul portale</th>
-            <th scope="col">Qui, diretto</th>
+            <th scope="col"><span class="solo-lettori">{testi.confronto.condizione}</span></th>
+            <th scope="col">{testi.confronto.sulPortale}</th>
+            <th scope="col">{testi.confronto.quiDiretto}</th>
           </tr>
         </thead>
         <tbody>
           {
-            righe.map((r) => (
+            righe.map((riga) => (
               <tr>
-                <th scope="row" style="font-weight:400">{r.voce}</th>
-                <td>{r.portale}</td>
+                <th scope="row" style="font-weight:400">{riga.voce}</th>
+                <td>{riga.portale}</td>
                 <td class="you">
-                  {r.diretto}
-                  {r.daDefinire && <span class="todo">da definire</span>}
+                  {riga.diretto}
+                  {riga.daDefinire && (
+                    <span class="todo">{testi.generale.daDefinire}</span>
+                  )}
                 </td>
               </tr>
             ))
@@ -78,10 +75,6 @@ const righe: Riga[] = [
       </table>
     </div>
 
-    <p class="nota" style="max-width:60ch">
-      Nessuna clausola ci obbliga più a pareggiare i portali: possiamo dirlo
-      apertamente, ed è la riga che converte chi arriva qui dopo aver guardato
-      Booking.
-    </p>
+    <p class="nota" style="max-width:60ch">{testi.confronto.nota}</p>
   </div>
 </section>

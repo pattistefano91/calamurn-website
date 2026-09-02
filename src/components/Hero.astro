@@ -1,7 +1,14 @@
 ---
 import { Picture } from "astro:assets";
-import { fotoConRuolo } from "../data/foto";
+import { fotoConRuolo, didascalia } from "../data/foto";
 import { casa } from "../data/casa";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const giorno = fotoConRuolo("hero-giorno");
 const sera = fotoConRuolo("hero-sera");
@@ -14,7 +21,7 @@ const sera = fotoConRuolo("hero-sera");
     quality={62}
     class="day"
     src={giorno.immagine}
-    alt={giorno.didascalia}
+    alt={didascalia(giorno, lingua)}
     widths={[640, 1024, 1600]}
     sizes="100vw"
     loading="eager"
@@ -46,17 +53,13 @@ const sera = fotoConRuolo("hero-sera");
       <p class="kicker">
         {casa.indirizzo.via} · {casa.indirizzo.quartiere}, {casa.indirizzo.citta}
       </p>
-      <h1>Il portone lo riconoscerai.</h1>
-      <p class="lede">
-        Quattro camere dentro un palazzo gotico-catalano, dietro Piazza
-        Archimede. L'arco, le bifore e la balaustra traforata sono gli stessi da
-        cinque secoli.
-      </p>
+      <h1>{testi.hero.titolo}</h1>
+      <p class="lede">{testi.hero.lede}</p>
 
       <!-- Potenziamento facoltativo: senza JavaScript resta la sola fotografia
            di giorno (spec 001, FR-011). -->
       <div class="lightctl" id="lightctl" hidden>
-        <span>La stessa facciata</span>
+        <span>{testi.hero.cursore}</span>
         <input
           type="range"
           id="light"
@@ -64,7 +67,7 @@ const sera = fotoConRuolo("hero-sera");
           max="100"
           value="0"
           step="1"
-          aria-label="Ora del giorno sulla facciata"
+          aria-label={testi.hero.cursoreEtichetta}
         />
         <output id="lighth" for="light">18:40</output>
       </div>

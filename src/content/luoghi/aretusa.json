@@ -1,6 +1,4 @@
 {
-  "nome": "Fonte Aretusa",
-  "occhiello": "Sul Porto Grande",
   "categoria": "monumenti",
   "x": 140,
   "y": 312,
@@ -8,5 +6,22 @@
   "minuti": 7,
   "minutiMisurati": false,
   "ordine": 5,
-  "consiglio": "Acqua dolce che sgorga a due passi dal mare, con i papiri. Il mito dice che Aretusa arrivò qui dalla Grecia."
+  "nome": {
+    "it": "Fonte Aretusa",
+    "en": "The Fountain of Arethusa",
+    "fr": "La fontaine Aréthuse",
+    "de": "Die Arethusaquelle"
+  },
+  "occhiello": {
+    "it": "Sul Porto Grande",
+    "en": "On the Porto Grande",
+    "fr": "Sur le Porto Grande",
+    "de": "Am Porto Grande"
+  },
+  "consiglio": {
+    "it": "Acqua dolce che sgorga a due passi dal mare, con i papiri. Il mito dice che Aretusa arrivò qui dalla Grecia.",
+    "en": "Fresh water rising a few steps from the sea, with papyrus growing in it. The myth says Arethusa arrived here from Greece.",
+    "fr": "De l'eau douce qui jaillit à deux pas de la mer, avec ses papyrus. Le mythe dit qu'Aréthuse est arrivée ici depuis la Grèce.",
+    "de": "Süßwasser, das wenige Schritte vom Meer entfernt hervorquillt, mit Papyrus darin. Der Mythos sagt, Arethusa sei von Griechenland hierhergekommen."
+  }
 }

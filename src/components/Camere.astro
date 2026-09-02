@@ -1,8 +1,15 @@
 ---
 import { Picture } from "astro:assets";
 import { getCollection } from "astro:content";
-import { fotoDi } from "../data/foto";
+import { fotoDi, didascalia } from "../data/foto";
 import { etichetta, metraturaTesto, ospitiTesto } from "../data/dotazioni";
+import { euro, t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const camere = (await getCollection("camere"))
   .filter((c) => c.data.prenotabile)
@@ -14,8 +21,8 @@ const nonConfermate = camere.filter((c) => !c.data.tariffaConfermata).length;
 <section id="le-camere">
   <div class="wrap">
     <div class="sec-h">
-      <h2>Le quattro camere</h2>
-      <p class="kicker">metratura reale, affacci diversi</p>
+      <h2>{testi.camere.titolo}</h2>
+      <p class="kicker">{testi.camere.occhiello}</p>
     </div>
 
     <div class="rooms">
@@ -25,50 +32,55 @@ const nonConfermate = camere.filter((c) => !c.data.tariffaConfermata).length;
           const copertina = d.foto[0] ? fotoDi(d.foto[0]) : null;
           const meta = [
             metraturaTesto(d.metratura),
-            ospitiTesto(d.ospitiMax),
-            d.dotazioni[0] ? etichetta(d.dotazioni[0]) : null,
+            ospitiTesto(lingua, d.ospitiMax),
+            d.dotazioni[0] ? etichetta(lingua, d.dotazioni[0]) : null,
           ].filter((x): x is string => Boolean(x));
 
           return (
             <article class="card">
               <div class="ph">
                 {copertina ? (
-                  <Picture formats={["webp"]} fallbackFormat="jpeg"
+                  <Picture
+                    formats={["webp"]}
+                    fallbackFormat="jpeg"
                     quality={70}
                     src={copertina.immagine}
-                    alt={copertina.didascalia}
+                    alt={didascalia(copertina, lingua)}
                     widths={[320, 640]}
                     sizes="(max-width: 640px) 100vw, 300px"
                     loading="lazy"
                   />
                 ) : (
                   <div class="roomshot" style="margin:0;border:none;height:100%">
-                    fotografia da fare
+                    {testi.camere.fotografiaDaFare}
                   </div>
                 )}
               </div>
 
               <div class="body">
-                <h3>{d.nome}</h3>
+                <h3>{d.nome[lingua]}</h3>
                 <div class="meta">
                   {meta.map((m) => <span>{m}</span>)}
-                  {d.metratura === null && <span class="todo">m² da misurare</span>}
+                  {d.metratura === null && (
+                    <span class="todo">{testi.camere.mqDaMisurare}</span>
+                  )}
                 </div>
-                <p class="desc">{d.descrizione}</p>
-                {d.avvertenza && <p class="avviso">{d.avvertenza}</p>}
+                <p class="desc">{d.descrizione[lingua]}</p>
+                {d.avvertenza && <p class="avviso">{d.avvertenza[lingua]}</p>}
                 <div class="foot">
                   <span style="font-family:var(--disp);font-size:15px">
                     {d.tariffaDa === null ? (
-                      <>
-                        da € <span class="blank">&nbsp;</span>
-                      </>
+                      <span class="blank">&nbsp;</span>
                     ) : (
-                      <>da {d.tariffaDa} €</>
+                      testi.camere.daPrezzo(euro(lingua, d.tariffaDa))
                     )}
-                    <small style="font-size:12px;color:var(--ink-60)"> / notte</small>
+                    <small style="font-size:12px;color:var(--ink-60)">
+                      {" "}
+                      {testi.camere.perNotte}
+                    </small>
                   </span>
-                  <button class="btn sm" type="button" data-camera={d.nome}>
-                    Prenota
+                  <button class="btn sm" type="button" data-camera={d.nome[lingua]}>
+                    {testi.camere.prenota}
                   </button>
                 </div>
               </div>
@@ -81,10 +93,8 @@ const nonConfermate = camere.filter((c) => !c.data.tariffaConfermata).length;
     {
       nonConfermate > 0 && (
         <p class="nota">
-          <span class="todo">tariffe indicative</span>
-          Le tariffe mostrate sono ricavate dalle schede pubbliche: la più bassa
-          rilevata è 95 € a notte. Vanno sostituite con il tariffario per stagione
-          della casa — e la metratura della suite manca del tutto.
+          <span class="todo">{testi.camere.tariffeIndicative}</span>
+          {testi.camere.notaTariffe}
         </p>
       )
     }

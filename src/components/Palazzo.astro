@@ -1,6 +1,13 @@
 ---
 import { Picture } from "astro:assets";
-import { fotoConRuolo } from "../data/foto";
+import { fotoConRuolo, didascalia } from "../data/foto";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const facciata = fotoConRuolo("facciata-bifore");
 ---
@@ -8,45 +15,31 @@ const facciata = fotoConRuolo("facciata-bifore");
 <section id="palazzo">
   <div class="wrap">
     <div class="sec-h">
-      <h2>Il palazzo e la strada</h2>
-      <p class="kicker">cinque secoli di via Dione</p>
+      <h2>{testi.palazzo.titolo}</h2>
+      <p class="kicker">{testi.palazzo.occhiello}</p>
     </div>
 
     <div class="storygrid">
       <div>
+        <p>{testi.palazzo.p1}</p>
+        <p>{testi.palazzo.p2}</p>
         <p>
-          Via Dione era il decumano maggiore della città greca. Compare integra
-          nel plastico di Ortigia modellato da Giuseppe Costa nel 1773 e ancora in
-          un catastale del 1916: la stessa via ricostruita dopo il terremoto del
-          1693, rimasta identica per quasi due secoli e mezzo.
-        </p>
-        <p>
-          Poi, negli anni Trenta, cinque isolati fra via Dione e via Cavour vengono
-          sventrati per aprire la strada celebrativa del regime, cancellando esempi
-          finissimi di architetture del tardo Quattrocento. Questa facciata è fra
-          le sopravvissute.
-        </p>
-        <p>
-          <span class="todo">da verificare</span>
-          L'arco ribassato, le bifore con traforo e le balaustre raccontano un
-          impianto tardo-gotico catalano, quattro-cinquecentesco. Se Francesco Di
-          Natale è documentato, va capito se firmò l'impianto o un intervento
-          successivo: la differenza fra «palazzo storico» e «palazzo
-          gotico-catalano del Quattrocento» vale molto, ed è tutta nel documento.
+          <span class="todo">{testi.palazzo.daVerificare}</span>
+          {testi.palazzo.p3}
         </p>
       </div>
 
       <figure>
-        <Picture formats={["webp"]} fallbackFormat="jpeg"
+        <Picture
+          formats={["webp"]}
+          fallbackFormat="jpeg"
           src={facciata.immagine}
-          alt={facciata.didascalia}
+          alt={didascalia(facciata, lingua)}
           widths={[480, 800, 1200]}
           sizes="(max-width: 820px) 100vw, 540px"
           loading="lazy"
         />
-        <figcaption>
-          Le bifore e la balaustra traforata, dal marciapiede di via Dione.
-        </figcaption>
+        <figcaption>{testi.palazzo.didascalia}</figcaption>
       </figure>
     </div>
   </div>

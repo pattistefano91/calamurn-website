@@ -1,6 +1,4 @@
 {
-  "nome": "Duomo e Piazza del Duomo",
-  "occhiello": "Il tempio di Atena dentro la cattedrale",
   "categoria": "monumenti",
   "x": 204,
   "y": 300,
@@ -8,5 +6,22 @@
   "minuti": 4,
   "minutiMisurati": false,
   "ordine": 2,
-  "consiglio": "Le colonne doriche del V secolo a.C. sono ancora dentro il muro. Vacci presto o dopo cena, non a mezzogiorno."
+  "nome": {
+    "it": "Duomo e Piazza del Duomo",
+    "en": "The Duomo and its square",
+    "fr": "Le Duomo et sa place",
+    "de": "Der Dom und sein Platz"
+  },
+  "occhiello": {
+    "it": "Il tempio di Atena dentro la cattedrale",
+    "en": "The temple of Athena inside the cathedral",
+    "fr": "Le temple d'Athéna dans la cathédrale",
+    "de": "Der Athenatempel in der Kathedrale"
+  },
+  "consiglio": {
+    "it": "Le colonne doriche del V secolo a.C. sono ancora dentro il muro. Vacci presto o dopo cena, non a mezzogiorno.",
+    "en": "The Doric columns of the fifth century BC are still inside the wall. Go early or after dinner, not at midday.",
+    "fr": "Les colonnes doriques du Ve siècle av. J.-C. sont encore dans le mur. Allez-y tôt ou après le dîner, pas à midi.",
+    "de": "Die dorischen Säulen aus dem 5. Jahrhundert v. Chr. stecken noch in der Mauer. Gehen Sie früh oder nach dem Abendessen, nicht mittags."
+  }
 }

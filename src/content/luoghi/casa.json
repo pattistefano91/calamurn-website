@@ -1,6 +1,4 @@
 {
-  "nome": "Calamùrn",
-  "occhiello": "Via Dione 58 · il portone",
   "categoria": "pratico",
   "x": 200,
   "y": 158,
@@ -9,5 +7,22 @@
   "minutiMisurati": true,
   "casa": true,
   "ordine": 0,
-  "consiglio": "Da qui parte tutto: Piazza Archimede è dietro l'angolo e il resto dell'isola sta dentro un quarto d'ora."
+  "nome": {
+    "it": "Calamùrn",
+    "en": "Calamùrn",
+    "fr": "Calamùrn",
+    "de": "Calamùrn"
+  },
+  "occhiello": {
+    "it": "Via Dione 58 · il portone",
+    "en": "Via Dione 58 · the door",
+    "fr": "Via Dione 58 · la porte",
+    "de": "Via Dione 58 · das Tor"
+  },
+  "consiglio": {
+    "it": "Da qui parte tutto: Piazza Archimede è dietro l'angolo e il resto dell'isola sta dentro un quarto d'ora.",
+    "en": "Everything starts here: Piazza Archimede is around the corner and the rest of the island fits inside a quarter of an hour.",
+    "fr": "Tout part d'ici : la Piazza Archimede est au coin de la rue et le reste de l'île tient dans un quart d'heure.",
+    "de": "Hier beginnt alles: Die Piazza Archimede liegt um die Ecke, und der Rest der Insel passt in eine Viertelstunde."
+  }
 }

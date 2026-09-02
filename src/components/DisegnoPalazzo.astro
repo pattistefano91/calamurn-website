@@ -1,9 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import SchedaCamera from "./SchedaCamera.astro";
+import { t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
 
 const camere = await getCollection("camere");
-const nomi = Object.fromEntries(camere.map((c) => [c.id, c.data.nome]));
+const nomi = Object.fromEntries(camere.map((c) => [c.id, c.data.nome[lingua]]));
 const perId = Object.fromEntries(camere.map((c) => [c.id, c]));
 
 /** La camera mostrata all'apertura e senza JavaScript. */
@@ -34,8 +41,8 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
 <section id="camere">
   <div class="wrap">
     <div class="sec-h">
-      <h2>Tutta la casa, in un disegno</h2>
-      <p class="kicker">tocca un ambiente · prospetto e sezione</p>
+      <h2>{testi.disegno.titolo}</h2>
+      <p class="kicker">{testi.disegno.occhiello}</p>
     </div>
 
     <!-- I filtri del tratto a matita: definiti una volta sola, sempre presenti
@@ -57,14 +64,14 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
 
     <div class="drawgrid">
       <div class="drawcol">
-        <div class="drawtabs" role="tablist" aria-label="Viste del palazzo">
-          <button id="tab-prospetto" role="tab" aria-selected="true" aria-controls="paneP">Prospetto</button>
-          <button id="tab-sezione" role="tab" aria-selected="false" aria-controls="paneS">Sezione</button>
+        <div class="drawtabs" role="tablist" aria-label={testi.disegno.viste}>
+          <button id="tab-prospetto" role="tab" aria-selected="true" aria-controls="paneP">{testi.disegno.prospetto}</button>
+          <button id="tab-sezione" role="tab" aria-selected="false" aria-controls="paneS">{testi.disegno.sezione}</button>
         </div>
 
         <div class="viewbox" id="viewbox">
           <div class="pane" id="paneP" role="tabpanel" aria-labelledby="tab-prospetto">
-            <svg viewBox="0 0 700 610" role="img" aria-label="Prospetto disegnato del palazzo su via Dione">
+            <svg viewBox="0 0 700 610" role="img" aria-label={testi.disegno.descrizioneProspetto}>
           
           <rect class="paper" x="0" y="0" width="700" height="610"/>
           <g filter="url(#rough)">
@@ -181,7 +188,7 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
                 x={h.x} y={h.y} width={h.w} height={h.h}
                 tabindex="0"
                 role="button"
-                aria-label={`Mostra ${nomi[h.k] ?? h.k}`}
+                aria-label={testi.disegno.mostra(nomi[h.k] ?? h.k)}
               />
             ))}
           </g>
@@ -189,7 +196,7 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
           </div>
 
           <div class="pane" id="paneS" role="tabpanel" aria-labelledby="tab-sezione" hidden>
-            <svg viewBox="0 0 660 570" role="img" aria-label="Sezione disegnata: i quattro livelli, il cortile e la scala">
+            <svg viewBox="0 0 660 570" role="img" aria-label={testi.disegno.descrizioneSezione}>
           <rect class="paper" x="0" y="0" width="660" height="570"/>
           <g filter="url(#rough)">
             <g filter="url(#soft)">
@@ -261,36 +268,38 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
                 x={h.x} y={h.y} width={h.w} height={h.h}
                 tabindex="0"
                 role="button"
-                aria-label={`Mostra ${nomi[h.k] ?? h.k}`}
+                aria-label={testi.disegno.mostra(nomi[h.k] ?? h.k)}
               />
             ))}
           </g>
         </svg>
           </div>
 
-          <button class="replay" id="replay" type="button">↻ ridisegna</button>
+          <button class="replay" id="replay" type="button">{testi.disegno.ridisegna}</button>
         </div>
       </div>
 
       <div class="info" id="info-camera">
         {
           ordineSchede.map((k) => (
-            <SchedaCamera camera={perId[k]} attiva={k === PREDEFINITA} />
+            <SchedaCamera lingua={lingua} camera={perId[k]} attiva={k === PREDEFINITA} />
           ))
         }
-        <p class="cap" id="lockhint" hidden>
-          ▸ passa sopra per esplorare, tocca per bloccare
+        <p
+          class="cap"
+          id="lockhint"
+          hidden
+          data-esplora={testi.disegno.esplora}
+          data-bloccata={testi.disegno.bloccata}
+        >
+          {testi.disegno.esplora}
         </p>
       </div>
     </div>
 
     <p class="nota">
-      <span class="todo">disegno, non rilievo</span>
-      Prospetto e sezione sono ricalcati dalle fotografie: arcone e portone al 58,
-      lanterna sulla chiave, bifore e balaustra traforata. Il portone divide il
-      palazzo in due: al primo piano stanno altre proprietà, al secondo le camere
-      sulla metà destra — Standard verso il centro, Deluxe all'estremità — e sopra,
-      in attico, la suite col terrazzo, che da via Dione non si vede.
+      <span class="todo">{testi.disegno.disegnoNonRilievo}</span>
+      {testi.disegno.nota}
     </p>
   </div>
 </section>
@@ -334,8 +343,8 @@ const ordineSchede = ["deluxe", "standard", "superior", "suite", "comuni", "andr
     if (!hint) return;
     hint.hidden = false;
     hint.textContent = bloccata
-      ? "● selezione bloccata — tocca di nuovo per sbloccare"
-      : "▸ passa sopra per esplorare, tocca per bloccare";
+      ? (hint.dataset.bloccata ?? "")
+      : (hint.dataset.esplora ?? "");
   }
 
   function collega() {

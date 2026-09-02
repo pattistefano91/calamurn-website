@@ -32,6 +32,15 @@ export PATH="/usr/local/opt/node@22/bin:$PATH"
 - **Fotografie** → `src/data/foto.manifest.json` dichiara didascalie e origini;
   `src/data/foto.ts` le espone al sito. Le didascalie sono anche i testi alternativi.
 - **Colori e misure** → solo `src/styles/ombra.css`. Nessun colore scritto in un componente.
+- **Testi** → `src/i18n/testi/{it,en,fr,de}.ts`. Nessuna stringa visibile scritta in un
+  componente: l'italiano è la fonte, le altre tre devono avere le stesse chiavi o non compila.
+  Nei contenuti i fatti stanno alla radice del JSON e la prosa sotto la lingua.
+
+## Attenzione ricorrente
+
+Un valore che è **prosa** non va in `casa.ts` come stringa singola: finisce non tradotto
+dentro le pagine straniere. Se si legge in pagina, è un testo e vuole tutte e quattro le
+lingue (il tipo `Frase`).
 
 ## Costruzione
 

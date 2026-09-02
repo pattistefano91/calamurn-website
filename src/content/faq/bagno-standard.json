@@ -1,6 +1,16 @@
 {
-  "domanda": "Dov'è il bagno della camera Standard?",
-  "risposta": "Sul pianerottolo, di fronte alla porta della camera: è privato e riservato solo a chi alloggia lì, ma si esce dalla stanza per raggiungerlo. È l'unica camera della casa organizzata così — le altre tre hanno il bagno interno — e la tariffa ne tiene conto. Preferiamo scriverlo qui piuttosto che lasciarlo scoprire all'arrivo. Vale però la pena aggiungere che quel pianerottolo non è un corridoio di servizio: è uno spazio arredato, con la pietra a vista, le piante appese e la nicchia dei fichi d'India illuminata.",
   "apertaDiDefault": false,
-  "ordine": 4
+  "ordine": 4,
+  "domanda": {
+    "it": "Dov'è il bagno della camera Standard?",
+    "en": "Where is the bathroom of the Standard room?",
+    "fr": "Où se trouve la salle de bains de la chambre Standard ?",
+    "de": "Wo ist das Bad des Standard-Zimmers?"
+  },
+  "risposta": {
+    "it": "Sul pianerottolo, di fronte alla porta della camera: è privato e riservato solo a chi alloggia lì, ma si esce dalla stanza per raggiungerlo. È l'unica camera della casa organizzata così — le altre tre hanno il bagno interno — e la tariffa ne tiene conto. Preferiamo scriverlo qui piuttosto che lasciarlo scoprire all'arrivo. Vale però la pena aggiungere che quel pianerottolo non è un corridoio di servizio: è uno spazio arredato, con la pietra a vista, le piante appese e la nicchia dei fichi d'India illuminata.",
+    "en": "On the landing, opposite the room door: it is private and reserved for whoever is staying there, but you step out of the room to reach it. It is the only room in the house arranged this way — the other three have the bathroom inside — and the rate reflects that. We would rather write it here than let you discover it on arrival. It is worth adding, though, that the landing is not a service corridor: it is a furnished room, with exposed stone, hanging plants and a lit niche of prickly pears.",
+    "fr": "Sur le palier, en face de la porte de la chambre : elle est privée et réservée à ceux qui logent là, mais il faut sortir de la pièce pour l'atteindre. C'est la seule chambre de la maison ainsi organisée — les trois autres ont la salle de bains à l'intérieur — et le tarif en tient compte. Nous préférons l'écrire ici plutôt que de vous le laisser découvrir à l'arrivée. Il vaut la peine d'ajouter que ce palier n'est pas un couloir de service : c'est un espace meublé, avec la pierre apparente, les plantes suspendues et la niche éclairée de figuiers de Barbarie.",
+    "de": "Auf dem Treppenabsatz, gegenüber der Zimmertür: Es ist privat und nur für die Gäste dieses Zimmers, doch man verlässt das Zimmer, um es zu erreichen. Es ist das einzige Zimmer im Haus mit dieser Aufteilung — die anderen drei haben das Bad im Zimmer — und der Preis berücksichtigt das. Wir schreiben es lieber hier, als es Sie bei der Ankunft entdecken zu lassen. Es sei aber gesagt, dass dieser Treppenabsatz kein Dienstflur ist: Er ist ein eingerichteter Raum mit Sichtmauerwerk, hängenden Pflanzen und einer beleuchteten Nische voller Feigenkakteen."
+  }
 }

@@ -1,12 +1,6 @@
 {
-  "nome": "Standard Queen",
-  "occhiello": "Secondo piano · balcone su via Dione",
-  "piano": "Secondo piano",
-  "affaccio": "Balcone su via Dione",
-  "descrizione": "Testiera antica intagliata, balcone sulla via e due pareti in pietra a vista. Il bagno è privato ma si trova sul pianerottolo, di fronte alla porta: è l'unica camera della casa fatta così, ed è il motivo per cui costa meno della Deluxe.",
   "metratura": 19,
   "ospitiMax": 2,
-  "letto": "Letto queen",
   "dotazioni": [
     "balcone-su-via",
     "bagno-sul-pianerottolo",
@@ -26,5 +20,28 @@
   "tariffaConfermata": false,
   "prenotabile": true,
   "ordine": 3,
-  "avvertenza": "Il bagno è privato e riservato solo a chi alloggia qui, ma sta sul pianerottolo, di fronte alla porta della camera: per raggiungerlo si esce dalla stanza. È l'unica camera della casa organizzata così, e la tariffa ne tiene conto."
+  "nome": {
+    "it": "Standard Queen",
+    "en": "Standard Queen",
+    "fr": "Standard Queen",
+    "de": "Standard Queen"
+  },
+  "occhiello": {
+    "it": "Secondo piano · balcone su via Dione",
+    "en": "Second floor · balcony over via Dione",
+    "fr": "Deuxième étage · balcon sur la via Dione",
+    "de": "Zweiter Stock · Balkon zur Via Dione"
+  },
+  "descrizione": {
+    "it": "Testiera antica intagliata, balcone sulla via e due pareti in pietra a vista. Il bagno è privato ma si trova sul pianerottolo, di fronte alla porta: è l'unica camera della casa fatta così, ed è il motivo per cui costa meno della Deluxe.",
+    "en": "An old carved headboard, a balcony over the street and two walls of exposed stone. The bathroom is private but sits on the landing, opposite the door: it is the only room in the house arranged this way, and it is the reason it costs less than the Deluxe.",
+    "fr": "Une tête de lit ancienne sculptée, un balcon sur la rue et deux murs en pierre apparente. La salle de bains est privée mais se trouve sur le palier, en face de la porte : c'est la seule chambre de la maison ainsi conçue, et c'est la raison pour laquelle elle coûte moins que la Deluxe.",
+    "de": "Ein altes geschnitztes Kopfteil, ein Balkon zur Straße und zwei Wände aus Sichtmauerwerk. Das Bad ist privat, liegt aber auf dem Treppenabsatz gegenüber der Tür: Es ist das einzige Zimmer im Haus, das so geschnitten ist, und der Grund, warum es weniger kostet als die Deluxe."
+  },
+  "avvertenza": {
+    "it": "Il bagno è privato e riservato solo a chi alloggia qui, ma sta sul pianerottolo, di fronte alla porta della camera: per raggiungerlo si esce dalla stanza. È l'unica camera della casa organizzata così, e la tariffa ne tiene conto.",
+    "en": "The bathroom is private and reserved for whoever is staying here, but it is on the landing, opposite the room door: you step out of the room to reach it. It is the only room in the house arranged this way, and the rate reflects that.",
+    "fr": "La salle de bains est privée et réservée à ceux qui logent ici, mais elle se trouve sur le palier, en face de la porte de la chambre : il faut sortir de la pièce pour l'atteindre. C'est la seule chambre de la maison ainsi organisée, et le tarif en tient compte.",
+    "de": "Das Bad ist privat und nur den Gästen dieses Zimmers vorbehalten, liegt aber auf dem Treppenabsatz gegenüber der Zimmertür: Man verlässt das Zimmer, um es zu erreichen. Es ist das einzige Zimmer im Haus mit dieser Aufteilung, und der Preis berücksichtigt das."
+  }
 }
