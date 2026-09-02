@@ -3,6 +3,10 @@
 Il sito di quattro camere in un palazzo tardo-gotico catalano, in via Dione 58 a Ortigia
 (Siracusa). Sito statico, prenotazione diretta su WhatsApp, nessun backend.
 
+**Online:** <https://calamurn-website.vercel.app> — deploy automatico a ogni push su `main`,
+anteprima su ogni pull request. Il sito è dichiarato `noindex` finché non viene collegato un
+dominio proprio: per ora è un'anteprima, non una vetrina pubblicata.
+
 Il progetto segue [Spec-Driven Development](https://github.com/github/spec-kit): prima la
 specifica, poi il codice. Le regole che valgono su tutto stanno nella
 [costituzione](.specify/memory/constitution.md); la prima, non negoziabile, è che **nessun
@@ -31,7 +35,7 @@ export PATH="/usr/local/opt/node@22/bin:$PATH"
 | Comando | Cosa fa |
 | --- | --- |
 | `npm run dev` | Server di sviluppo con ricarica. |
-| `npm run build` | Costruisce il sito statico in `dist/`. La prima volta impiega qualche minuto: genera le varianti AVIF, WebP e JPEG di ogni fotografia. |
+| `npm run build` | Costruisce il sito statico in `dist/`. Impiega circa 90 secondi a freddo: genera le varianti WebP e JPEG di ogni fotografia. |
 | `npm run check` | Controllo dei tipi su componenti e contenuti. |
 | `npm run foto:ingest` | Rigenera le sorgenti fotografiche da `material/` (serve solo a chi ha gli originali). |
 | `npm run dati:mancanti` | **Elenca tutto ciò che è ancora da confermare.** È la lista da mandare al proprietario. |
@@ -90,7 +94,7 @@ conferma.
 | 008 | [Contenuti editoriali](specs/008-contenuti-editoriali/spec.md) | parziale: quattro domande senza risposta |
 | 009 | [Internazionalizzazione IT·EN·FR·DE](specs/009-internazionalizzazione/spec.md) | da fare |
 | 010 | [Reperibilità e pagine locali](specs/010-seo-e-pagine-locali/spec.md) | parziale: dati strutturati e sitemap sì, pagine locali no |
-| 011 | [Pubblicazione su Vercel](specs/011-deploy-vercel/spec.md) | in corso |
+| 011 | [Pubblicazione su Vercel](specs/011-deploy-vercel/spec.md) | implementata, manca il dominio |
 
 Il flusso spec-kit resta disponibile: `/speckit-specify`, `/speckit-plan`, `/speckit-tasks`,
 `/speckit-implement`.
@@ -106,7 +110,9 @@ Esegui `npm run dati:mancanti` per la lista completa. In sintesi:
 - **i minuti a piedi cronometrati** verso gli undici luoghi della mappa;
 - **le regole della ZTL, i parcheggi, la colazione, la cancellazione**;
 - **le tre traduzioni** (inglese, francese, tedesco);
-- **il dominio** da collegare.
+- **il dominio** da collegare: quando c'è, va impostata la variabile d'ambiente `SITE_URL`
+  sul progetto Vercel — è quella a togliere il `noindex` e a rendere corretti indirizzi
+  canonici e mappa del sito.
 
 Finché queste voci restano aperte il sito è un'anteprima onesta, non una vetrina finita: ogni
 buco è dichiarato in pagina.

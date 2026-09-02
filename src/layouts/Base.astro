@@ -19,11 +19,14 @@ const {
   indicizzabile = true,
 } = Astro.props;
 
-// Solo la produzione è indicizzabile: le anteprime di Vercel — e ogni
-// costruzione che non sia quella di produzione — restano fuori dai motori
-// (spec 011, FR-003).
-const inProduzione =
-  process.env.VERCEL_ENV === undefined || process.env.VERCEL_ENV === "production";
+// Restano fuori dai motori di ricerca sia le anteprime di Vercel (spec 011,
+// FR-003) sia l'intero sito finché vive su un indirizzo di servizio: senza un
+// dominio proprio quello pubblicato è un'anteprima, non una vetrina.
+// Il dominio si dichiara con la variabile d'ambiente SITE_URL.
+const anteprimaDiRamo =
+  process.env.VERCEL_ENV !== undefined && process.env.VERCEL_ENV !== "production";
+const dominioProprio = Boolean(process.env.SITE_URL);
+const pubblicabile = dominioProprio && !anteprimaDiRamo;
 
 const canonico = new URL(Astro.url.pathname, Astro.site).href;
 const og = new URL(immagineSociale, Astro.site).href;
@@ -64,7 +67,7 @@ const schema = {
     <meta name="description" content={descrizione} />
     <link rel="canonical" href={canonico} />
     {
-      (!indicizzabile || !inProduzione) && (
+      (!indicizzabile || !pubblicabile) && (
         <meta name="robots" content="noindex, nofollow" />
       )
     }
