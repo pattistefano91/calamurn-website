@@ -77,6 +77,41 @@ const luoghi = defineCollection({
   }),
 });
 
+/**
+ * Le recensioni (spec 012). I fatti — chi, quando, quanto, dove — stanno alla
+ * radice; il testo esiste nelle quattro lingue come ogni altra prosa.
+ *
+ * La cartella è vuota finché non arrivano i testi per esteso in lingua
+ * originale: quelli dell'esportazione Google sono tagliati e tradotti a
+ * macchina, e pubblicarli attribuirebbe a una persona parole che non ha
+ * scritto (FR-010b).
+ */
+const recensioni = defineCollection({
+  loader: glob({ base: "./src/content/recensioni", pattern: "**/*.json" }),
+  schema: z.object({
+    fonte: z.enum(["google", "booking"]),
+    /** Mese e anno bastano, e sono meno identificanti del giorno esatto. */
+    data: z.string().regex(/^\d{4}-\d{2}$/),
+    /** Solo il nome di battesimo: mai il cognome (FR-011). */
+    nome: z.string(),
+    /** Codice del paese, facoltativo. */
+    paese: z.string().length(2).optional(),
+    punteggio: z.number(),
+    scala: z.number(),
+    /** La lingua in cui l'ospite ha scritto: può non essere una del sito. */
+    linguaOriginale: z.string(),
+    /** La pagina dove chiunque può verificare che esista davvero (FR-005). */
+    link: z.url(),
+    /** Il testo, nella lingua originale e tradotto nelle quattro del sito. */
+    testo: tradotto(z.string()),
+    /** Se il testo è stato accorciato, va dichiarato (FR-010). */
+    accorciata: z.boolean().default(false),
+    camera: z.string().optional(),
+    risposta: tradotto(z.string()).optional(),
+    ordine: z.number(),
+  }),
+});
+
 const faq = defineCollection({
   loader: glob({ base: "./src/content/faq", pattern: "**/*.json" }),
   schema: z.object({
@@ -90,4 +125,4 @@ const faq = defineCollection({
   }),
 });
 
-export const collections = { camere, luoghi, faq };
+export const collections = { camere, luoghi, faq, recensioni };

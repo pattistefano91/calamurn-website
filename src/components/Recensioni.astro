@@ -1,0 +1,153 @@
+---
+import { getCollection } from "astro:content";
+import {
+  PIATTAFORME,
+  punteggiConfermati,
+  punteggiDaConfermare,
+  type Punteggio,
+} from "../data/recensioni";
+import { LOCALE, t, type Lingua } from "../i18n";
+
+interface Props {
+  lingua: Lingua;
+}
+const { lingua } = Astro.props;
+const testi = t(lingua);
+const r = testi.recensioni;
+
+const recensioni = (await getCollection("recensioni")).sort(
+  (a, b) => a.data.ordine - b.data.ordine,
+);
+
+const confermati = punteggiConfermati();
+const daConfermare = punteggiDaConfermare();
+
+// La sezione compare quando ha qualcosa di vero da dire: un punteggio
+// confermato basta, anche prima che esistano i testi (spec 012, FR-022).
+const daMostrare = confermati.length > 0 || recensioni.length > 0;
+
+const numero = (n: number) =>
+  new Intl.NumberFormat(LOCALE[lingua], { maximumFractionDigits: 1 }).format(n);
+
+const dataLeggibile = (iso: string) =>
+  new Intl.DateTimeFormat(LOCALE[lingua], {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(iso + "T00:00:00"));
+
+const mese = (iso: string) =>
+  new Intl.DateTimeFormat(LOCALE[lingua], { month: "long", year: "numeric" }).format(
+    new Date(iso + "-01T00:00:00"),
+  );
+
+const nomeLingua = (codice: string) => r.lingue[codice] ?? codice;
+
+// Nessun dato strutturato Review o AggregateRating: Google considera
+// auto-referenziali le recensioni su un'attività pubblicate dal sito
+// dell'attività stessa (spec 012, FR-014).
+---
+
+{
+  daMostrare && (
+    <section id="recensioni">
+      <div class="wrap">
+        <div class="sec-h">
+          <h2>{r.titolo}</h2>
+          <p class="kicker">{r.occhiello}</p>
+        </div>
+
+        <div class="punteggi">
+          {confermati.map((p: Punteggio) => (
+            <div class="punteggio">
+              <p class="kicker">{p.nome}</p>
+              <p class="voto">
+                {numero(p.valore)}
+                <span>
+                  {" "}
+                  {r.su} {p.scala}
+                </span>
+              </p>
+              <p class="sotto">
+                {p.recensioni !== null && <>{r.conta(p.recensioni)} · </>}
+                {r.rilevatoIl} {dataLeggibile(p.rilevato)}
+              </p>
+              <a href={p.url} target="_blank" rel="noopener nofollow">
+                {r.vediTutte} ↗
+              </a>
+            </div>
+          ))}
+
+          {daConfermare.map((p: Punteggio) => (
+            <div class="punteggio incompleto">
+              <p class="kicker">{p.nome}</p>
+              <p class="voto">
+                {numero(p.valore)}
+                <span>
+                  {" "}
+                  {r.su} {p.scala}
+                </span>
+              </p>
+              <p class="sotto">
+                <span class="todo">{r.punteggioDaConfermare}</span>
+              </p>
+              <a href={p.url} target="_blank" rel="noopener nofollow">
+                {r.vediTutte} ↗
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* La dichiarazione di provenienza non è decorazione: senza, pubblicare
+            una selezione è una pratica ingannevole (spec 012, FR-006). */}
+        <p class="provenienza">
+          {r.provenienza} {r.verificate}
+        </p>
+
+        {recensioni.length > 0 ? (
+          <ul class="rec">
+            {recensioni.map((rec) => {
+              const d = rec.data;
+              return (
+                <li>
+                  <blockquote cite={d.link}>{d.testo[lingua]}</blockquote>
+                  <p class="chi">
+                    <strong>{d.nome}</strong>
+                    <span>
+                      {mese(d.data)} · {PIATTAFORME[d.fonte].nome} ·{" "}
+                      {numero(d.punteggio)}/{d.scala}
+                    </span>
+                    {d.linguaOriginale !== lingua && (
+                      <span class="lingua">
+                        {r.originale(nomeLingua(d.linguaOriginale))} · {r.tradotta}
+                      </span>
+                    )}
+                    <a
+                      href={d.link}
+                      target="_blank"
+                      rel="noopener nofollow"
+                      aria-label={r.leggiOriginale(d.nome)}
+                    >
+                      ↗
+                    </a>
+                  </p>
+                  {d.risposta && (
+                    <div class="risposta">
+                      <p class="kicker">{r.rispostaDellaCasa}</p>
+                      <p>{d.risposta[lingua]}</p>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p class="nota">
+            <span class="todo">{r.testiMancanti}</span>
+            {r.testiMancantiSpiegazione}
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}
