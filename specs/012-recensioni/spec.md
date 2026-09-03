@@ -235,7 +235,15 @@ copi il testo nella lingua in cui è stato scritto, con la data che Google mostr
   come tale.
 - **FR-021**: La sezione DEVE essere leggibile per intero senza JavaScript; scorrimenti,
   filtri o caroselli sono potenziamenti.
-- **FR-022**: Se non esiste alcuna recensione pubblicabile, la sezione NON DEVE comparire.
+- **FR-022**: La sezione compare quando ha **qualcosa di vero da dire**. Il punteggio
+  complessivo di una piattaforma è già qualcosa di vero: se è confermato, la sezione compare
+  anche prima che esista una singola recensione pubblicata, dichiarando che i testi mancano.
+  Se invece non è confermato nemmeno un punteggio, la sezione NON DEVE comparire.
+
+  *(Il requisito diceva prima che senza recensioni la sezione non doveva comparire affatto.
+  È stato corretto il 3 settembre 2026: il punteggio Google è un dato confermato e nasconderlo
+  in attesa dei testi sarebbe tenere fuori dal sito una cosa vera. Il Principio I della
+  costituzione chiede di dichiarare i buchi, non di rimandare la pagina.)*
 - **FR-023**: La sezione DEVE stare **dopo il confronto con i portali e prima della
   galleria**: è lì che nasce il dubbio «posso fidarmi a prenotare diretto», ed è lì che la
   voce di un altro ospite serve.

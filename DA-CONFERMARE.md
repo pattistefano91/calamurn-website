@@ -352,6 +352,11 @@ su 68 recensioni, di cui 62 da cinque stelle, 3 da quattro e 1 da una. Quaranta 
 scritte in italiano. In più le coordinate della scheda hanno corretto quelle del sito, che
 sbagliavano di duecento metri.
 
+**La sezione esiste già sul sito** (branch `012-recensioni`, non ancora pubblicata): mostra i
+due punteggi — Google confermato, Booking in attesa — con la dichiarazione di provenienza
+richiesta dalla legge. Il posto per i testi c'è ed è stato collaudato con dati finti; restano
+vuoti finché non arrivano gli originali richiesti in I1.
+
 **Booking: in attesa.** Quando riesci: Extranet → Recensioni, copia il blocco e mandamelo.
 Mi servono anche punteggio e numero di recensioni come li leggi tu, perché le fonti pubbliche
 si contraddicono (477, 461, 108 a seconda dell'aggregatore).

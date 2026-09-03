@@ -42,6 +42,14 @@ Un valore che è **prosa** non va in `casa.ts` come stringa singola: finisce non
 dentro le pagine straniere. Se si legge in pagina, è un testo e vuole tutte e quattro le
 lingue (il tipo `Frase`).
 
+## Un'insidia della content collection
+
+Se cancelli un file da `src/content/*/` e ricostruisci, a volte la vecchia versione resta
+nell'output: il content layer di Astro può trattenere in cache un documento anche dopo che il
+suo file è sparito. Se qualcosa che hai tolto compare ancora in `dist/`, prima di sospettare
+un bug altrove pulisci la cache: `rm -rf .astro node_modules/.astro dist` e ricostruisci da
+zero.
+
 ## Costruzione
 
 `npm run build` impiega circa 90 secondi: genera WebP e JPEG a più larghezze per 45
