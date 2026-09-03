@@ -345,5 +345,71 @@ Nessuna è urgente, ma cambiano il sito.
 
 ---
 
+## I · Le recensioni
+
+Il sito mostrerà una selezione delle recensioni ricevute (spec 012). Non posso estrarle dalle
+pagine pubbliche: i termini d'uso di Booking vietano l'estrazione sistematica e quelli di
+Google vietano di conservare i contenuti oltre trenta giorni. Ma **le tue recensioni sono
+tue**: dai tuoi pannelli le vedi tutte e le puoi copiare in blocco. Tu incolli, uno script le
+trasforma in contenuto.
+
+### I1 · Da dove le prendo
+
+- **Booking.com — Extranet → Recensioni.** Selezionale, copia e incolla il blocco in un file
+  di testo. Non riscrivere niente: serve il testo grezzo, anche disordinato.
+  → *(allega il file, oppure incolla qui)*
+
+- **Google — la scheda attività esiste?** Se sì, mandami il link alla scheda e copia allo
+  stesso modo le recensioni dalla sezione Recensioni.
+  → 
+
+### I2 · I numeri veri
+
+Le fonti pubbliche si contraddicono: 477, 461 e 108 recensioni a seconda dell'aggregatore.
+Il numero vero lo vedi solo tu.
+
+- **Booking**: punteggio complessivo e numero di recensioni, come li leggi oggi in Extranet
+  → 
+
+- **Google**: punteggio e numero di recensioni
+  → 
+
+- Siete su **altre piattaforme** (Airbnb, Expedia, TripAdvisor)?
+  → 
+
+### I3 · Come le mostriamo
+
+- **Quante ne vuoi in pagina?** (tre o quattro reggono bene; oltre le otto nessuno legge)
+  → 
+
+- **Dopo quanti anni una recensione esce dal sito?** Una del 2022 racconta una casa che forse
+  non c'è più.
+  → 
+
+- **Vuoi rispondere in pagina** ad almeno una recensione? La risposta della casa è la cosa che
+  più fa capire chi siete.
+  → 
+
+### I4 · Due cose da decidere consapevolmente
+
+- **La riga di dichiarazione.** Hai detto «solo le positive, senza dichiarare nulla». La
+  selezione va benissimo ed è quello che fanno tutti; il *non dichiararla* però è una pratica
+  commerciale ingannevole ai sensi dell'art. 22-bis del Codice del Consumo, sanzionabile
+  dall'AGCM. La spec prevede quindi una riga come:
+
+  > *Una selezione delle recensioni che ci hanno lasciato su Booking e Google. Le abbiamo
+  > scelte noi: qui ci sono tutte.*
+
+  Confermi che va bene così, o vuoi scriverla diversamente?
+  → 
+
+- **Le pareti sottili.** È l'unico rilievo che torna nelle recensioni pubbliche, e il sito
+  oggi non lo dice da nessuna parte. Non deve stare per forza fra le recensioni: può essere
+  una domanda frequente. Ma se un ospite lo scopre alle due di notte, quella recensione da tre
+  stelle la scrive comunque. Come vuoi affrontarlo?
+  → 
+
+---
+
 *Quando ne hai compilato un pezzo, basta che me lo rimandi: non serve sia completo. Ogni
 riga riempita è un segnaposto giallo che sparisce dal sito.*

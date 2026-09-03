@@ -120,6 +120,7 @@ pagina tradotta lo dichiara in cima.
 | 009 | [Internazionalizzazione IT·EN·FR·DE](specs/009-internazionalizzazione/spec.md) | implementata, traduzioni da rilettura |
 | 010 | [Reperibilità e pagine locali](specs/010-seo-e-pagine-locali/spec.md) | parziale: dati strutturati e sitemap sì, pagine locali no |
 | 011 | [Pubblicazione su Vercel](specs/011-deploy-vercel/spec.md) | implementata, manca il dominio |
+| 012 | [Le recensioni degli ospiti](specs/012-recensioni/spec.md) | specificata, da implementare |
 
 Il flusso spec-kit resta disponibile: `/speckit-specify`, `/speckit-plan`, `/speckit-tasks`,
 `/speckit-implement`.
