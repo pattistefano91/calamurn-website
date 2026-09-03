@@ -347,66 +347,92 @@ Nessuna è urgente, ma cambiano il sito.
 
 ## I · Le recensioni
 
-Il sito mostrerà una selezione delle recensioni ricevute (spec 012). Non posso estrarle dalle
-pagine pubbliche: i termini d'uso di Booking vietano l'estrazione sistematica e quelli di
-Google vietano di conservare i contenuti oltre trenta giorni. Ma **le tue recensioni sono
-tue**: dai tuoi pannelli le vedi tutte e le puoi copiare in blocco. Tu incolli, uno script le
-trasforma in contenuto.
+**Google: fatto.** L'esportazione è arrivata, il link alla scheda pure. Ne ho ricavato: 4,8/5
+su 68 recensioni, di cui 62 da cinque stelle, 3 da quattro e 1 da una. Quaranta sono state
+scritte in italiano. In più le coordinate della scheda hanno corretto quelle del sito, che
+sbagliavano di duecento metri.
 
-### I1 · Da dove le prendo
+**Booking: in attesa.** Quando riesci: Extranet → Recensioni, copia il blocco e mandamelo.
+Mi servono anche punteggio e numero di recensioni come li leggi tu, perché le fonti pubbliche
+si contraddicono (477, 461, 108 a seconda dell'aggregatore).
+→ *(allega quando l'hai)*
 
-- **Booking.com — Extranet → Recensioni.** Selezionale, copia e incolla il blocco in un file
-  di testo. Non riscrivere niente: serve il testo grezzo, anche disordinato.
-  → *(allega il file, oppure incolla qui)*
+### I1 · Perché l'esportazione non basta per pubblicare i testi
 
-- **Google — la scheda attività esiste?** Se sì, mandami il link alla scheda e copia allo
-  stesso modo le recensioni dalla sezione Recensioni.
+Tre problemi, tutti risolvibili in un quarto d'ora:
+
+1. **I testi sono tagliati.** Quasi tutti finiscono con «… More»: l'esportazione ha preso la
+   vista chiusa. Una recensione monca è peggio di nessuna recensione.
+2. **I testi sono la traduzione automatica in inglese fatta da Google.** Quaranta recensioni
+   su 66 erano in italiano: quello che leggo non sono le parole dell'ospite, è la resa inglese
+   di Google. Pubblicarle vorrebbe dire attribuire a qualcuno parole che non ha scritto.
+3. **Le date sono relative** («2 anni fa»), e in pagina serve mese e anno.
+
+Siccome in pagina ne vanno cinque o sei, non serve riesportare tutto: apri **solo quelle**
+sulla scheda, premi «Altro» e «Visualizza originale», e copiami testo e data.
+
+### I2 · La selezione che proporrei
+
+Le ho scelte per: essere recenti, dire qualcosa di concreto invece di «bellissimo», e coprire
+lingue diverse. Dimmi quali tieni, quali togli, quali aggiungi.
+
+| | Chi | Quando | Lingua | Perché questa |
+| --- | --- | --- | --- | --- |
+| 1 | Francesca R. | 2 settimane fa | italiano | La più recente. Nomina Francesca e il check-in «molto intuitivo»: parla del servizio, non dell'arredamento. |
+| 2 | Cecilia S. | 1 mese fa | italiano | È l'unica che nomina **la colazione al bar in Piazza Archimede**: conferma dalla voce di un ospite ciò che il sito promette. |
+| 3 | Jack C. | un anno fa | inglese | «Darei alla posizione sei stelle su cinque», e nomina il condizionatore. Concreta e in inglese. |
+| 4 | Maja Ż. | un anno fa | polacco | «Centrale ma in una via laterale, quindi silenziosa». È l'unica che risponde in anticipo al dubbio sul rumore. |
+| 5 | Sabine B. | 2 anni fa | tedesco | Dettagli pratici sul balcone e sulla luce. Copre il tedesco. |
+| 6 | Luca S. | 3 anni fa | italiano | Racconta che gli hanno permesso di spostare la prenotazione **fuori dai termini di cancellazione, in alta stagione, allo stesso prezzo**. È una storia, non un aggettivo: vale più di dieci «tutto perfetto». |
+
+- Va bene questa selezione?
   → 
 
-### I2 · I numeri veri
-
-Le fonti pubbliche si contraddicono: 477, 461 e 108 recensioni a seconda dell'aggregatore.
-Il numero vero lo vedi solo tu.
-
-- **Booking**: punteggio complessivo e numero di recensioni, come li leggi oggi in Extranet
+- La numero 6 ha tre anni. La tieni lo stesso per la storia che racconta, o preferisci solo
+  recensioni recenti?
   → 
 
-- **Google**: punteggio e numero di recensioni
+### I3 · Due cose da guardare
+
+- **C'è una recensione a 5 stelle firmata «Stefano Patti».** È il tuo nome. Se sei tu (o un
+  familiare), non può andare sul sito — e ti conviene toglierla anche da Google: le linee guida
+  della piattaforma e l'art. 22-bis vietano le recensioni auto-prodotte, e una recensione col
+  nome del proprietario sulla propria scheda è la prima cosa che un concorrente segnala.
+  È tua o è un omonimo?
   → 
 
-- Siete su **altre piattaforme** (Airbnb, Expedia, TripAdvisor)?
+- **C'è una recensione a 1 stella** (Cynthia, due anni fa) su un pagamento anticipato e una
+  prenotazione di inizio luglio. Non andrà sul sito, ma **è pubblica**: chiunque clicchi sul
+  link alla scheda la vede. Sai com'è andata? Se c'è una risposta della casa, è un punto a
+  favore da mostrare, non da nascondere.
   → 
 
-### I3 · Come le mostriamo
+### I4 · Come le mostriamo
 
-- **Quante ne vuoi in pagina?** (tre o quattro reggono bene; oltre le otto nessuno legge)
+- **Quante ne vuoi in pagina?** (cinque o sei reggono bene; oltre le otto nessuno legge)
   → 
 
-- **Dopo quanti anni una recensione esce dal sito?** Una del 2022 racconta una casa che forse
-  non c'è più.
+- **Dopo quanti anni una recensione esce dal sito?**
   → 
 
-- **Vuoi rispondere in pagina** ad almeno una recensione? La risposta della casa è la cosa che
-  più fa capire chi siete.
+- **Vuoi rispondere in pagina** ad almeno una recensione?
   → 
-
-### I4 · Due cose da decidere consapevolmente
 
 - **La riga di dichiarazione.** Hai detto «solo le positive, senza dichiarare nulla». La
-  selezione va benissimo ed è quello che fanno tutti; il *non dichiararla* però è una pratica
-  commerciale ingannevole ai sensi dell'art. 22-bis del Codice del Consumo, sanzionabile
-  dall'AGCM. La spec prevede quindi una riga come:
+  selezione va benissimo; il *non dichiararla* è però una pratica commerciale ingannevole ai
+  sensi dell'art. 22-bis del Codice del Consumo, sanzionabile dall'AGCM. La spec prevede
+  quindi una riga come:
 
-  > *Una selezione delle recensioni che ci hanno lasciato su Booking e Google. Le abbiamo
+  > *Una selezione delle recensioni che ci hanno lasciato su Google e su Booking. Le abbiamo
   > scelte noi: qui ci sono tutte.*
 
-  Confermi che va bene così, o vuoi scriverla diversamente?
+  Confermi che va bene così, o la vuoi scritta diversamente?
   → 
 
-- **Le pareti sottili.** È l'unico rilievo che torna nelle recensioni pubbliche, e il sito
-  oggi non lo dice da nessuna parte. Non deve stare per forza fra le recensioni: può essere
-  una domanda frequente. Ma se un ospite lo scopre alle due di notte, quella recensione da tre
-  stelle la scrive comunque. Come vuoi affrontarlo?
+- **Le pareti sottili.** Torna nelle recensioni pubbliche di Booking e il sito non lo dice da
+  nessuna parte. Può stare fra le domande frequenti invece che fra le recensioni. Ma se un
+  ospite lo scopre alle due di notte, quella recensione da tre stelle la scrive comunque.
+  Come vuoi affrontarlo?
   → 
 
 ---

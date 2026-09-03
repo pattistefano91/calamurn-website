@@ -38,11 +38,12 @@ export const casa = {
     quartiere: "Ortigia",
     paese: "IT",
   },
-  /** Coordinate di via Dione 58, Ortigia. Da rifinire con un rilievo sul posto. */
-  coordinate: daConfermare(
-    { lat: 37.0644, lon: 15.2933 },
-    "Coordinate ricavate dall'indirizzo, non rilevate sul posto.",
-  ),
+  /**
+   * Coordinate della scheda Google della casa — quelle che Google stesso usa
+   * per collocarla sulla mappa. La stima precedente, ricavata dall'indirizzo,
+   * sbagliava di circa duecento metri.
+   */
+  coordinate: confermato({ lat: 37.0625045, lon: 15.2935289 }),
   cin: confermato("19089017C106672"),
 
   contatti: {

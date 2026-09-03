@@ -10,6 +10,16 @@
 Booking.com — punteggio 9,2 — e sulla scheda Google. Vogliamo mostrare le migliori, senza
 doverle ricopiare a mano una per una."
 
+**Dati confermati il 3 settembre 2026** (esportazione Google fornita dal proprietario):
+
+- **Google**: 4,8/5 su **68 recensioni**. Scheda:
+  <https://maps.app.goo.gl/HJqeGzgmouQAmmg16>
+- Distribuzione dei voti nell'esportazione (66 recensioni leggibili): **62 da cinque stelle,
+  3 da quattro, 1 da una**.
+- Lingua originale: 40 in italiano, poi spagnolo, tedesco, polacco, ebraico e un gruppo
+  scritto direttamente in inglese.
+- **Booking.com**: ancora da esportare.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Chi esita vede che qualcun altro c'è già stato (Priority: P1)
@@ -120,6 +130,27 @@ lingua originale sia dichiarata quando è diversa.
 - **Tutte le recensioni scelte sono a punteggio pieno**: il visitatore smette di crederci. La
   selezione dovrebbe includere un giudizio meno che perfetto — vedi le assunzioni.
 
+## Cosa l'esportazione Google contiene e cosa no
+
+L'esportazione fornita è sufficiente per il punteggio complessivo e per **scegliere** quali
+recensioni pubblicare. Non è sufficiente per pubblicarne il testo, per tre ragioni che vanno
+risolte prima dell'implementazione.
+
+1. **I testi sono tagliati.** Quasi ogni recensione finisce con «… More»: l'esportazione ha
+   catturato la vista compressa, non quella aperta. Pubblicare una recensione monca sarebbe
+   peggio che non pubblicarla.
+2. **I testi sono la traduzione automatica di Google verso l'inglese.** Quaranta recensioni su
+   sessantasei erano scritte in italiano, e quello che l'esportazione riporta non sono le
+   parole dell'ospite ma la resa inglese che Google ne fa. Pubblicarle significherebbe
+   attribuire a una persona parole che non ha scritto, e violare il divieto di modificare il
+   testo (FR-010).
+3. **Le date sono relative** — «2 years ago», «a month ago» — quindi non permettono di
+   scrivere il mese e l'anno richiesti da FR-018.
+
+Poiché in pagina ne andranno cinque o sei, la soluzione non è riesportare tutto: basta che il
+proprietario apra quelle poche sulla scheda, prema «Altro» e «Visualizza originale», e ne
+copi il testo nella lingua in cui è stato scritto, con la data che Google mostra per esteso.
+
 ## Requirements *(mandatory)*
 
 ### Provenienza e raccolta
@@ -161,6 +192,13 @@ lingua originale sia dichiarata quando è diversa.
   da solo, col passare del tempo.
 - **FR-010**: Nessun testo di recensione DEVE essere modificato. È ammesso tagliare, ma il
   taglio va segnalato; è ammesso — anzi dovuto — omettere nomi di terzi.
+- **FR-010b**: DEVE essere pubblicato il testo **nella lingua in cui l'ospite l'ha scritto**,
+  non la traduzione automatica che la piattaforma mostra di default. Le traduzioni verso le
+  altre tre lingue del sito sono nostre e vanno dichiarate come tali (FR-017).
+- **FR-010c**: NON DEVE essere pubblicata alcuna recensione scritta da chi gestisce la casa o
+  da suoi familiari, neppure se autentica e spontanea. *(L'esportazione Google ne contiene una
+  firmata con il nome del proprietario: va esclusa dalla selezione — vedi i dati da
+  confermare.)*
 
 ### Dati personali
 
@@ -208,9 +246,13 @@ lingua originale sia dichiarata quando è diversa.
 
 - **[NEEDS CLARIFICATION]** Numero reale di recensioni su Booking.com: le fonti pubbliche si
   contraddicono (477, 461 e 108 a seconda dell'aggregatore). Il numero vero sta nella
-  Extranet.
-- **[NEEDS CLARIFICATION]** Esiste una scheda Google Business Profile attiva? Con quale
-  punteggio e quante recensioni?
+  Extranet, ancora da esportare.
+- *Risolto il 3 settembre 2026*: la scheda Google esiste, 4,8/5 su 68 recensioni.
+- **[NEEDS CLARIFICATION]** Il testo per esteso, in lingua originale, e la data esatta delle
+  cinque o sei recensioni scelte.
+- **[NEEDS CLARIFICATION]** La recensione firmata con il nome del proprietario
+  nell'esportazione Google è davvero sua, o di un omonimo? Se è sua va tolta anche da Google:
+  le linee guida della piattaforma e l'art. 22-bis vietano le recensioni auto-prodotte.
 - **[NEEDS CLARIFICATION]** Quante recensioni si vogliono mostrare, e chi le sceglie?
 - **[NEEDS CLARIFICATION]** Dopo quanti anni una recensione esce dal sito?
 - **[NEEDS CLARIFICATION]** La casa vuole rispondere in pagina ad almeno una recensione?
